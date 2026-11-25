@@ -3,25 +3,21 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Search, X } from "lucide-react";
-import type { PublicModelFacets } from "@/types/app";
 import { cn } from "@/lib/utils";
 
 interface FilterState {
   q: string;
-  city: string;
-  hair: string;
-  eyes: string;
-  heightMin: string;
-  heightMax: string;
+  ageMin: string;
+  ageMax: string;
 }
 
-const heightRanges = [
+const ageRanges = [
   { label: "All", min: "", max: "" },
-  { label: "To 170", min: "", max: "169" },
-  { label: "170–175", min: "170", max: "175" },
-  { label: "175–180", min: "175", max: "180" },
-  { label: "180–185", min: "180", max: "185" },
-  { label: "185+", min: "185", max: "" },
+  { label: "18–25", min: "18", max: "25" },
+  { label: "26–35", min: "26", max: "35" },
+  { label: "36–45", min: "36", max: "45" },
+  { label: "46–55", min: "46", max: "55" },
+  { label: "56–70", min: "56", max: "70" },
 ];
 
 function FilterLink({
@@ -48,44 +44,18 @@ function FilterLink({
   );
 }
 
-function FilterRow({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="flex flex-col gap-2 border-t border-ledger/35 py-3 sm:flex-row sm:items-baseline sm:gap-5">
-      <span className="micro-label w-24 shrink-0 text-graphite">{label}</span>
-      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2">
-        {children}
-      </div>
-    </div>
-  );
-}
-
 function Separator() {
   return <span className="text-[10px] text-ledger/45">/</span>;
 }
 
-export function ArchiveFilters({
-  facets,
-  total,
-}: {
-  facets: PublicModelFacets;
-  total: number;
-}) {
+export function ArchiveFilters({ total }: { total: number }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [filters, setFilters] = useState<FilterState>({
     q: searchParams.get("q") ?? "",
-    city: searchParams.get("city") ?? "",
-    hair: searchParams.get("hair") ?? "",
-    eyes: searchParams.get("eyes") ?? "",
-    heightMin: searchParams.get("heightMin") ?? "",
-    heightMax: searchParams.get("heightMax") ?? "",
+    ageMin: searchParams.get("ageMin") ?? "",
+    ageMax: searchParams.get("ageMax") ?? "",
   });
   const firstRender = useRef(true);
 
@@ -122,29 +92,14 @@ export function ArchiveFilters({
   }
 
   function clear() {
-    const next: FilterState = {
-      q: "",
-      city: "",
-      hair: "",
-      eyes: "",
-      heightMin: "",
-      heightMax: "",
-    };
+    const next: FilterState = { q: "", ageMin: "", ageMax: "" };
     setFilters(next);
     router.replace(pathname, { scroll: false });
   }
 
-  const hasFilters = Boolean(
-    filters.q ||
-      filters.city ||
-      filters.hair ||
-      filters.eyes ||
-      filters.heightMin ||
-      filters.heightMax,
-  );
-
-  const heightIsActive = (min: string, max: string) =>
-    filters.heightMin === min && filters.heightMax === max;
+  const hasFilters = Boolean(filters.q || filters.ageMin || filters.ageMax);
+  const ageIsActive = (min: string, max: string) =>
+    filters.ageMin === min && filters.ageMax === max;
 
   return (
     <div className="border-t border-ledger/70">
@@ -158,8 +113,8 @@ export function ArchiveFilters({
               onChange={(event) =>
                 setFilters({ ...filters, q: event.target.value })
               }
-              placeholder="Search the casting index"
-              aria-label="Search models by name"
+              placeholder="Search initials"
+              aria-label="Search models by initials"
               className="w-full bg-transparent font-mono text-xs text-ink outline-none placeholder:text-graphite"
             />
             {filters.q && (
@@ -195,75 +150,24 @@ export function ArchiveFilters({
         </div>
       </div>
 
-      <FilterRow label="Location">
-        <FilterLink active={!filters.city} onClick={() => update({ city: "" })}>
-          All
-        </FilterLink>
-        {facets.cities.map((city) => (
-          <span key={city} className="flex items-baseline gap-2">
-            <Separator />
-            <FilterLink
-              active={filters.city === city}
-              onClick={() => update({ city })}
-            >
-              {city}
-            </FilterLink>
-          </span>
-        ))}
-      </FilterRow>
-
-      <FilterRow label="Hair">
-        <FilterLink active={!filters.hair} onClick={() => update({ hair: "" })}>
-          All
-        </FilterLink>
-        {facets.hairColors.map((hair) => (
-          <span key={hair} className="flex items-baseline gap-2">
-            <Separator />
-            <FilterLink
-              active={filters.hair === hair}
-              onClick={() => update({ hair })}
-            >
-              {hair}
-            </FilterLink>
-          </span>
-        ))}
-      </FilterRow>
-
-      <FilterRow label="Eyes">
-        <FilterLink active={!filters.eyes} onClick={() => update({ eyes: "" })}>
-          All
-        </FilterLink>
-        {facets.eyeColors.map((eyes) => (
-          <span key={eyes} className="flex items-baseline gap-2">
-            <Separator />
-            <FilterLink
-              active={filters.eyes === eyes}
-              onClick={() => update({ eyes })}
-            >
-              {eyes}
-            </FilterLink>
-          </span>
-        ))}
-      </FilterRow>
-
-      <FilterRow label="Height / cm">
-        {heightRanges.map((range, index) => (
-          <span key={range.label} className="flex items-baseline gap-2">
-            {index > 0 && <Separator />}
-            <FilterLink
-              active={heightIsActive(range.min, range.max)}
-              onClick={() =>
-                update({
-                  heightMin: range.min,
-                  heightMax: range.max,
-                })
-              }
-            >
-              {range.label}
-            </FilterLink>
-          </span>
-        ))}
-      </FilterRow>
+      <div className="flex flex-col gap-2 border-t border-ledger/35 py-3 sm:flex-row sm:items-baseline sm:gap-5">
+        <span className="micro-label w-24 shrink-0 text-graphite">Age</span>
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2">
+          {ageRanges.map((range, index) => (
+            <span key={range.label} className="flex items-baseline gap-2">
+              {index > 0 && <Separator />}
+              <FilterLink
+                active={ageIsActive(range.min, range.max)}
+                onClick={() =>
+                  update({ ageMin: range.min, ageMax: range.max })
+                }
+              >
+                {range.label}
+              </FilterLink>
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -3,17 +3,14 @@ import { ArchiveFilters } from "@/components/public/archive-filters";
 import { ArchivePagination } from "@/components/public/archive-pagination";
 import { ModelCard } from "@/components/public/model-card";
 import { EmptyState } from "@/components/shared/empty-state";
-import {
-  getPublicModelFacets,
-  getPublicModels,
-} from "@/lib/queries/models";
+import { getPublicModels } from "@/lib/queries/models";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "The Archive",
   description:
-    "Explore Peoples Archive, the model and casting roster of Gro Therp Casting. Filter by city, height, hair, and eyes.",
+    "Explore the Peoples Archive casting index by initials and age. Full profiles remain private to the agency.",
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -43,18 +40,12 @@ export default async function ArchivePage({
   const page = readNumber(params, "page") ?? 1;
   const filters = {
     q: readValue(params, "q")?.slice(0, 80),
-    city: readValue(params, "city"),
-    hair: readValue(params, "hair"),
-    eyes: readValue(params, "eyes"),
-    heightMin: readNumber(params, "heightMin"),
-    heightMax: readNumber(params, "heightMax"),
+    ageMin: readNumber(params, "ageMin"),
+    ageMax: readNumber(params, "ageMax"),
     page,
   };
 
-  const [result, facets] = await Promise.all([
-    getPublicModels(filters),
-    getPublicModelFacets(),
-  ]);
+  const result = await getPublicModels(filters);
 
   const baseParams: Record<string, string> = {};
   for (const [key, value] of Object.entries(params)) {
@@ -62,14 +53,7 @@ export default async function ArchivePage({
     if (first && key !== "page") baseParams[key] = first;
   }
 
-  const hasFilters = Boolean(
-    filters.q ||
-      filters.city ||
-      filters.hair ||
-      filters.eyes ||
-      filters.heightMin ||
-      filters.heightMax,
-  );
+  const hasFilters = Boolean(filters.q || filters.ageMin || filters.ageMax);
 
   return (
     <div>
@@ -99,7 +83,7 @@ export default async function ArchivePage({
       </section>
 
       <div className="mx-auto w-full max-w-[1440px] px-5 md:px-10">
-        <ArchiveFilters facets={facets} total={result.total} />
+        <ArchiveFilters total={result.total} />
 
         {result.models.length ? (
           <>
@@ -125,7 +109,7 @@ export default async function ArchivePage({
             title={hasFilters ? "No faces match that search." : "The archive is being refreshed."}
             description={
               hasFilters
-                ? "Try widening the height range, choosing a different city, or clearing the filters."
+                ? "Try a different age range, search by initials, or clear the filters."
                 : "New faces are added regularly. Please check back soon."
             }
             action={

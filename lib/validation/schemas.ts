@@ -48,6 +48,11 @@ export const profileSchema = z.object({
   hair_color: z.preprocess(emptyToNull, z.string().max(40).nullable()).optional(),
   eye_color: z.preprocess(emptyToNull, z.string().max(40).nullable()).optional(),
   bio: z.preprocess(emptyToNull, z.string().max(1200).nullable()).optional(),
+  age: z.coerce
+    .number()
+    .int()
+    .min(18, "Enter an age of 18 or over.")
+    .max(90, "Age must be 90 or under."),
 });
 
 export const partialProfileSchema = profileSchema.partial();

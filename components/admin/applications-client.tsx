@@ -230,6 +230,7 @@ export function ApplicationsClient({
                     ["Phone", formatPhone(selected.phone)],
                     ["Email", selected.email || "—"],
                     ["City", selected.city || "—"],
+                    ["Age", selected.age ? `${selected.age}` : "—"],
                     ["Height", selected.height_cm ? `${selected.height_cm} cm` : "—"],
                     ["Bust", selected.bust_cm ? `${selected.bust_cm} cm` : "—"],
                     ["Waist", selected.waist_cm ? `${selected.waist_cm} cm` : "—"],

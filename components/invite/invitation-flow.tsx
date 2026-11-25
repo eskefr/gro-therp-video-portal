@@ -78,6 +78,10 @@ function cleanProfile(values: ModelFormValues): DraftProfile {
   const profile: DraftProfile = {};
   if (values.name?.trim()) profile.name = values.name.trim();
   if (values.email?.trim()) profile.email = values.email.trim();
+  if (values.age !== "" && values.age !== null && values.age !== undefined) {
+    const parsedAge = Number(values.age);
+    if (Number.isFinite(parsedAge)) profile.age = parsedAge;
+  }
   if (values.city?.trim()) profile.city = values.city.trim();
   if (values.hair_color?.trim()) profile.hair_color = values.hair_color.trim();
   if (values.eye_color?.trim()) profile.eye_color = values.eye_color.trim();
@@ -108,6 +112,7 @@ export function InvitationFlow({
   const form = useForm<ModelFormValues>({
     defaultValues: {
       name: profile.name ?? "",
+      age: profile.age ?? "",
       phone: initialDraft.phone ?? "",
       email: profile.email ?? "",
       city: profile.city ?? "",

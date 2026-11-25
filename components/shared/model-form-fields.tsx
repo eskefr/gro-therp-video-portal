@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 export interface ModelFormValues {
   name: string;
+  age: string | number;
   phone: string;
   email: string;
   city: string;
@@ -56,6 +57,18 @@ export function ModelFormFields({
             placeholder="First and last name"
             className={cellInput}
             {...register("name")}
+          />
+        </Field>
+        <Field label="Age" htmlFor="age" required error={error("age")}>
+          <Input
+            id="age"
+            type="number"
+            min={18}
+            max={90}
+            inputMode="numeric"
+            placeholder="28"
+            className={cellInput}
+            {...register("age")}
           />
         </Field>
         <Field label="Email" htmlFor="email" error={error("email")}>

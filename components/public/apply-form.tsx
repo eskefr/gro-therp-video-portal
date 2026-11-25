@@ -24,6 +24,7 @@ export function ApplyForm() {
   } = useForm<ModelFormValues>({
     defaultValues: {
       name: "",
+      age: "",
       phone: "",
       email: "",
       city: "",
@@ -66,6 +67,7 @@ export function ApplyForm() {
       isHidden,
       profile: {
         name: values.name,
+        age: values.age,
         email: values.email,
         city: values.city,
         height_cm: values.height_cm,

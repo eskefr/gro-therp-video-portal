@@ -98,8 +98,9 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
                     <h2 className="truncate font-display text-xl leading-tight">
                       {model.name}
                     </h2>
-                    <p className="mt-1 text-[11px] text-graphite">
+                    <p className="mt-1 font-mono text-[10px] text-graphite">
                       {model.city || "City TBC"}
+                      {model.age ? ` · ${model.age}` : ""}
                       {model.height_cm ? ` · ${model.height_cm} cm` : ""}
                     </p>
                   </div>

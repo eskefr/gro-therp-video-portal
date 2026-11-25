@@ -54,6 +54,7 @@ export async function submitApplicationAction(
     .from("models")
     .insert({
       name: parsed.data.profile.name,
+      age: parsed.data.profile.age,
       phone,
       email: parsed.data.profile.email ?? null,
       city: parsed.data.profile.city ?? null,

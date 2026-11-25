@@ -204,6 +204,7 @@ export async function POST(
         .from("models")
         .insert({
           name: profileResult.data.name,
+          age: profileResult.data.age,
           phone,
           email: profileResult.data.email ?? null,
           city: profileResult.data.city ?? null,

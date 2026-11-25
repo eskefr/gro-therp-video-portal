@@ -7,17 +7,16 @@ import type {
   Model,
   PendingApplication,
   PublicModel,
-  PublicModelFacets,
   PublicModelFilters,
 } from "@/types/app";
 
 export const ARCHIVE_PAGE_SIZE = 24;
 
 const PUBLIC_MODEL_COLUMNS =
-  "id,name,city,height_cm,bust_cm,waist_cm,hips_cm,shoe_size,hair_color,eye_color,bio,headshot_url,created_at";
+  "id,initials,age,headshot_url,created_at";
 
 const ADMIN_MODEL_COLUMNS =
-  "id,name,phone,email,city,height_cm,bust_cm,waist_cm,hips_cm,shoe_size,hair_color,eye_color,bio,headshot_url,is_hidden,status,created_at,updated_at";
+  "id,name,phone,email,city,height_cm,bust_cm,waist_cm,hips_cm,shoe_size,hair_color,eye_color,bio,age,initials,headshot_url,is_hidden,status,created_at,updated_at";
 
 export async function getPublicModels(filters: PublicModelFilters) {
   const supabase = createPublicClient();
@@ -33,13 +32,10 @@ export async function getPublicModels(filters: PublicModelFilters) {
 
   if (filters.q) {
     const clean = filters.q.replace(/[%,()]/g, "").trim();
-    if (clean) query = query.ilike("name", `%${clean}%`);
+    if (clean) query = query.ilike("initials", `%${clean}%`);
   }
-  if (filters.city) query = query.eq("city", filters.city);
-  if (filters.hair) query = query.eq("hair_color", filters.hair);
-  if (filters.eyes) query = query.eq("eye_color", filters.eyes);
-  if (filters.heightMin) query = query.gte("height_cm", filters.heightMin);
-  if (filters.heightMax) query = query.lte("height_cm", filters.heightMax);
+  if (filters.ageMin) query = query.gte("age", filters.ageMin);
+  if (filters.ageMax) query = query.lte("age", filters.ageMax);
 
   const { data, error, count } = await query
     .order("created_at", { ascending: false })
@@ -53,36 +49,6 @@ export async function getPublicModels(filters: PublicModelFilters) {
     page,
     pageSize: ARCHIVE_PAGE_SIZE,
     totalPages: Math.max(1, Math.ceil((count ?? 0) / ARCHIVE_PAGE_SIZE)),
-  };
-}
-
-export async function getPublicModelFacets(): Promise<PublicModelFacets> {
-  const supabase = createPublicClient();
-  const { data, error } = await supabase
-    .from("models")
-    .select("city,hair_color,eye_color")
-    .eq("status", "approved")
-    .eq("is_hidden", false);
-
-  if (error) throw new Error(error.message);
-
-  const cities = new Set<string>();
-  const hairColors = new Set<string>();
-  const eyeColors = new Set<string>();
-
-  for (const row of data ?? []) {
-    if (row.city) cities.add(row.city);
-    if (row.hair_color) hairColors.add(row.hair_color);
-    if (row.eye_color) eyeColors.add(row.eye_color);
-  }
-
-  const sorted = (values: Set<string>) =>
-    Array.from(values).sort((a, b) => a.localeCompare(b));
-
-  return {
-    cities: sorted(cities),
-    hairColors: sorted(hairColors),
-    eyeColors: sorted(eyeColors),
   };
 }
 

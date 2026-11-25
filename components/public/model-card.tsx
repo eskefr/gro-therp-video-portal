@@ -11,7 +11,6 @@ export function ModelCard({
   index: number;
 }) {
   const indexLabel = String(index).padStart(2, "0");
-  const year = new Date(model.created_at).getFullYear() || 2026;
 
   return (
     <article className="group flex flex-col border-r border-b border-ledger/60 bg-paper p-2 sm:p-2.5">
@@ -19,7 +18,7 @@ export function ModelCard({
         <div className="relative size-full overflow-hidden bg-manila/25">
           <Image
             src={model.headshot_url}
-            alt={`${model.name}, represented by Peoples Archive`}
+            alt={`Archival portrait ${indexLabel}`}
             fill
             priority={priority}
             sizes="(max-width: 640px) 96vw, (max-width: 1024px) 46vw, 23vw"
@@ -33,9 +32,9 @@ export function ModelCard({
           <span className="font-mono text-[9px] tracking-[0.02em] text-graphite">
             {indexLabel}.
           </span>{" "}
-          {model.name}{" "}
+          {model.initials}{" "}
           <span className="font-mono text-[9px] tracking-[0.02em] text-graphite">
-            — {model.city || "Location TBC"} / {year}
+            — {model.age ?? "—"}
           </span>
         </p>
       </div>

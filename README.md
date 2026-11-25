@@ -205,6 +205,7 @@ proxy.ts                Admin route guard
 - Signed admin media URLs expire after one hour; reload the cast page to refresh them.
 - Videos are capped at 50 MB per file. This is intentionally conservative for local and starter Supabase plans.
 - The seed uses bundled portrait assets in `public/seed` for speed and offline reliability. Real application and admin uploads use Supabase Storage.
+- The public archive exposes only initials, age, and the portrait; full names and profile data stay behind the admin boundary.
 
 ## Useful commands
 

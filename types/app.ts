@@ -23,6 +23,8 @@ export interface Model {
   hair_color: string | null;
   eye_color: string | null;
   bio: string | null;
+  age: number | null;
+  initials: string;
   headshot_url: string;
   is_hidden: boolean;
   status: ModelStatus;
@@ -32,19 +34,7 @@ export interface Model {
 
 export type PublicModel = Pick<
   Model,
-  | "id"
-  | "name"
-  | "city"
-  | "height_cm"
-  | "bust_cm"
-  | "waist_cm"
-  | "hips_cm"
-  | "shoe_size"
-  | "hair_color"
-  | "eye_color"
-  | "bio"
-  | "headshot_url"
-  | "created_at"
+  "id" | "initials" | "age" | "headshot_url" | "created_at"
 >;
 
 export interface Cast {
@@ -121,6 +111,7 @@ export interface DraftProfile {
   hair_color?: string;
   eye_color?: string;
   bio?: string;
+  age?: number | null;
 }
 
 export interface DraftHeadshot {
@@ -150,18 +141,9 @@ export interface DraftData {
 
 export interface PublicModelFilters {
   q?: string;
-  city?: string;
-  hair?: string;
-  eyes?: string;
-  heightMin?: number;
-  heightMax?: number;
+  ageMin?: number;
+  ageMax?: number;
   page?: number;
-}
-
-export interface PublicModelFacets {
-  cities: string[];
-  hairColors: string[];
-  eyeColors: string[];
 }
 
 export interface CastWithCount extends Cast {

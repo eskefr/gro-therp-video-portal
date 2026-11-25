@@ -27,6 +27,7 @@ import type { DraftHeadshot } from "@/types/app";
 
 const defaults: ModelFormValues = {
   name: "",
+  age: "",
   phone: "",
   email: "",
   city: "",
@@ -77,6 +78,7 @@ export function CreateModelDialog() {
       isHidden,
       profile: {
         name: values.name,
+        age: values.age,
         email: values.email,
         city: values.city,
         height_cm: values.height_cm,
