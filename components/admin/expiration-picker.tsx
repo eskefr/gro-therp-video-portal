@@ -65,7 +65,7 @@ export function ExpirationPicker({
         </div>
       )}
 
-      <p className="mt-2 font-mono text-[10px] text-graphite">
+      <p className="mt-2 font-mono text-[12px] text-graphite">
         Closes {formatDateTime(value)} · local time
       </p>
     </div>

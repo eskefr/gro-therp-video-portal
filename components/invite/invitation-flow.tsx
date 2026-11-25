@@ -386,7 +386,7 @@ export function InvitationFlow({
                 >
                   <span
                     className={cn(
-                      "flex size-5 items-center justify-center border border-ledger font-mono text-[9px]",
+                      "flex size-5 items-center justify-center border border-ledger font-mono text-[12px]",
                       index < activeIndex && "bg-paper text-ledger",
                       index === activeIndex && "border-ledger bg-ledger text-paper",
                     )}
@@ -555,11 +555,11 @@ function PhoneStep({
             }
           }}
         />
-        <p className="mt-2 text-[11px] leading-4 text-graphite">
+        <p className="mt-2 text-[12px] leading-4 text-graphite">
           Danish numbers can be entered without +45. International numbers
           should include their country code.
         </p>
-        {error && <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>}
+        {error && <p className="mt-2 font-mono text-[12px] text-destructive">{error}</p>}
       </div>
       {lookupLoading && (
         <p className="mt-4 flex items-center gap-2 text-xs text-graphite">

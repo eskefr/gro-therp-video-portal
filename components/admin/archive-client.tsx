@@ -98,7 +98,7 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
                     <h2 className="truncate font-display text-xl leading-tight">
                       {model.name}
                     </h2>
-                    <p className="mt-1 font-mono text-[10px] text-graphite">
+                    <p className="mt-1 font-mono text-[12px] text-graphite">
                       {model.city || "City TBC"}
                       {model.age ? ` · ${model.age}` : ""}
                       {model.height_cm ? ` · ${model.height_cm} cm` : ""}
@@ -107,10 +107,10 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
                   <MicroBadge tone="approved">Live</MicroBadge>
                 </div>
                 <div className="mt-3 flex items-center justify-between border-t border-ledger pt-2.5">
-                  <span className="font-mono text-[10px] text-graphite">
+                  <span className="font-mono text-[12px] text-graphite">
                     {formatPhone(model.phone)}
                   </span>
-                  <span className="font-mono text-[10px] text-graphite">
+                  <span className="font-mono text-[12px] text-graphite">
                     {model.hair_color || "—"}
                   </span>
                 </div>

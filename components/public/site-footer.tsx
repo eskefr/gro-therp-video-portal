@@ -37,7 +37,7 @@ export function SiteFooter() {
           <p className="micro-label text-graphite">Contact</p>
           <div className="mt-5 border border-ledger bg-manila px-4 py-3">
             <p className="micro-label text-graphite">Address</p>
-            <address className="mt-1.5 font-mono text-[11px] leading-5 text-ink not-italic">
+            <address className="mt-1.5 font-mono text-[12px] leading-5 text-ink not-italic">
               {BRAND.address}
               <br />
               {BRAND.postalCode} {BRAND.city}
@@ -51,13 +51,13 @@ export function SiteFooter() {
               </p>
               <a
                 href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
-                className="mt-1 block font-mono text-[11px] text-ink hover:text-ledger"
+                className="mt-1 block font-mono text-[12px] text-ink hover:text-ledger"
               >
                 {BRAND.phone}
               </a>
               <a
                 href={`mailto:${BRAND.email}`}
-                className="block font-mono text-[11px] text-ink hover:text-ledger"
+                className="block font-mono text-[12px] text-ink hover:text-ledger"
               >
                 {BRAND.email}
               </a>
@@ -68,13 +68,13 @@ export function SiteFooter() {
               </p>
               <a
                 href={`tel:${BRAND.assistantPhone.replace(/\s/g, "")}`}
-                className="mt-1 block font-mono text-[11px] text-ink hover:text-ledger"
+                className="mt-1 block font-mono text-[12px] text-ink hover:text-ledger"
               >
                 {BRAND.assistantPhone}
               </a>
               <a
                 href={`mailto:${BRAND.assistantEmail}`}
-                className="block font-mono text-[11px] text-ink hover:text-ledger"
+                className="block font-mono text-[12px] text-ink hover:text-ledger"
               >
                 {BRAND.assistantEmail}
               </a>
@@ -83,7 +83,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-ledger">
-        <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-2 px-5 py-5 font-mono text-[10px] uppercase tracking-[0.04em] text-graphite sm:flex-row sm:items-center sm:justify-between md:px-10">
+        <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-2 px-5 py-5 font-mono text-[12px] uppercase tracking-[0.04em] text-graphite sm:flex-row sm:items-center sm:justify-between md:px-10">
           <span>
             © {new Date().getFullYear()} {BRAND.fullName}
           </span>

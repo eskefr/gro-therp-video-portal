@@ -148,13 +148,13 @@ export function CastDetailClient({
           </button>
         </div>
         <span className="h-4 w-px bg-border" />
-        <p className="font-mono text-[10px] text-graphite">
+        <p className="font-mono text-[12px] text-graphite">
           {formatShootDates(cast.shoot_start, cast.shoot_end)}
         </p>
-        <p className="font-mono text-[10px] text-graphite">
+        <p className="font-mono text-[12px] text-graphite">
           {cast.location || "Location TBC"}
         </p>
-        <p className="stamp ml-auto text-[10px] text-graphite">
+        <p className="stamp ml-auto text-[12px] text-graphite">
           {members.length} cast · {invitations.length} links
         </p>
       </div>
@@ -196,7 +196,7 @@ export function CastDetailClient({
                   <h3 className="mt-2 font-display text-2xl leading-tight">
                     {member.model.name}
                   </h3>
-                  <p className="mt-1 font-mono text-[10px] text-graphite">
+                  <p className="mt-1 font-mono text-[12px] text-graphite">
                     {member.model.city || "City TBC"}
                     {member.model.height_cm ? ` · ${member.model.height_cm} cm` : ""}
                   </p>
@@ -316,11 +316,11 @@ export function CastDetailClient({
                         {invitation.target_model_id ? "Media request" : "Cast invite"}
                         {invitation.require_media_upload ? " · media required" : ""}
                       </td>
-                      <td className="px-4 py-3 font-mono text-[10px]">
+                      <td className="px-4 py-3 font-mono text-[12px]">
                         <span className="block">{formatDateTime(invitation.expires_at)}</span>
                         <Countdown
                           expiresAt={invitation.expires_at}
-                          className="mt-0.5 block text-[10px] text-graphite"
+                          className="mt-0.5 block text-[12px] text-graphite"
                         />
                       </td>
                       <td className="px-4 py-3">
@@ -517,7 +517,7 @@ function AddModelsDialog({
                       <p className="truncate text-sm font-medium">{model.name}</p>
                       {model.is_hidden && <MicroBadge tone="hidden">Hidden</MicroBadge>}
                     </div>
-                    <p className="text-[11px] text-graphite">
+                    <p className="text-[12px] text-graphite">
                       {model.city || "City TBC"}
                       {model.height_cm ? ` · ${model.height_cm} cm` : ""}
                     </p>

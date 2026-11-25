@@ -71,7 +71,7 @@ export function HeadshotUploader({
           {label}
           {required && <span className="ml-1 text-destructive">*</span>}
         </label>
-        <span className="stamp text-[10px] text-graphite">
+        <span className="stamp text-[12px] text-graphite">
           Max {formatBytes(MAX_HEADSHOT_BYTES)}
         </span>
       </div>
@@ -95,10 +95,10 @@ export function HeadshotUploader({
             className="size-24 shrink-0 object-cover"
           />
           <div className="min-w-0 flex-1">
-            <p className="truncate font-mono text-[11px]">
+            <p className="truncate font-mono text-[12px]">
               {value.name || "Headshot uploaded"}
             </p>
-            <p className="mt-1 font-mono text-[10px] text-graphite">
+            <p className="mt-1 font-mono text-[12px] text-graphite">
               Uploaded and ready for review.
             </p>
             <button
@@ -146,13 +146,13 @@ export function HeadshotUploader({
           <span className="micro-label text-ink">
             {uploading ? "Uploading headshot…" : "Choose a headshot"}
           </span>
-          <span className="max-w-xs font-mono text-[10px] leading-5 text-graphite">
+          <span className="max-w-xs font-mono text-[12px] leading-5 text-graphite">
             {hint}
           </span>
         </button>
       )}
 
-      {error && <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>}
+      {error && <p className="mt-2 font-mono text-[12px] text-destructive">{error}</p>}
     </div>
   );
 }

@@ -86,7 +86,7 @@ export function CreateCastDialog() {
           <div className="ledger-grid sm:grid-cols-2">
             <div className="ledger-section col-span-full flex items-center justify-between px-4 py-2.5">
               <span className="micro-label">Cast details</span>
-              <span className="stamp text-[10px]">New record</span>
+              <span className="stamp text-[12px]">New record</span>
             </div>
             <div className="ledger-cell sm:col-span-2">
               <Label htmlFor="title" className="micro-label mb-1.5 text-graphite">

@@ -161,18 +161,18 @@
 
   .micro-label {
     font-family: var(--font-sans), sans-serif;
-    font-size: 0.64rem;
+    font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.12em;
-    line-height: 1.2;
+    line-height: 1.25;
     text-transform: uppercase;
   }
 
   .stamp {
     font-family: var(--font-typewriter), "Courier New", monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.045em;
-    line-height: 1.4;
+    font-size: 0.75rem;
+    letter-spacing: 0.035em;
+    line-height: 1.45;
     text-transform: uppercase;
     color: var(--ledger);
   }

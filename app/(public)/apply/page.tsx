@@ -17,7 +17,7 @@ export default function ApplyPage() {
             <p className="micro-label text-graphite">
               Talent applications
             </p>
-            <h1 className="mt-5 max-w-md font-display text-5xl leading-[0.96] tracking-[-0.045em] sm:text-6xl xl:text-7xl">
+            <h1 className="mt-5 max-w-md font-display text-4xl leading-[1] tracking-[-0.04em] sm:text-5xl xl:text-6xl">
               A face is only
               <br />
               the beginning.
@@ -29,23 +29,23 @@ export default function ApplyPage() {
             </p>
             <div className="mt-10 max-w-sm border border-ledger bg-manila px-5 py-5">
               <p className="micro-label text-graphite">What happens next</p>
-              <ol className="mt-4 space-y-3 font-mono text-[11px] leading-6 text-graphite">
+              <ol className="mt-4 space-y-3 font-mono text-[12px] leading-6 text-graphite">
                 <li className="flex gap-3">
-                  <span className="font-mono text-[10px] text-ledger">01</span>
+                  <span className="font-mono text-[12px] text-ledger">01</span>
                   Your application is reviewed by the casting team.
                 </li>
                 <li className="flex gap-3">
-                  <span className="font-mono text-[10px] text-ledger">02</span>
+                  <span className="font-mono text-[12px] text-ledger">02</span>
                   If there’s a fit, we’ll invite you to a short conversation.
                 </li>
                 <li className="flex gap-3">
-                  <span className="font-mono text-[10px] text-ledger">03</span>
+                  <span className="font-mono text-[12px] text-ledger">03</span>
                   Approved profiles join the archive, unless you choose to stay
                   hidden.
                 </li>
               </ol>
             </div>
-            <p className="mt-10 font-mono text-[10px] leading-5 text-graphite">
+            <p className="mt-10 font-mono text-[12px] leading-5 text-graphite">
               Prefer email? Write to{" "}
               <a
                 href={`mailto:${BRAND.email}`}

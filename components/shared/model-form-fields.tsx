@@ -37,7 +37,7 @@ export function ModelFormFields({
 }) {
   const error = (field: keyof ModelFormValues) =>
     errors[field]?.message ? (
-      <p className="mt-1 font-mono text-[10px] text-destructive">
+      <p className="mt-1 font-mono text-[12px] text-destructive">
         {String(errors[field]?.message)}
       </p>
     ) : null;
@@ -47,7 +47,7 @@ export function ModelFormFields({
       <div className="ledger-grid sm:grid-cols-2">
         <div className="ledger-section col-span-full flex items-center justify-between px-4 py-2.5">
           <span className="micro-label">The basics</span>
-          <span className="stamp text-[10px]">Form 01 / Talent</span>
+          <span className="stamp text-[12px]">Form 01 / Talent</span>
         </div>
 
         <Field label="Full name" htmlFor="name" required error={error("name")}>
@@ -96,6 +96,7 @@ export function ModelFormFields({
           required
           error={error("phone")}
           hint="Danish numbers can be entered as 20 12 34 56."
+          className="sm:col-span-2"
         >
           <Input
             id="phone"
@@ -113,7 +114,7 @@ export function ModelFormFields({
         <div className="ledger-grid grid-cols-2 sm:grid-cols-4">
           <div className="ledger-section col-span-full flex items-center justify-between px-4 py-2.5">
             <span className="micro-label">Measurements</span>
-            <span className="stamp text-[10px]">Centimetres</span>
+            <span className="stamp text-[12px]">Centimetres</span>
           </div>
           <Field label="Height" htmlFor="height_cm">
             <Input
@@ -152,7 +153,7 @@ export function ModelFormFields({
             />
           </Field>
         </div>
-        <p className="mt-1.5 font-mono text-[10px] leading-4 text-graphite">
+        <p className="mt-1.5 font-mono text-[12px] leading-4 text-graphite">
           All measurements in centimetres. Leave blank if unsure.
         </p>
       </div>
@@ -191,7 +192,7 @@ export function ModelFormFields({
       <div className="ledger-grid">
         <div className="ledger-section flex items-center justify-between px-4 py-2.5">
           <span className="micro-label">Personal note</span>
-          <span className="stamp text-[10px]">Optional</span>
+          <span className="stamp text-[12px]">Optional</span>
         </div>
         <Field
           label="A little about you"
@@ -218,6 +219,7 @@ function Field({
   required,
   error,
   hint,
+  className,
   children,
 }: {
   label: string;
@@ -225,10 +227,11 @@ function Field({
   required?: boolean;
   error?: React.ReactNode;
   hint?: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="ledger-cell">
+    <div className={cn("ledger-cell", className)}>
       <Label
         htmlFor={htmlFor}
         className="micro-label mb-1.5 flex items-center gap-1 text-graphite"
@@ -238,7 +241,7 @@ function Field({
       </Label>
       {children}
       {hint && !error && (
-        <p className="mt-1 font-mono text-[10px] leading-4 text-graphite">{hint}</p>
+        <p className="mt-1 font-mono text-[12px] leading-4 text-graphite">{hint}</p>
       )}
       {error}
     </div>

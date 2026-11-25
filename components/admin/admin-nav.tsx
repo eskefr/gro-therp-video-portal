@@ -42,7 +42,7 @@ export function AdminNav() {
         </span>
       </div>
 
-      <nav className="grid grid-cols-3 gap-1 border-t border-ledger/70 px-3 py-2 lg:mt-10 lg:flex lg:flex-col lg:gap-0.5 lg:border-t-0 lg:px-3 lg:py-0">
+      <nav className="grid grid-cols-2 gap-1 border-t border-ledger/70 px-3 py-2 sm:grid-cols-3 lg:mt-10 lg:flex lg:flex-col lg:gap-0.5 lg:border-t-0 lg:px-3 lg:py-0">
         {items.map((item) => {
           const active = item.exact
             ? pathname === item.href
@@ -69,8 +69,8 @@ export function AdminNav() {
           href="/archive"
           className="micro-label flex items-center gap-2 text-graphite transition hover:text-ink"
         >
-          <Archive className="size-3.5" />
-          View public archive
+          <Archive className="size-3.5 shrink-0" />
+          <span className="whitespace-nowrap">Public archive</span>
         </Link>
         <form action={adminLogoutAction}>
           <button

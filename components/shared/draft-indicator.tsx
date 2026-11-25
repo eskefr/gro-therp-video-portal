@@ -28,7 +28,7 @@ export function DraftIndicator({
   return (
     <div
       className={cn(
-        "flex items-center gap-1.5 font-mono text-[10px] leading-4 tracking-[0.02em] text-graphite uppercase",
+        "flex items-center gap-1.5 font-mono text-[12px] leading-4 tracking-[0.02em] text-graphite uppercase",
         status === "error" && "text-destructive",
         className,
       )}

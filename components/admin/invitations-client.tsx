@@ -127,7 +127,7 @@ export function InvitationsClient({
             {item.label}
             <span
               className={cn(
-                "text-[9px] opacity-60",
+                "text-[12px] opacity-60",
                 filter === item.value && "opacity-80",
               )}
             >
@@ -168,7 +168,7 @@ export function InvitationsClient({
                         {invitation.cast.title}
                         <ArrowUpRight className="size-3 opacity-0 transition group-hover:opacity-100" />
                       </Link>
-                      <p className="mt-0.5 text-[11px] text-graphite">
+                      <p className="mt-0.5 text-[12px] text-graphite">
                         {invitation.cast.client_name || "Independent"}
                       </p>
                     </td>
@@ -196,11 +196,11 @@ export function InvitationsClient({
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-4 font-mono text-[10px]">
+                    <td className="px-4 py-4 font-mono text-[12px]">
                       <p>{formatDateTime(invitation.expires_at)}</p>
                       <Countdown
                         expiresAt={invitation.expires_at}
-                        className="mt-0.5 block font-mono text-[10px] text-graphite"
+                        className="mt-0.5 block font-mono text-[12px] text-graphite"
                       />
                     </td>
                     <td className="px-4 py-4">

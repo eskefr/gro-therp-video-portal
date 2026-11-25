@@ -20,7 +20,7 @@ export default async function AdminLoginPage({
         <Brand />
         <div className="max-w-xl">
           <p className="micro-label text-graphite">Demo environment</p>
-          <p className="mt-6 font-display text-6xl leading-[0.92] tracking-[-0.055em] xl:text-7xl">
+          <p className="mt-6 font-display text-5xl leading-[0.98] tracking-[-0.045em] xl:text-6xl">
             Casting, without
             <br />
             the paperwork.

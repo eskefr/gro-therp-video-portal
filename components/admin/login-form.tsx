@@ -47,7 +47,7 @@ export function LoginForm({ next }: { next: string }) {
       <div className="ledger-grid mt-7">
         <div className="ledger-section flex items-center justify-between px-4 py-2.5">
           <span className="micro-label">Access credentials</span>
-          <span className="stamp text-[10px]">Staff only</span>
+          <span className="stamp text-[12px]">Staff only</span>
         </div>
         <div className="ledger-cell">
           <Label htmlFor="passcode" className="micro-label mb-1.5 text-graphite">
@@ -64,7 +64,7 @@ export function LoginForm({ next }: { next: string }) {
             placeholder="••••••••"
           />
           {error && (
-            <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>
+            <p className="mt-2 font-mono text-[12px] text-destructive">{error}</p>
           )}
         </div>
       </div>
@@ -83,7 +83,7 @@ export function LoginForm({ next }: { next: string }) {
         {pending ? "Checking" : "Enter workspace"}
       </Button>
 
-      <p className="mt-5 text-[11px] leading-5 text-graphite">
+      <p className="mt-5 text-[12px] leading-5 text-graphite">
         Demo authentication only. Replace the passcode gate with proper auth
         before using this with real talent data.
       </p>

@@ -127,7 +127,7 @@ export function MediaUploader({
           Casting photos & video
           <span className="ml-1 text-destructive">*</span>
         </span>
-        <span className="stamp text-[10px] text-graphite">
+        <span className="stamp text-[12px] text-graphite">
           {media.length} / {MAX_CASTING_MEDIA_FILES} · Max{" "}
           {formatBytes(MAX_CASTING_MEDIA_BYTES)} each
         </span>
@@ -177,7 +177,7 @@ export function MediaUploader({
                   />
                 )}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-2 pt-8 pb-1.5">
-                  <p className="truncate text-[10px] text-white/85">{item.name}</p>
+                  <p className="truncate text-[12px] text-white/85">{item.name}</p>
                 </div>
                 {!disabled && (
                   <button
@@ -232,13 +232,13 @@ export function MediaUploader({
               ? `Uploading ${uploading} file${uploading === 1 ? "" : "s"}…`
               : "Drop files or choose from your device"}
           </span>
-          <span className="font-mono text-[10px] leading-5 text-graphite">
+          <span className="font-mono text-[12px] leading-5 text-graphite">
             Photos and short casting clips. Keep it natural and current.
           </span>
         </button>
       )}
 
-      {error && <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>}
+      {error && <p className="mt-2 font-mono text-[12px] text-destructive">{error}</p>}
     </div>
   );
 }

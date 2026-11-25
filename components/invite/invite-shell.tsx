@@ -43,9 +43,9 @@ export function InviteShell({
             <p className="micro-label text-graphite">
               {targetName ? "Casting media request" : "Casting invitation"}
             </p>
-            <span className="stamp text-[10px] text-graphite">{reference}</span>
+            <span className="stamp text-[12px] text-graphite">{reference}</span>
           </div>
-          <h1 className="mt-5 max-w-xl font-display text-5xl leading-[0.94] tracking-[-0.045em] text-ink sm:text-6xl xl:text-7xl">
+          <h1 className="mt-5 max-w-xl font-display text-4xl leading-[1] tracking-[-0.04em] text-ink sm:text-5xl xl:text-6xl">
             {cast.title}
           </h1>
 
@@ -100,7 +100,7 @@ export function InviteShell({
             </div>
           )}
 
-          <p className="mt-10 font-mono text-[10px] leading-5 text-graphite">
+          <p className="mt-10 font-mono text-[12px] leading-5 text-graphite">
             Something not right? Write to{" "}
             <a
               href={`mailto:${BRAND.email}`}
@@ -116,7 +116,7 @@ export function InviteShell({
       </div>
 
       <footer className="double-rule border-ledger">
-        <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-2 px-5 py-5 font-mono text-[10px] uppercase tracking-[0.04em] text-graphite sm:flex-row sm:items-center sm:justify-between md:px-10">
+        <div className="mx-auto flex w-full max-w-[1500px] flex-col gap-2 px-5 py-5 font-mono text-[12px] uppercase tracking-[0.04em] text-graphite sm:flex-row sm:items-center sm:justify-between md:px-10">
           <span>
             © {new Date().getFullYear()} {BRAND.fullName}
           </span>

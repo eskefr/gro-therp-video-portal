@@ -172,7 +172,7 @@ export function ApplyForm() {
       )}
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-xs font-mono text-[10px] leading-5 text-graphite">
+        <p className="max-w-xs font-mono text-[12px] leading-5 text-graphite">
           By applying you agree to the agency storing your details for casting
           consideration.
         </p>

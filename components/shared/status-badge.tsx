@@ -27,7 +27,7 @@ export function InvitationStatusBadge({
   return (
     <span
       className={cn(
-        "inline-flex w-fit items-center gap-1.5 border px-2.5 py-1 font-mono text-[9px] leading-none tracking-[0.02em] uppercase",
+        "inline-flex w-fit items-center gap-1.5 border px-2.5 py-1 font-mono text-[12px] leading-none tracking-[0.02em] uppercase",
         invitationStatusTone(status),
         className,
       )}

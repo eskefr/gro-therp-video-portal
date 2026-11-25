@@ -65,7 +65,7 @@ export default async function ArchivePage({
                 Archive casting · {result.total}{" "}
                 {result.total === 1 ? "entry" : "entries"}
               </p>
-              <h1 className="mt-5 max-w-3xl font-display text-6xl leading-[0.88] tracking-[-0.055em] sm:text-7xl xl:text-[6.5rem]">
+              <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[0.95] tracking-[-0.05em] sm:text-6xl xl:text-7xl">
                 The Archive
               </h1>
             </div>

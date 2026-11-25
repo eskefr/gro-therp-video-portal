@@ -152,9 +152,9 @@ export function ApplicationsClient({
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 font-mono text-[10px]">
+                  <td className="px-4 py-3 font-mono text-[12px]">
                     <p>{formatPhone(application.phone)}</p>
-                    <p className="mt-0.5 font-mono text-[10px] text-graphite">
+                    <p className="mt-0.5 font-mono text-[12px] text-graphite">
                       {application.email || "No email"}
                     </p>
                   </td>
@@ -177,7 +177,7 @@ export function ApplicationsClient({
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 font-mono text-[10px] text-graphite">
+                  <td className="px-4 py-3 font-mono text-[12px] text-graphite">
                     {formatDate(application.created_at)}
                   </td>
                   <td className="px-4 py-3 text-right">

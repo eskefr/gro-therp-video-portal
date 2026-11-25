@@ -157,7 +157,7 @@ export default async function AdminOverviewPage() {
                       <InvitationStatusBadge status={status} compact />
                       <Countdown
                         expiresAt={invitation.expires_at}
-                        className="text-[10px] text-graphite"
+                        className="text-[12px] text-graphite"
                       />
                     </div>
                   </div>
@@ -206,7 +206,7 @@ export default async function AdminOverviewPage() {
                 <h3 className="mt-2 font-display text-2xl leading-tight tracking-[-0.02em]">
                   {cast.title}
                 </h3>
-                <p className="mt-2 font-mono text-[10px] text-graphite">
+                <p className="mt-2 font-mono text-[12px] text-graphite">
                   {formatShootDates(cast.shoot_start, cast.shoot_end)}
                 </p>
               </div>

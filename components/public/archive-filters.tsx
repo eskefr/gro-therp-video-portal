@@ -45,7 +45,7 @@ function FilterLink({
 }
 
 function Separator() {
-  return <span className="text-[10px] text-ledger/45">/</span>;
+  return <span className="text-[12px] text-ledger/45">/</span>;
 }
 
 export function ArchiveFilters({ total }: { total: number }) {
@@ -134,7 +134,7 @@ export function ArchiveFilters({ total }: { total: number }) {
         </div>
 
         <div className="flex items-center justify-end gap-5">
-          <span className="stamp hidden text-[10px] text-graphite sm:inline">
+          <span className="stamp hidden text-[12px] text-graphite sm:inline">
             {String(total).padStart(2, "0")} {total === 1 ? "entry" : "entries"}
           </span>
           {hasFilters && (
@@ -155,7 +155,6 @@ export function ArchiveFilters({ total }: { total: number }) {
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2">
           {ageRanges.map((range, index) => (
             <span key={range.label} className="flex items-baseline gap-2">
-              {index > 0 && <Separator />}
               <FilterLink
                 active={ageIsActive(range.min, range.max)}
                 onClick={() =>
@@ -164,6 +163,7 @@ export function ArchiveFilters({ total }: { total: number }) {
               >
                 {range.label}
               </FilterLink>
+              {index < ageRanges.length - 1 && <Separator />}
             </span>
           ))}
         </div>

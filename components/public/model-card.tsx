@@ -28,12 +28,12 @@ export function ModelCard({
       </div>
 
       <div className="min-h-11 px-0.5 pt-2 pb-1">
-        <p className="font-display text-sm leading-[1.35] tracking-[-0.01em] text-ink">
-          <span className="font-mono text-[9px] tracking-[0.02em] text-graphite">
+        <p className="font-display text-[15px] leading-[1.4] tracking-[-0.01em] text-ink">
+          <span className="font-mono text-[12px] tracking-[0.02em] text-graphite">
             {indexLabel}.
           </span>{" "}
           {model.initials}{" "}
-          <span className="font-mono text-[9px] tracking-[0.02em] text-graphite">
+          <span className="font-mono text-[12px] tracking-[0.02em] text-graphite">
             — {model.age ?? "—"}
           </span>
         </p>

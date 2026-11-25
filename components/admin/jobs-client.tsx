@@ -38,7 +38,7 @@ export function JobsClient({ casts }: { casts: CastWithCount[] }) {
                 <h2 className="mt-2 font-display text-3xl leading-[1.02] tracking-[-0.03em]">
                   {cast.title}
                 </h2>
-                <p className="mt-3 font-mono text-[10px] text-graphite">
+                <p className="mt-3 font-mono text-[12px] text-graphite">
                   {formatShootDates(cast.shoot_start, cast.shoot_end)}
                   {cast.location ? ` · ${cast.location}` : ""}
                 </p>

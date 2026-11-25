@@ -6,7 +6,7 @@ export default function NotFound() {
     <main className="flex flex-1 items-center justify-center px-6 py-24">
       <div className="max-w-lg text-center">
         <p className="micro-label text-graphite">404 — Not found</p>
-        <h1 className="mt-5 text-5xl tracking-[-0.04em] md:text-6xl">
+        <h1 className="mt-5 text-4xl tracking-[-0.03em] md:text-5xl">
           This page has left the set.
         </h1>
         <p className="mt-5 text-sm leading-6 text-graphite">
