@@ -74,12 +74,12 @@ export default async function ArchivePage({
   return (
     <div>
       <section className="paper-texture double-rule border-b border-ledger">
-        <div className="mx-auto w-full max-w-[1500px] px-5 py-14 md:px-10 md:py-20">
+        <div className="mx-auto w-full max-w-[1440px] px-5 py-14 md:px-10 md:py-20">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
               <p className="micro-label text-graphite">
-                Represented talent · {result.total}{" "}
-                {result.total === 1 ? "face" : "faces"}
+                Archive casting · {result.total}{" "}
+                {result.total === 1 ? "entry" : "entries"}
               </p>
               <h1 className="mt-5 max-w-3xl font-display text-6xl leading-[0.88] tracking-[-0.055em] sm:text-7xl xl:text-[6.5rem]">
                 The Archive
@@ -98,18 +98,36 @@ export default async function ArchivePage({
         </div>
       </section>
 
-      <div className="mx-auto w-full max-w-[1500px] px-5 md:px-10">
+      <div className="mx-auto w-full max-w-[1440px] px-5 md:px-10">
         <ArchiveFilters facets={facets} total={result.total} />
 
         {result.models.length ? (
           <>
-            <div className="grid grid-cols-2 gap-4 py-10 md:grid-cols-3 md:gap-5 lg:grid-cols-4">
+            <div className="mt-7 grid grid-cols-1 border-t border-l border-ledger/60 sm:grid-cols-2 lg:grid-cols-4">
               {result.models.map((model, index) => (
                 <ModelCard
                   key={model.id}
                   model={model}
                   priority={index < 4}
-                  catalogNumber={`GT / ${String((result.page - 1) * result.pageSize + index + 1).padStart(3, "0")}`}
+                  index={(result.page - 1) * result.pageSize + index + 1}
+                />
+              ))}
+              {Array.from({
+                length: (4 - (result.models.length % 4)) % 4,
+              }).map((_, index) => (
+                <div
+                  key={`desktop-plate-${index}`}
+                  aria-hidden
+                  className="hidden border-r border-b border-ledger/60 bg-paper lg:block"
+                />
+              ))}
+              {Array.from({
+                length: (2 - (result.models.length % 2)) % 2,
+              }).map((_, index) => (
+                <div
+                  key={`tablet-plate-${index}`}
+                  aria-hidden
+                  className="hidden border-r border-b border-ledger/60 bg-paper sm:block lg:hidden"
                 />
               ))}
             </div>

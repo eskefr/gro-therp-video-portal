@@ -2,18 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Search, SlidersHorizontal, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
+import { Search, X } from "lucide-react";
 import type { PublicModelFacets } from "@/types/app";
+import { cn } from "@/lib/utils";
 
 interface FilterState {
   q: string;
@@ -24,44 +15,58 @@ interface FilterState {
   heightMax: string;
 }
 
-const selectClass =
-  "h-10 w-full appearance-none rounded-none border border-ledger bg-paper px-3 pr-8 font-mono text-xs outline-none focus:border-ledger focus:ring-2 focus:ring-ledger/20";
+const heightRanges = [
+  { label: "All", min: "", max: "" },
+  { label: "To 170", min: "", max: "169" },
+  { label: "170–175", min: "170", max: "175" },
+  { label: "175–180", min: "175", max: "180" },
+  { label: "180–185", min: "180", max: "185" },
+  { label: "185+", min: "185", max: "" },
+];
 
-function SelectField({
-  label,
-  value,
-  onChange,
-  options,
-  placeholder,
+function FilterLink({
+  active,
+  children,
+  onClick,
 }: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-  options: string[];
-  placeholder: string;
+  active: boolean;
+  children: React.ReactNode;
+  onClick: () => void;
 }) {
   return (
-    <label className="block">
-      <span className="micro-label mb-2 block text-graphite">{label}</span>
-      <span className="relative block">
-        <select
-          value={value}
-          onChange={(event) => onChange(event.target.value)}
-          className={selectClass}
-        >
-          <option value="">{placeholder}</option>
-          {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-graphite">
-          ↓
-        </span>
-      </span>
-    </label>
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={cn(
+        "micro-label border-b pb-0.5 text-graphite transition hover:text-ink",
+        active ? "border-ledger text-ink" : "border-transparent",
+      )}
+    >
+      {children}
+    </button>
   );
+}
+
+function FilterRow({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-2 border-t border-ledger/35 py-3 sm:flex-row sm:items-baseline sm:gap-5">
+      <span className="micro-label w-24 shrink-0 text-graphite">{label}</span>
+      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-2">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function Separator() {
+  return <span className="text-[10px] text-ledger/45">/</span>;
 }
 
 export function ArchiveFilters({
@@ -74,7 +79,6 @@ export function ArchiveFilters({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [open, setOpen] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
     q: searchParams.get("q") ?? "",
     city: searchParams.get("city") ?? "",
@@ -118,7 +122,7 @@ export function ArchiveFilters({
   }
 
   function clear() {
-    const next = {
+    const next: FilterState = {
       q: "",
       city: "",
       hair: "",
@@ -130,155 +134,136 @@ export function ArchiveFilters({
     router.replace(pathname, { scroll: false });
   }
 
-  const activeCount = Object.entries(filters).filter(
-    ([key, value]) => key !== "q" && Boolean(value),
-  ).length;
-
-  const body = (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-      <SelectField
-        label="City"
-        value={filters.city}
-        onChange={(value) => update({ city: value })}
-        options={facets.cities}
-        placeholder="All cities"
-      />
-      <SelectField
-        label="Hair"
-        value={filters.hair}
-        onChange={(value) => update({ hair: value })}
-        options={facets.hairColors}
-        placeholder="Any hair"
-      />
-      <SelectField
-        label="Eyes"
-        value={filters.eyes}
-        onChange={(value) => update({ eyes: value })}
-        options={facets.eyeColors}
-        placeholder="Any eyes"
-      />
-      <label className="block">
-        <span className="micro-label mb-2 block text-graphite">
-          Height from
-        </span>
-        <select
-          value={filters.heightMin}
-          onChange={(event) => update({ heightMin: event.target.value })}
-          className={selectClass}
-        >
-          <option value="">Any height</option>
-          <option value="165">165 cm</option>
-          <option value="170">170 cm</option>
-          <option value="175">175 cm</option>
-          <option value="180">180 cm</option>
-          <option value="185">185 cm</option>
-        </select>
-      </label>
-      <label className="block">
-        <span className="micro-label mb-2 block text-graphite">
-          Height to
-        </span>
-        <select
-          value={filters.heightMax}
-          onChange={(event) => update({ heightMax: event.target.value })}
-          className={selectClass}
-        >
-          <option value="">No limit</option>
-          <option value="175">175 cm</option>
-          <option value="180">180 cm</option>
-          <option value="185">185 cm</option>
-          <option value="190">190 cm</option>
-          <option value="195">195 cm</option>
-        </select>
-      </label>
-    </div>
+  const hasFilters = Boolean(
+    filters.q ||
+      filters.city ||
+      filters.hair ||
+      filters.eyes ||
+      filters.heightMin ||
+      filters.heightMax,
   );
 
+  const heightIsActive = (min: string, max: string) =>
+    filters.heightMin === min && filters.heightMax === max;
+
   return (
-    <div className="border-y border-ledger bg-manila/35 py-5">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
-        <div className="relative w-full lg:max-w-xs">
-          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-graphite" />
-          <Input
-            value={filters.q}
-            onChange={(event) => setFilters({ ...filters, q: event.target.value })}
-            placeholder="Search the catalogue"
-            aria-label="Search models by name"
-            className="h-10 rounded-none border-ledger bg-paper pl-9"
-          />
-          {filters.q && (
-            <button
-              type="button"
-              onClick={() => {
-                setFilters({ ...filters, q: "" });
-                update({ q: "" });
-              }}
-              className="absolute top-1/2 right-3 -translate-y-1/2 text-graphite hover:text-ink"
-              aria-label="Clear search"
-            >
-              <X className="size-3.5" />
-            </button>
-          )}
-        </div>
-
-        <div className="hidden flex-1 lg:block">{body}</div>
-
-        <div className="flex items-center justify-between gap-3 lg:hidden">
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button variant="outline" className="micro-label h-10 gap-2 rounded-none border-ledger bg-paper">
-                <SlidersHorizontal className="size-3.5" />
-                Filters
-                {activeCount > 0 && (
-                  <span className="flex size-5 items-center justify-center bg-ledger text-[10px] text-paper">
-                    {activeCount}
-                  </span>
-                )}
-              </Button>
-            </SheetTrigger>
-            <SheetContent className="w-full overflow-y-auto sm:max-w-md">
-              <SheetHeader>
-                <SheetTitle className="font-display text-3xl font-normal">
-                  Filter the archive
-                </SheetTitle>
-              </SheetHeader>
-              <div className="mt-7">{body}</div>
-              <Button
-                className="micro-label mt-8 h-11 w-full rounded-none"
-                onClick={() => setOpen(false)}
-              >
-                Show {total} models
-              </Button>
+    <div className="border-t border-ledger/70">
+      <div className="flex flex-col gap-4 py-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex w-full max-w-xl items-center gap-5">
+          <span className="micro-label w-24 shrink-0 text-graphite">Index</span>
+          <div className="flex flex-1 items-center gap-2 border-b border-ledger pb-2">
+            <Search className="size-3.5 shrink-0 text-ledger" />
+            <input
+              value={filters.q}
+              onChange={(event) =>
+                setFilters({ ...filters, q: event.target.value })
+              }
+              placeholder="Search the casting index"
+              aria-label="Search models by name"
+              className="w-full bg-transparent font-mono text-xs text-ink outline-none placeholder:text-graphite"
+            />
+            {filters.q && (
               <button
                 type="button"
                 onClick={() => {
-                  clear();
-                  setOpen(false);
+                  setFilters({ ...filters, q: "" });
+                  update({ q: "" });
                 }}
-                className="micro-label mt-4 w-full text-center text-graphite"
+                className="shrink-0 text-graphite hover:text-ink"
+                aria-label="Clear search"
               >
-                Clear all filters
+                <X className="size-3.5" />
               </button>
-            </SheetContent>
-          </Sheet>
-          <p className="text-xs text-graphite">
-            {total} {total === 1 ? "face" : "faces"}
-          </p>
+            )}
+          </div>
         </div>
 
-        {(activeCount > 0 || filters.q || filters.heightMax) && (
-          <button
-            type="button"
-            onClick={clear}
-            className={cn(
-              "micro-label hidden shrink-0 items-center gap-1.5 text-graphite hover:text-ink lg:flex",
-            )}
-          >
-            <X className="size-3" />
-            Clear
-          </button>
-        )}
+        <div className="flex items-center justify-end gap-5">
+          <span className="stamp hidden text-[10px] text-graphite sm:inline">
+            {String(total).padStart(2, "0")} {total === 1 ? "entry" : "entries"}
+          </span>
+          {hasFilters && (
+            <button
+              type="button"
+              onClick={clear}
+              className="micro-label inline-flex items-center gap-1.5 border-b border-ledger pb-0.5 text-ink"
+            >
+              <X className="size-3" />
+              Reset index
+            </button>
+          )}
+        </div>
       </div>
+
+      <FilterRow label="Location">
+        <FilterLink active={!filters.city} onClick={() => update({ city: "" })}>
+          All
+        </FilterLink>
+        {facets.cities.map((city) => (
+          <span key={city} className="flex items-baseline gap-2">
+            <Separator />
+            <FilterLink
+              active={filters.city === city}
+              onClick={() => update({ city })}
+            >
+              {city}
+            </FilterLink>
+          </span>
+        ))}
+      </FilterRow>
+
+      <FilterRow label="Hair">
+        <FilterLink active={!filters.hair} onClick={() => update({ hair: "" })}>
+          All
+        </FilterLink>
+        {facets.hairColors.map((hair) => (
+          <span key={hair} className="flex items-baseline gap-2">
+            <Separator />
+            <FilterLink
+              active={filters.hair === hair}
+              onClick={() => update({ hair })}
+            >
+              {hair}
+            </FilterLink>
+          </span>
+        ))}
+      </FilterRow>
+
+      <FilterRow label="Eyes">
+        <FilterLink active={!filters.eyes} onClick={() => update({ eyes: "" })}>
+          All
+        </FilterLink>
+        {facets.eyeColors.map((eyes) => (
+          <span key={eyes} className="flex items-baseline gap-2">
+            <Separator />
+            <FilterLink
+              active={filters.eyes === eyes}
+              onClick={() => update({ eyes })}
+            >
+              {eyes}
+            </FilterLink>
+          </span>
+        ))}
+      </FilterRow>
+
+      <FilterRow label="Height / cm">
+        {heightRanges.map((range, index) => (
+          <span key={range.label} className="flex items-baseline gap-2">
+            {index > 0 && <Separator />}
+            <FilterLink
+              active={heightIsActive(range.min, range.max)}
+              onClick={() =>
+                update({
+                  heightMin: range.min,
+                  heightMax: range.max,
+                })
+              }
+            >
+              {range.label}
+            </FilterLink>
+          </span>
+        ))}
+      </FilterRow>
     </div>
   );
 }
