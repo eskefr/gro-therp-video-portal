@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Check,
+  Eye,
   Film,
   Link2,
   Loader2,
@@ -337,11 +338,11 @@ export function CastDetailClient({
                             variant="ghost"
                           />
                           <Link
-                            href={`/invite/${invitation.token}`}
-                            target="_blank"
-                            className="micro-label px-2 py-1.5 text-graphite hover:text-ink"
+                            href={`/admin/invitations/${invitation.id}`}
+                            className="micro-label inline-flex items-center gap-1 px-2 py-1.5 text-graphite hover:text-ink"
                           >
-                            Open
+                            <Eye className="size-3" />
+                            Inspect
                           </Link>
                         </div>
                       </td>

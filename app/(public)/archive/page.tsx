@@ -58,27 +58,10 @@ export default async function ArchivePage({
   return (
     <div>
       <section className="paper-texture double-rule border-b border-ledger">
-        <div className="mx-auto w-full max-w-[1440px] px-5 py-14 md:px-10 md:py-20">
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <p className="micro-label text-graphite">
-                Archive casting · {result.total}{" "}
-                {result.total === 1 ? "entry" : "entries"}
-              </p>
-              <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[0.95] tracking-[-0.05em] sm:text-6xl xl:text-7xl">
-                The Archive
-              </h1>
-            </div>
-            <div className="max-w-xs lg:pb-3">
-              <p className="text-sm leading-6 text-graphite">
-                Faces we believe in. A living roster of models and talent for
-                editorial, campaign, runway, and moving image.
-              </p>
-              <p className="stamp mt-5">
-                Copenhagen · Representing worldwide
-              </p>
-            </div>
-          </div>
+        <div className="mx-auto w-full max-w-[1440px] px-5 py-6 md:px-10 md:py-7">
+          <h1 className="font-display text-3xl leading-none tracking-[-0.03em] sm:text-4xl">
+            The Archive
+          </h1>
         </div>
       </section>
 

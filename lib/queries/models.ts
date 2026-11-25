@@ -79,9 +79,10 @@ export async function getPendingApplications(): Promise<PendingApplication[]> {
 
   const { data: invitations } = await admin
     .from("invitations")
-    .select("claimed_model_id,cast_id,token")
+    .select("id,claimed_model_id,cast_id,token,created_at")
     .in("claimed_model_id", models.map((model) => model.id))
-    .eq("status", "submitted");
+    .in("status", ["submitted", "completed"])
+    .order("created_at", { ascending: false });
 
   if (!invitations?.length) return models;
 
@@ -92,15 +93,21 @@ export async function getPendingApplications(): Promise<PendingApplication[]> {
     .in("id", castIds);
 
   const castTitle = new Map((casts ?? []).map((cast) => [cast.id, cast.title]));
-  const source = new Map(
-    invitations.map((invitation) => [
-      invitation.claimed_model_id,
-      {
-        castTitle: castTitle.get(invitation.cast_id) ?? "Cast invitation",
-        token: invitation.token,
-      },
-    ]),
-  );
+  const source = new Map<
+    string,
+    NonNullable<PendingApplication["source"]>
+  >();
+
+  for (const invitation of invitations) {
+    if (!invitation.claimed_model_id || source.has(invitation.claimed_model_id)) {
+      continue;
+    }
+    source.set(invitation.claimed_model_id, {
+      castTitle: castTitle.get(invitation.cast_id) ?? "Cast invitation",
+      token: invitation.token,
+      invitationId: invitation.id,
+    });
+  }
 
   return models.map((model) => ({
     ...model,

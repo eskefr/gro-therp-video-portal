@@ -6,7 +6,7 @@ Peoples Archive is the casting practice of Gro Therp Casting in Copenhagen. The 
 
 ## What’s included
 
-- **Public archive** with server-side filters for city, height, hair, eyes, and name.
+- **Public archive** with initials and age filters and an initials/age-only public projection.
 - **Self-registration** at `/apply`, including an optional hidden profile.
 - **Magic-link invitations** at `/invite/[token]`:
   - expiry enforcement
@@ -16,12 +16,12 @@ Peoples Archive is the casting practice of Gro Therp Casting in Copenhagen. The 
   - required casting media uploads
   - direct media requests for models already on a cast
 - **Admin workspace**:
-  - overview statistics
+  - compact overview statistics and review queues
   - approved archive with hidden-profile badges
   - pending application review with approve/reject
   - cast management, role notes, and media previews
   - invite generation with 24h / 3d / 7d / custom expiry
-  - invitation tracker with live status and countdowns
+  - invitation tracker with live status, countdowns, and submission inspection
 - **Direct-to-Supabase uploads** using short-lived signed upload URLs. File bytes do not pass through Vercel functions.
 - **Seed data** for a complete client demo, including every invitation state.
 
@@ -205,7 +205,6 @@ proxy.ts                Admin route guard
 - Signed admin media URLs expire after one hour; reload the cast page to refresh them.
 - Videos are capped at 50 MB per file. This is intentionally conservative for local and starter Supabase plans.
 - The seed uses bundled portrait assets in `public/seed` for speed and offline reliability. Demo portraits were sourced from [grotherpcasting.dk](https://grotherpcasting.dk) and share a muted color grade. Real application and admin uploads use Supabase Storage.
-- The public archive exposes only initials, age, and portrait; full names and profile data stay admin-only.
 - The public archive exposes only initials, age, and the portrait; full names and profile data stay behind the admin boundary.
 
 ## Useful commands

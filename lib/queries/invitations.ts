@@ -4,10 +4,14 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import type {
   Cast,
   Invitation,
+  InvitationInspection,
   InvitationWithRelations,
   Model,
+  SubmissionMedia,
 } from "@/types/app";
 import { getEffectiveInvitationStatus } from "@/lib/invitations/status";
+import { normalizeDraft } from "@/lib/invitations/draft";
+import { publicHeadshotUrl, signMediaItems } from "@/lib/storage/media";
 
 export async function getInvitationByToken(
   token: string,
@@ -122,6 +126,120 @@ export async function getInvitationList(): Promise<InvitationWithRelations[]> {
       } as InvitationWithRelations;
     })
     .filter((row): row is InvitationWithRelations => Boolean(row));
+}
+
+export async function getInvitationInspection(
+  invitationId: string,
+): Promise<InvitationInspection | null> {
+  const admin = createAdminClient();
+  const { data: row } = await admin
+    .from("invitations")
+    .select("*")
+    .eq("id", invitationId)
+    .maybeSingle();
+
+  if (!row) return null;
+  const invitation = row as Invitation;
+
+  const [{ data: cast }, { data: target }, { data: claimed }] =
+    await Promise.all([
+      admin
+        .from("casts")
+        .select("id,title,client_name")
+        .eq("id", invitation.cast_id)
+        .maybeSingle(),
+      invitation.target_model_id
+        ? admin
+            .from("models")
+            .select("*")
+            .eq("id", invitation.target_model_id)
+            .maybeSingle()
+        : Promise.resolve({ data: null }),
+      invitation.claimed_model_id
+        ? admin
+            .from("models")
+            .select("*")
+            .eq("id", invitation.claimed_model_id)
+            .maybeSingle()
+        : Promise.resolve({ data: null }),
+    ]);
+
+  if (!cast) return null;
+
+  const model = (claimed as Model | null) ?? (target as Model | null) ?? null;
+  let memberMedia: SubmissionMedia[] = [];
+
+  if (invitation.claimed_model_id) {
+    const { data: member } = await admin
+      .from("cast_members")
+      .select("submission_media")
+      .eq("cast_id", invitation.cast_id)
+      .eq("model_id", invitation.claimed_model_id)
+      .maybeSingle();
+
+    if (member && Array.isArray(member.submission_media)) {
+      memberMedia = member.submission_media as SubmissionMedia[];
+    }
+  }
+
+  const draft = normalizeDraft(invitation.draft_data);
+  const draftProfile = draft.profile ?? {};
+  const status = getEffectiveInvitationStatus(invitation);
+  const isSubmitted = status === "submitted" || status === "completed";
+  const draftMedia = draft.media ?? [];
+  const media =
+    isSubmitted && memberMedia.length
+      ? memberMedia
+      : draftMedia.length
+        ? draftMedia
+        : memberMedia;
+  const mediaSource: InvitationInspection["mediaSource"] = media.length
+    ? isSubmitted
+      ? "submitted"
+      : "draft"
+    : null;
+
+  const draftHeadshot = draft.headshot;
+  const draftHeadshotUrl = draftHeadshot
+    ? draftHeadshot.path
+      ? publicHeadshotUrl(draftHeadshot.path)
+      : draftHeadshot.url
+    : null;
+
+  return {
+    id: invitation.id,
+    token: invitation.token,
+    status,
+    castTitle: cast.title,
+    clientName: cast.client_name ?? null,
+    recipientName:
+      model?.name ?? draftProfile.name ?? draft.lookup?.name ?? null,
+    isMediaRequest: Boolean(invitation.target_model_id),
+    requireMediaUpload: invitation.require_media_upload,
+    expiresAt: invitation.expires_at,
+    submittedAt: invitation.submitted_at,
+    draftSavedAt: draft.savedAt ?? draft.clientUpdatedAt ?? null,
+    modelStatus: model?.status ?? null,
+    profile: {
+      name: model?.name ?? draftProfile.name ?? null,
+      age: model?.age ?? draftProfile.age ?? null,
+      phone: model?.phone ?? draft.phone ?? null,
+      email: model?.email ?? draftProfile.email ?? null,
+      city: model?.city ?? draftProfile.city ?? null,
+      height_cm: model?.height_cm ?? draftProfile.height_cm ?? null,
+      bust_cm: model?.bust_cm ?? draftProfile.bust_cm ?? null,
+      waist_cm: model?.waist_cm ?? draftProfile.waist_cm ?? null,
+      hips_cm: model?.hips_cm ?? draftProfile.hips_cm ?? null,
+      shoe_size: model?.shoe_size ?? draftProfile.shoe_size ?? null,
+      hair_color: model?.hair_color ?? draftProfile.hair_color ?? null,
+      eye_color: model?.eye_color ?? draftProfile.eye_color ?? null,
+      bio: model?.bio ?? draftProfile.bio ?? null,
+      isHidden: model?.is_hidden ?? Boolean(draft.isHidden),
+    },
+    headshotUrl: model?.headshot_url ?? draftHeadshotUrl,
+    media: await signMediaItems(media),
+    mediaSource,
+  };
 }
 
 export async function getRecentInvitations(limit = 5) {

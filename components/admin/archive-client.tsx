@@ -28,14 +28,11 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
     });
   }, [models, query, visibility]);
 
-  const hiddenCount = models.filter((model) => model.is_hidden).length;
-
   return (
     <div>
       <AdminPageHeader
         eyebrow="Talent archive"
         title="All approved models"
-        description={`${models.length} approved profiles, including ${hiddenCount} hidden from the public roster. Hidden models remain fully castable.`}
         action={<CreateModelDialog />}
       />
 

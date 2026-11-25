@@ -15,7 +15,6 @@ export function JobsClient({ casts }: { casts: CastWithCount[] }) {
       <AdminPageHeader
         eyebrow="Casts & jobs"
         title="Casting board"
-        description="Open casts, attached talent, and the links that keep everything moving."
         action={<CreateCastDialog />}
       />
 

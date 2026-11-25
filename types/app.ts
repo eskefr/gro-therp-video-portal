@@ -155,7 +155,44 @@ export interface PendingApplication extends Model {
   source?: {
     castTitle: string;
     token: string;
+    invitationId: string;
   } | null;
+}
+
+export interface InvitationInspectionProfile {
+  name: string | null;
+  age: number | null;
+  phone: string | null;
+  email: string | null;
+  city: string | null;
+  height_cm: number | null;
+  bust_cm: number | null;
+  waist_cm: number | null;
+  hips_cm: number | null;
+  shoe_size: number | null;
+  hair_color: string | null;
+  eye_color: string | null;
+  bio: string | null;
+  isHidden: boolean;
+}
+
+export interface InvitationInspection {
+  id: string;
+  token: string;
+  status: EffectiveInvitationStatus;
+  castTitle: string;
+  clientName: string | null;
+  recipientName: string | null;
+  isMediaRequest: boolean;
+  requireMediaUpload: boolean;
+  expiresAt: string;
+  submittedAt: string | null;
+  draftSavedAt: string | null;
+  modelStatus: ModelStatus | null;
+  profile: InvitationInspectionProfile;
+  headshotUrl: string | null;
+  media: SignedMedia[];
+  mediaSource: "submitted" | "draft" | null;
 }
 
 export interface AdminStats {

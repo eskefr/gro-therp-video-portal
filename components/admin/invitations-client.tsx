@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import {
   ArrowUpRight,
   Check,
+  Eye,
   Film,
   Image as ImageIcon,
   Loader2,
@@ -100,7 +101,6 @@ export function InvitationsClient({
       <AdminPageHeader
         eyebrow="Magic links"
         title="Invitation tracker"
-        description="Every cast link, media request, draft, and submission. Links expire automatically; the status is calculated against the server clock."
         action={
           <Button
             variant="outline"
@@ -218,12 +218,11 @@ export function InvitationsClient({
                           className="h-8 px-2"
                         />
                         <Link
-                          href={`/invite/${invitation.token}`}
-                          target="_blank"
+                          href={`/admin/invitations/${invitation.id}`}
                           className="micro-label inline-flex h-8 items-center gap-1 px-2 text-graphite hover:text-ink"
                         >
-                          Open
-                          <ArrowUpRight className="size-3" />
+                          <Eye className="size-3" />
+                          Inspect
                         </Link>
                         {status === "submitted" && (
                           <button

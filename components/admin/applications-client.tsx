@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowUpRight,
@@ -87,11 +88,7 @@ export function ApplicationsClient({
 
   return (
     <div>
-      <AdminPageHeader
-        eyebrow="Applications"
-        title="The pending queue"
-        description="Direct applications and new faces from cast invitations. Approving a profile moves it to the archive; rejecting removes it."
-      />
+      <AdminPageHeader eyebrow="Applications" title="The pending queue" />
 
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full max-w-sm">
@@ -238,13 +235,30 @@ export function ApplicationsClient({
                     ["Shoe", selected.shoe_size ? `${selected.shoe_size}` : "—"],
                     ["Hair", selected.hair_color || "—"],
                     ["Eyes", selected.eye_color || "—"],
-                  ].map(([label, value]) => (
-                    <div key={label} className="bg-paper px-3 py-2.5">
+                  ].map(([label, value], index, list) => (
+                    <div
+                      key={label}
+                      className={`bg-paper px-3 py-2.5 ${
+                        index === list.length - 1 && list.length % 2 === 1
+                          ? "col-span-2"
+                          : ""
+                      }`}
+                    >
                       <p className="micro-label text-graphite">{label}</p>
                       <p className="mt-1 break-words text-xs">{value}</p>
                     </div>
                   ))}
                 </div>
+
+                {selected.source && (
+                  <Link
+                    href={`/admin/invitations/${selected.source.invitationId}`}
+                    className="micro-label inline-flex items-center gap-1.5 text-graphite underline underline-offset-4 hover:text-ink"
+                  >
+                    Inspect invitation submission
+                    <ArrowUpRight className="size-3" />
+                  </Link>
+                )}
 
                 <div>
                   <p className="micro-label text-graphite">About</p>

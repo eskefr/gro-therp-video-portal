@@ -36,13 +36,9 @@ export function LoginForm({ next }: { next: string }) {
       <span className="flex size-10 items-center justify-center border border-ledger bg-manila text-ledger">
         <LockKeyhole className="size-4" />
       </span>
-      <p className="micro-label mt-6 text-graphite">Agency workspace</p>
-      <h1 className="mt-3 font-display text-4xl tracking-[-0.03em]">
-        Welcome back.
+      <h1 className="mt-6 font-display text-3xl tracking-[-0.03em]">
+        Admin access
       </h1>
-      <p className="mt-3 text-sm leading-6 text-graphite">
-        Enter the demo passcode to view and manage the agency.
-      </p>
 
       <div className="ledger-grid mt-7">
         <div className="ledger-section flex items-center justify-between px-4 py-2.5">
