@@ -204,7 +204,8 @@ proxy.ts                Admin route guard
 - Uploaded headshots live in a public bucket so they can appear in the public archive. Hidden profiles are excluded from listings, but their image URL is still public-by-URL. Use a private pending bucket if you need stricter image privacy.
 - Signed admin media URLs expire after one hour; reload the cast page to refresh them.
 - Videos are capped at 50 MB per file. This is intentionally conservative for local and starter Supabase plans.
-- The seed uses bundled portrait assets in `public/seed` for speed and offline reliability. Real application and admin uploads use Supabase Storage.
+- The seed uses bundled portrait assets in `public/seed` for speed and offline reliability. Demo portraits were sourced from [grotherpcasting.dk](https://grotherpcasting.dk) and are normalized to grayscale. Real application and admin uploads use Supabase Storage.
+- The public archive exposes only initials, age, and portrait; full names and profile data stay admin-only.
 - The public archive exposes only initials, age, and the portrait; full names and profile data stay behind the admin boundary.
 
 ## Useful commands

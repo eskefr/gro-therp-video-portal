@@ -30,6 +30,7 @@ Peoples Archive is the public-facing casting archive of Gro Therp Casting. The c
 - Admin auth is a demo passcode cookie in `lib/auth`; `proxy.ts` is only an optimistic gate. Layouts and every Server Action call `requireAdmin`/`getAdminSession` themselves.
 - Theme tokens and global sharp-corner rules live in `app/globals.css`; `app/shadcn.css` is a committed local copy. Fonts are Newsreader (display), Inter (labels/UI), Courier Prime (dates/metadata).
 - The archive is a zero-gap contact sheet: the wrapper owns top/left hairlines, each cell owns right/bottom; do not add gaps, shadows, or both sides of internal borders. Its filters are text links, not dropdowns.
+- The public archive intentionally exposes only initials, age, and portrait. `models.initials` is trigger-derived from the first two name words. Do not add full names, city, or stats back to `PublicModel` or the anon grants; full records stay admin-only. Age is required for new model records.
 - `components/ui` is generated shadcn code and imports `cn`/primitives from packages. Custom code uses `@/lib/utils`. Do not reintroduce the `shadcn` CLI dependency or the old `@tailwindcss/turbopack` CSS loader.
 - Keep comments intent-only; do not add numbered step comments.
 
