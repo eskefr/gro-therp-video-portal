@@ -1,8 +1,8 @@
-# GRO-THERP — Casting & Model Agency
+# PEOPLES ARCHIVE — Casting & Model Agency
 
 A fast, editorial casting-platform prototype built with Next.js App Router, Supabase, Tailwind CSS, shadcn/ui, and Lucide icons. It includes a public model archive, self-registration, expiring magic-link cast invitations with draft autosave, and a demo-friendly admin workspace.
 
-The interface follows an archival editorial / vintage library-card direction: warm paper and manila surfaces, ledger-blue rules, Newsreader display type, Inter labels, and Courier Prime for dates and metadata.
+Peoples Archive is the casting practice of Gro Therp Casting in Copenhagen. The interface follows an archival editorial / vintage library-card direction: warm paper and manila surfaces, ledger-blue rules, Newsreader display type, Inter labels, and Courier Prime for dates and metadata.
 
 ## What’s included
 

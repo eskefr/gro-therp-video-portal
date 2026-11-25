@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "The Archive",
   description:
-    "Explore the Gro-Therp roster of models and castable talent. Filter by city, height, hair, and eyes.",
+    "Explore Peoples Archive, the model and casting roster of Gro Therp Casting. Filter by city, height, hair, and eyes.",
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -110,24 +110,6 @@ export default async function ArchivePage({
                   model={model}
                   priority={index < 4}
                   index={(result.page - 1) * result.pageSize + index + 1}
-                />
-              ))}
-              {Array.from({
-                length: (4 - (result.models.length % 4)) % 4,
-              }).map((_, index) => (
-                <div
-                  key={`desktop-plate-${index}`}
-                  aria-hidden
-                  className="hidden border-r border-b border-ledger/60 bg-paper lg:block"
-                />
-              ))}
-              {Array.from({
-                length: (2 - (result.models.length % 2)) % 2,
-              }).map((_, index) => (
-                <div
-                  key={`tablet-plate-${index}`}
-                  aria-hidden
-                  className="hidden border-r border-b border-ledger/60 bg-paper sm:block lg:hidden"
                 />
               ))}
             </div>

@@ -5,26 +5,29 @@ import { BRAND } from "@/lib/constants";
 export function SiteFooter() {
   return (
     <footer className="double-rule mt-auto border-ledger bg-paper">
-      <div className="mx-auto grid w-full max-w-[1500px] gap-12 px-5 py-16 md:grid-cols-[1.45fr_0.55fr_0.85fr] md:gap-16 md:px-10 md:py-20">
+      <div className="mx-auto grid w-full max-w-[1500px] gap-12 px-5 py-16 md:grid-cols-[1.4fr_0.5fr_1.15fr] md:gap-16 md:px-10 md:py-20">
         <div>
-          <Brand compact />
+          <Brand compact className="h-5" />
           <p className="mt-6 max-w-sm font-display text-2xl leading-snug tracking-[-0.02em] text-ink">
             Distinctive faces, quiet confidence, and work with a point of view.
           </p>
           <p className="mt-6 max-w-sm text-sm leading-6 text-graphite">
-            A casting and model agency representing locally and
-            internationally from Copenhagen.
+            Peoples Archive is the casting practice of Gro Therp Casting,
+            working locally and internationally from Copenhagen.
           </p>
         </div>
         <div>
           <p className="micro-label text-graphite">Explore</p>
           <div className="mt-5 flex flex-col gap-3 text-sm">
             <Link href="/archive" className="w-fit hover:text-ledger">
-              Model archive
+              Archive
             </Link>
             <Link href="/apply" className="w-fit hover:text-ledger">
-              Apply to the agency
+              Apply
             </Link>
+            <a href={`mailto:${BRAND.email}`} className="w-fit hover:text-ledger">
+              Contact
+            </a>
             <Link href="/admin" className="w-fit hover:text-ledger">
               Admin access
             </Link>
@@ -32,18 +35,50 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="micro-label text-graphite">Contact</p>
-          <div className="mt-5 space-y-3 text-sm">
-            <a href={`mailto:${BRAND.email}`} className="block hover:text-ledger">
-              {BRAND.email}
-            </a>
-            <p className="font-mono text-xs text-graphite">
-              {BRAND.city}, {BRAND.country}
-            </p>
+          <div className="mt-5 border border-ledger bg-manila px-4 py-3">
+            <p className="micro-label text-graphite">Address</p>
+            <address className="mt-1.5 font-mono text-[11px] leading-5 text-ink not-italic">
+              {BRAND.address}
+              <br />
+              {BRAND.postalCode} {BRAND.city}
+            </address>
           </div>
-          <div className="mt-8 border border-ledger bg-manila px-3 py-2">
-            <p className="stamp text-[10px] text-ink">
-              Copenhagen · Representing worldwide
-            </p>
+
+          <div className="mt-5 space-y-4">
+            <div>
+              <p className="micro-label text-graphite">
+                Casting director · {BRAND.directorName}
+              </p>
+              <a
+                href={`tel:${BRAND.phone.replace(/\s/g, "")}`}
+                className="mt-1 block font-mono text-[11px] text-ink hover:text-ledger"
+              >
+                {BRAND.phone}
+              </a>
+              <a
+                href={`mailto:${BRAND.email}`}
+                className="block font-mono text-[11px] text-ink hover:text-ledger"
+              >
+                {BRAND.email}
+              </a>
+            </div>
+            <div>
+              <p className="micro-label text-graphite">
+                Casting assistant · {BRAND.assistantName}
+              </p>
+              <a
+                href={`tel:${BRAND.assistantPhone.replace(/\s/g, "")}`}
+                className="mt-1 block font-mono text-[11px] text-ink hover:text-ledger"
+              >
+                {BRAND.assistantPhone}
+              </a>
+              <a
+                href={`mailto:${BRAND.assistantEmail}`}
+                className="block font-mono text-[11px] text-ink hover:text-ledger"
+              >
+                {BRAND.assistantEmail}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -52,7 +87,7 @@ export function SiteFooter() {
           <span>
             © {new Date().getFullYear()} {BRAND.fullName}
           </span>
-          <span>Archive no. GT / MMXXVI</span>
+          <span>Peoples Archive · PA / MMXXVI</span>
         </div>
       </div>
     </footer>

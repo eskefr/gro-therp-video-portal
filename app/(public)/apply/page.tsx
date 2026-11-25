@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { ApplyForm } from "@/components/public/apply-form";
+import { BRAND } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Apply",
   description:
-    "Apply to join the Gro-Therp casting and model agency. Share your details, measurements, and a headshot.",
+    "Apply to Peoples Archive, the casting practice of Gro Therp Casting. Share your details, measurements, and a headshot.",
 };
 
 export default function ApplyPage() {
@@ -47,10 +48,10 @@ export default function ApplyPage() {
             <p className="mt-10 font-mono text-[10px] leading-5 text-graphite">
               Prefer email? Write to{" "}
               <a
-                href="mailto:casting@gro-therp.com"
+                href={`mailto:${BRAND.email}`}
                 className="text-ledger underline underline-offset-4"
               >
-                casting@gro-therp.com
+                {BRAND.email}
               </a>
               .
             </p>

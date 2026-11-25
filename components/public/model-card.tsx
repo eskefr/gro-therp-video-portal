@@ -19,7 +19,7 @@ export function ModelCard({
         <div className="relative size-full overflow-hidden bg-manila/25">
           <Image
             src={model.headshot_url}
-            alt={`${model.name}, represented by Gro-Therp`}
+            alt={`${model.name}, represented by Peoples Archive`}
             fill
             priority={priority}
             sizes="(max-width: 640px) 96vw, (max-width: 1024px) 46vw, 23vw"

@@ -1,9 +1,17 @@
 export const BRAND = {
-  name: "GRO-THERP",
-  fullName: "Gro-Therp Casting",
-  email: "casting@gro-therp.com",
-  city: "Copenhagen",
+  name: "PEOPLES ARCHIVE",
+  fullName: "Peoples Archive — Gro Therp Casting",
+  email: "gro@grotherpcasting.dk",
+  assistantEmail: "signe@grotherpcasting.dk",
+  directorName: "Gro Therp",
+  assistantName: "Signe Clemmesen",
+  phone: "+45 27 12 70 82",
+  assistantPhone: "+45 30 30 06 59",
+  address: "Blågårdsgade 31C",
+  postalCode: "2200",
+  city: "København N",
   country: "Denmark",
+  website: "https://grotherpcasting.dk",
 } as const;
 
 export const MAX_HEADSHOT_BYTES = 8 * 1024 * 1024;

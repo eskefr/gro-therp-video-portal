@@ -8,7 +8,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Gro-Therp repository guide
+# Peoples Archive repository guide
+
+Peoples Archive is the public-facing casting archive of Gro Therp Casting. The codebase and deployment names still use `gro-therp`.
 
 ## Run and verify
 

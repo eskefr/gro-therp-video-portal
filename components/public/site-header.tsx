@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Brand } from "@/components/shared/brand";
+import { BRAND } from "@/lib/constants";
 
 export function SiteHeader() {
   return (
@@ -12,20 +13,19 @@ export function SiteHeader() {
             href="/archive"
             className="micro-label hidden text-graphite transition hover:text-ink sm:inline"
           >
-            The Archive
+            Archive
           </Link>
-          <Link
-            href="/apply"
+          <a
+            href={`mailto:${BRAND.email}`}
             className="micro-label hidden text-graphite transition hover:text-ink md:inline"
           >
-            Apply
-          </Link>
+            Contact
+          </a>
           <Link
             href="/apply"
             className="micro-label inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border border-ledger px-3 py-2.5 text-ink transition hover:bg-manila"
           >
-            <span className="hidden sm:inline">Join the agency</span>
-            <span className="sm:hidden">Apply</span>
+            Apply
             <ArrowUpRight className="size-3" />
           </Link>
         </nav>

@@ -16,7 +16,7 @@ export function InviteShell({
   targetName?: string | null;
   children: React.ReactNode;
 }) {
-  const reference = `GT / ${cast.id.slice(0, 4).toUpperCase()}`;
+  const reference = `PA / ${cast.id.slice(0, 4).toUpperCase()}`;
 
   return (
     <div className="min-h-screen bg-paper">

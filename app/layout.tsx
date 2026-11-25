@@ -28,8 +28,8 @@ const courier = Courier_Prime({
 export const metadata: Metadata = {
   metadataBase: new URL(PUBLIC_SITE_URL),
   title: {
-    default: "GRO-THERP — Casting & Model Agency",
-    template: "%s · GRO-THERP",
+    default: "PEOPLES ARCHIVE — Casting & Model Agency",
+    template: "%s · Peoples Archive",
   },
   description:
     "An editorial casting agency representing distinctive faces and connecting talent with ambitious clients.",
