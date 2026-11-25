@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { formatDistanceToNowStrict } from "date-fns";
+import { cn } from "@/lib/utils";
 
 export function Countdown({
   expiresAt,
@@ -32,7 +33,10 @@ export function Countdown({
   }, [expiresAt, prefix]);
 
   return (
-    <span className={className} suppressHydrationWarning>
+    <span
+      className={cn("font-mono tracking-[0.01em]", className)}
+      suppressHydrationWarning
+    >
       {label ?? "—"}
     </span>
   );

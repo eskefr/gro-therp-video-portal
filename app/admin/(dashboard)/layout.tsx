@@ -14,7 +14,7 @@ export default async function AdminLayout({
   await requireAdmin();
 
   return (
-    <div className="min-h-screen bg-background lg:flex">
+    <div className="min-h-screen bg-paper lg:flex">
       <AdminNav />
       <main className="min-w-0 flex-1">
         <div className="mx-auto w-full max-w-[1400px] px-5 py-8 md:px-8 md:py-11 xl:px-12">

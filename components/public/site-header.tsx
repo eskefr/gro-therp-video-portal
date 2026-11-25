@@ -4,25 +4,25 @@ import { Brand } from "@/components/shared/brand";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-4 px-4 sm:px-5 md:h-[68px] md:px-10">
+    <header className="sticky top-0 z-40 border-b border-ledger bg-paper/95 backdrop-blur-md">
+      <div className="mx-auto flex h-16 w-full max-w-[1500px] items-center justify-between gap-4 px-4 sm:px-5 md:h-[72px] md:px-10">
         <Brand />
-        <nav className="flex items-center gap-6 md:gap-9">
+        <nav className="flex items-center gap-5 md:gap-8">
           <Link
             href="/archive"
-            className="micro-label hidden text-muted-foreground transition hover:text-foreground sm:inline"
+            className="micro-label hidden text-graphite transition hover:text-ink sm:inline"
           >
             The Archive
           </Link>
           <Link
             href="/apply"
-            className="micro-label hidden text-muted-foreground transition hover:text-foreground md:inline"
+            className="micro-label hidden text-graphite transition hover:text-ink md:inline"
           >
             Apply
           </Link>
           <Link
             href="/apply"
-            className="micro-label inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border-b border-foreground pb-1 text-foreground"
+            className="micro-label inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap border border-ledger px-3 py-2.5 text-ink transition hover:bg-manila"
           >
             <span className="hidden sm:inline">Join the agency</span>
             <span className="sm:hidden">Apply</span>

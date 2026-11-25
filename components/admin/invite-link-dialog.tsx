@@ -83,16 +83,16 @@ function InviteLinkDialogBody({
   const isMedia = kind === "media";
 
   return (
-    <DialogContent className="w-full border-border bg-popover p-0 sm:max-w-lg">
-      <div className="border-b border-border px-6 py-5">
+    <DialogContent className="w-full border-ledger bg-popover p-0 sm:max-w-lg">
+      <div className="border-b border-ledger bg-manila px-6 py-5">
         <DialogHeader>
-          <p className="micro-label text-muted-foreground">
+          <p className="micro-label text-graphite">
             {isMedia ? "Direct request" : "Magic link"}
           </p>
           <DialogTitle className="font-display text-3xl font-normal tracking-[-0.03em]">
             {isMedia ? "Request casting media" : "Generate a cast invite"}
           </DialogTitle>
-          <DialogDescription className="text-sm leading-6 text-muted-foreground">
+          <DialogDescription className="text-sm leading-6 text-graphite">
             {isMedia
               ? `Send ${targetName ?? "this model"} a private upload link for ${castTitle}.`
               : `A single-use link for ${castTitle}. Talent can register or sign in by phone.`}
@@ -102,16 +102,16 @@ function InviteLinkDialogBody({
 
       {link ? (
         <div className="px-6 py-7">
-          <span className="flex size-10 items-center justify-center rounded-full border border-[#bfd0bf] bg-[#e5ecdf] text-[#40553a]">
+          <span className="flex size-10 items-center justify-center border border-ledger bg-manila text-ledger">
             <Check className="size-4" />
           </span>
           <h3 className="mt-5 font-display text-2xl">Link ready.</h3>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+          <p className="mt-2 text-sm leading-6 text-graphite">
             Copy it and send it directly to the {isMedia ? "model" : "talent"}.
             Anyone with this link can submit until it expires.
           </p>
-          <div className="mt-5 flex items-center gap-2 border border-border bg-background px-3 py-2.5">
-            <Link2 className="size-3.5 shrink-0 text-muted-foreground" />
+          <div className="mt-5 flex items-center gap-2 border border-ledger bg-paper px-3 py-2.5">
+            <Link2 className="size-3.5 shrink-0 text-graphite" />
             <span className="min-w-0 flex-1 truncate text-xs">{link}</span>
             <CopyButton value={link} label="Copy" variant="ghost" />
           </div>
@@ -127,7 +127,7 @@ function InviteLinkDialogBody({
               href={link}
               target="_blank"
               rel="noreferrer"
-              className="micro-label inline-flex h-10 flex-1 items-center justify-center gap-2 border border-foreground bg-foreground text-background"
+              className="micro-label inline-flex h-10 flex-1 items-center justify-center gap-2 border border-ledger bg-manila text-ink"
             >
               Open link
               <Sparkles className="size-3.5" />
@@ -142,7 +142,7 @@ function InviteLinkDialogBody({
           </div>
 
           {!isMedia && (
-            <div className="flex items-start gap-3 border-t border-border pt-5">
+            <div className="flex items-start gap-3 border-t border-ledger pt-5">
               <Switch
                 id="require-media"
                 checked={requireMedia}
@@ -154,7 +154,7 @@ function InviteLinkDialogBody({
                 className="flex-col items-start gap-0 text-sm leading-5 font-normal"
               >
                 Require casting video/photos during signup
-                <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+                <span className="mt-1 block text-xs leading-5 text-graphite">
                   Talent must upload at least one file before they can submit.
                 </span>
               </Label>
@@ -170,7 +170,7 @@ function InviteLinkDialogBody({
       )}
 
       {!link && (
-        <DialogFooter className="border-t border-border px-6 py-4">
+        <DialogFooter className="border-t border-ledger px-6 py-4">
           <Button
             variant="outline"
             className="micro-label h-10 rounded-none"

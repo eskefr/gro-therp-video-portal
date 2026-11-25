@@ -53,16 +53,16 @@ export function invitationStatusLabel(
 export function invitationStatusTone(status: InvitationStatus | EffectiveInvitationStatus) {
   switch (status) {
     case "active":
-      return "bg-[#e7ead9] text-[#4c5d30] border-[#cbd3b4]";
+      return "border-ledger bg-manila text-ink";
     case "in_progress":
-      return "bg-[#f2e8d3] text-[#7c5b22] border-[#e2d0ad]";
+      return "border-ledger bg-[#f3ead7] text-ink";
     case "submitted":
-      return "bg-[#e7e4dd] text-[#5b5346] border-[#d4cec2]";
+      return "border-ledger bg-paper text-ink";
     case "completed":
-      return "bg-[#dfe9df] text-[#385a3d] border-[#bfd0bf]";
+      return "border-ledger bg-ledger-soft text-ledger";
     case "expired":
-      return "bg-[#f1dfdb] text-[#8c3f32] border-[#e2c5bf]";
+      return "border-[#9a3b2e] bg-[#f1e5e1] text-[#7f3b31]";
     default:
-      return "bg-muted text-muted-foreground";
+      return "border-ledger bg-paper text-graphite";
   }
 }

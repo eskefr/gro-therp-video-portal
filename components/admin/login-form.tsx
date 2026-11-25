@@ -31,34 +31,42 @@ export function LoginForm({ next }: { next: string }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="w-full max-w-sm border border-border bg-card p-7 shadow-[0_20px_60px_rgba(50,40,25,0.06)] sm:p-9"
+      className="double-rule w-full max-w-sm border border-ledger bg-card p-7 sm:p-9"
     >
-      <span className="flex size-10 items-center justify-center rounded-full bg-secondary">
+      <span className="flex size-10 items-center justify-center border border-ledger bg-manila text-ledger">
         <LockKeyhole className="size-4" />
       </span>
-      <p className="micro-label mt-6 text-muted-foreground">Agency workspace</p>
+      <p className="micro-label mt-6 text-graphite">Agency workspace</p>
       <h1 className="mt-3 font-display text-4xl tracking-[-0.03em]">
         Welcome back.
       </h1>
-      <p className="mt-3 text-sm leading-6 text-muted-foreground">
+      <p className="mt-3 text-sm leading-6 text-graphite">
         Enter the demo passcode to view and manage the agency.
       </p>
 
-      <div className="mt-7">
-        <Label htmlFor="passcode" className="mb-2 text-xs font-medium">
-          Passcode
-        </Label>
-        <Input
-          id="passcode"
-          type="password"
-          autoComplete="current-password"
-          autoFocus
-          value={passcode}
-          onChange={(event) => setPasscode(event.target.value)}
-          className="h-11 rounded-none bg-background"
-          placeholder="••••••••"
-        />
-        {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
+      <div className="ledger-grid mt-7">
+        <div className="ledger-section flex items-center justify-between px-4 py-2.5">
+          <span className="micro-label">Access credentials</span>
+          <span className="stamp text-[10px]">Staff only</span>
+        </div>
+        <div className="ledger-cell">
+          <Label htmlFor="passcode" className="micro-label mb-1.5 text-graphite">
+            Passcode
+          </Label>
+          <Input
+            id="passcode"
+            type="password"
+            autoComplete="current-password"
+            autoFocus
+            value={passcode}
+            onChange={(event) => setPasscode(event.target.value)}
+            className="h-9 border-0 bg-transparent px-0 py-1 text-[15px] shadow-none focus-visible:ring-0"
+            placeholder="••••••••"
+          />
+          {error && (
+            <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>
+          )}
+        </div>
       </div>
 
       <Button
@@ -75,7 +83,7 @@ export function LoginForm({ next }: { next: string }) {
         {pending ? "Checking" : "Enter workspace"}
       </Button>
 
-      <p className="mt-5 text-[11px] leading-5 text-muted-foreground">
+      <p className="mt-5 text-[11px] leading-5 text-graphite">
         Demo authentication only. Replace the passcode gate with proper auth
         before using this with real talent data.
       </p>

@@ -25,7 +25,7 @@ interface FilterState {
 }
 
 const selectClass =
-  "h-10 w-full appearance-none rounded-none border border-input bg-card px-3 pr-8 text-sm outline-none focus:border-ring";
+  "h-10 w-full appearance-none rounded-none border border-ledger bg-paper px-3 pr-8 font-mono text-xs outline-none focus:border-ledger focus:ring-2 focus:ring-ledger/20";
 
 function SelectField({
   label,
@@ -42,7 +42,7 @@ function SelectField({
 }) {
   return (
     <label className="block">
-      <span className="micro-label mb-2 block text-muted-foreground">{label}</span>
+      <span className="micro-label mb-2 block text-graphite">{label}</span>
       <span className="relative block">
         <select
           value={value}
@@ -56,7 +56,7 @@ function SelectField({
             </option>
           ))}
         </select>
-        <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-muted-foreground">
+        <span className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 text-xs text-graphite">
           ↓
         </span>
       </span>
@@ -158,7 +158,7 @@ export function ArchiveFilters({
         placeholder="Any eyes"
       />
       <label className="block">
-        <span className="micro-label mb-2 block text-muted-foreground">
+        <span className="micro-label mb-2 block text-graphite">
           Height from
         </span>
         <select
@@ -175,7 +175,7 @@ export function ArchiveFilters({
         </select>
       </label>
       <label className="block">
-        <span className="micro-label mb-2 block text-muted-foreground">
+        <span className="micro-label mb-2 block text-graphite">
           Height to
         </span>
         <select
@@ -195,16 +195,16 @@ export function ArchiveFilters({
   );
 
   return (
-    <div className="border-y border-border py-5">
+    <div className="border-y border-ledger bg-manila/35 py-5">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center">
         <div className="relative w-full lg:max-w-xs">
-          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-graphite" />
           <Input
             value={filters.q}
             onChange={(event) => setFilters({ ...filters, q: event.target.value })}
-            placeholder="Search by name"
+            placeholder="Search the catalogue"
             aria-label="Search models by name"
-            className="h-10 rounded-none border-input bg-card pl-9"
+            className="h-10 rounded-none border-ledger bg-paper pl-9"
           />
           {filters.q && (
             <button
@@ -213,7 +213,7 @@ export function ArchiveFilters({
                 setFilters({ ...filters, q: "" });
                 update({ q: "" });
               }}
-              className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              className="absolute top-1/2 right-3 -translate-y-1/2 text-graphite hover:text-ink"
               aria-label="Clear search"
             >
               <X className="size-3.5" />
@@ -226,11 +226,11 @@ export function ArchiveFilters({
         <div className="flex items-center justify-between gap-3 lg:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" className="micro-label h-10 gap-2 rounded-none">
+              <Button variant="outline" className="micro-label h-10 gap-2 rounded-none border-ledger bg-paper">
                 <SlidersHorizontal className="size-3.5" />
                 Filters
                 {activeCount > 0 && (
-                  <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-[10px] text-background">
+                  <span className="flex size-5 items-center justify-center bg-ledger text-[10px] text-paper">
                     {activeCount}
                   </span>
                 )}
@@ -255,13 +255,13 @@ export function ArchiveFilters({
                   clear();
                   setOpen(false);
                 }}
-                className="micro-label mt-4 w-full text-center text-muted-foreground"
+                className="micro-label mt-4 w-full text-center text-graphite"
               >
                 Clear all filters
               </button>
             </SheetContent>
           </Sheet>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-graphite">
             {total} {total === 1 ? "face" : "faces"}
           </p>
         </div>
@@ -271,7 +271,7 @@ export function ArchiveFilters({
             type="button"
             onClick={clear}
             className={cn(
-              "micro-label hidden shrink-0 items-center gap-1.5 text-muted-foreground hover:text-foreground lg:flex",
+              "micro-label hidden shrink-0 items-center gap-1.5 text-graphite hover:text-ink lg:flex",
             )}
           >
             <X className="size-3" />

@@ -113,15 +113,15 @@ export function InvitationsClient({
         }
       />
 
-      <div className="mb-5 flex flex-wrap gap-1 border-b border-border pb-3">
+      <div className="mb-5 flex flex-wrap gap-1 border-b border-ledger pb-3">
         {filters.map((item) => (
           <button
             key={item.value}
             type="button"
             onClick={() => setFilter(item.value)}
             className={cn(
-              "micro-label flex items-center gap-1.5 px-3 py-2 text-muted-foreground transition hover:text-foreground",
-              filter === item.value && "bg-foreground text-background",
+              "micro-label flex items-center gap-1.5 px-3 py-2 text-graphite transition hover:text-ink",
+              filter === item.value && "bg-ledger text-paper",
             )}
           >
             {item.label}
@@ -138,13 +138,13 @@ export function InvitationsClient({
       </div>
 
       {filtered.length ? (
-        <div className="overflow-x-auto border border-border bg-card">
+        <div className="double-rule overflow-x-auto border border-ledger bg-card">
           <table className="w-full min-w-[1040px] text-left text-sm">
             <thead>
-              <tr className="border-b border-border">
+              <tr className="border-b border-ledger">
                 {["Cast", "Recipient", "Type", "Requirements", "Expires", "Status", "Actions"].map(
                   (label) => (
-                    <th key={label} className="micro-label px-4 py-3 text-muted-foreground">
+                    <th key={label} className="micro-label px-4 py-3 text-graphite">
                       {label}
                     </th>
                   ),
@@ -168,39 +168,39 @@ export function InvitationsClient({
                         {invitation.cast.title}
                         <ArrowUpRight className="size-3 opacity-0 transition group-hover:opacity-100" />
                       </Link>
-                      <p className="mt-0.5 text-[11px] text-muted-foreground">
+                      <p className="mt-0.5 text-[11px] text-graphite">
                         {invitation.cast.client_name || "Independent"}
                       </p>
                     </td>
                     <td className="px-4 py-4 text-xs">
                       <p>{recipient}</p>
-                      <p className="mt-0.5 text-muted-foreground">
+                      <p className="mt-0.5 text-graphite">
                         {isMediaRequest ? "Targeted" : "Open invite"}
                       </p>
                     </td>
                     <td className="px-4 py-4">
-                      <span className="micro-label text-muted-foreground">
+                      <span className="micro-label text-graphite">
                         {isMediaRequest ? "Media request" : "Cast invite"}
                       </span>
                     </td>
                     <td className="px-4 py-4">
                       {invitation.require_media_upload ? (
-                        <span className="micro-label inline-flex items-center gap-1.5 text-muted-foreground">
+                        <span className="micro-label inline-flex items-center gap-1.5 text-graphite">
                           <Film className="size-3" />
                           Media required
                         </span>
                       ) : (
-                        <span className="micro-label inline-flex items-center gap-1.5 text-muted-foreground">
+                        <span className="micro-label inline-flex items-center gap-1.5 text-graphite">
                           <ImageIcon className="size-3" />
                           No media
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-4 text-xs">
+                    <td className="px-4 py-4 font-mono text-[10px]">
                       <p>{formatDateTime(invitation.expires_at)}</p>
                       <Countdown
                         expiresAt={invitation.expires_at}
-                        className="mt-0.5 block text-[10px] text-muted-foreground"
+                        className="mt-0.5 block font-mono text-[10px] text-graphite"
                       />
                     </td>
                     <td className="px-4 py-4">
@@ -220,7 +220,7 @@ export function InvitationsClient({
                         <Link
                           href={`/invite/${invitation.token}`}
                           target="_blank"
-                          className="micro-label inline-flex h-8 items-center gap-1 px-2 text-muted-foreground hover:text-foreground"
+                          className="micro-label inline-flex h-8 items-center gap-1 px-2 text-graphite hover:text-ink"
                         >
                           Open
                           <ArrowUpRight className="size-3" />
@@ -230,7 +230,7 @@ export function InvitationsClient({
                             type="button"
                             onClick={() => void complete(invitation)}
                             disabled={pendingId === invitation.id}
-                            className="micro-label inline-flex h-8 items-center gap-1 px-2 text-muted-foreground hover:text-foreground disabled:opacity-50"
+                            className="micro-label inline-flex h-8 items-center gap-1 px-2 text-graphite hover:text-ink disabled:opacity-50"
                           >
                             {pendingId === invitation.id ? (
                               <Loader2 className="size-3 animate-spin" />

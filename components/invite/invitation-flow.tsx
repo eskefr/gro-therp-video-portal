@@ -340,12 +340,12 @@ export function InvitationFlow({
 
   if (!targetStillCast) {
     return (
-      <div className="border border-border bg-card px-6 py-14 text-center sm:px-10">
-        <CircleUserRound className="mx-auto size-8 text-muted-foreground" />
+      <div className="border border-ledger bg-card px-6 py-14 text-center sm:px-10">
+        <CircleUserRound className="mx-auto size-8 text-graphite" />
         <h2 className="mt-5 font-display text-4xl tracking-[-0.03em]">
           This request is no longer available.
         </h2>
-        <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-graphite">
           The model is no longer attached to this cast. Contact the casting team
           if you think this is a mistake.
         </p>
@@ -367,23 +367,23 @@ export function InvitationFlow({
           : 2;
 
   return (
-    <div className="border border-border bg-card">
-      <div className="flex items-center justify-between border-b border-border px-5 py-4 sm:px-7">
+    <div className="double-rule border border-ledger bg-card">
+      <div className="flex items-center justify-between border-b border-ledger bg-manila px-5 py-3.5 sm:px-7">
         <div className="flex items-center gap-2">
           {progress.map((label, index) => {
             return (
               <div key={label} className="flex items-center gap-2">
                 <span
                   className={cn(
-                    "micro-label flex items-center gap-1.5 text-muted-foreground/50",
-                    index === activeIndex && "text-foreground",
+                    "micro-label flex items-center gap-1.5 text-graphite/50",
+                    index === activeIndex && "text-ink",
                   )}
                 >
                   <span
                     className={cn(
-                      "flex size-5 items-center justify-center rounded-full border border-border text-[9px]",
-                      index < activeIndex && "border-[#c5d2bd] bg-[#e5ecdf] text-[#40553a]",
-                      index === activeIndex && "border-foreground bg-foreground text-background",
+                      "flex size-5 items-center justify-center border border-ledger font-mono text-[9px]",
+                      index < activeIndex && "bg-paper text-ledger",
+                      index === activeIndex && "border-ledger bg-ledger text-paper",
                     )}
                   >
                     {index < activeIndex ? <Check className="size-2.5" /> : index + 1}
@@ -459,7 +459,7 @@ export function InvitationFlow({
           </p>
         )}
 
-        <div className="mt-8 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-8 flex flex-col gap-4 border-t border-ledger pt-6 sm:flex-row sm:items-center sm:justify-between">
           <DraftIndicator
             status={autosave.status}
             savedAt={autosave.savedAt}
@@ -472,7 +472,7 @@ export function InvitationFlow({
               size="lg"
               onClick={() => void checkPhone()}
               disabled={lookupLoading}
-              className="micro-label h-12 rounded-none px-7"
+              className="micro-label h-11 min-w-40 rounded-none px-7"
             >
               {lookupLoading ? (
                 <Loader2 className="size-4 animate-spin" />
@@ -487,7 +487,7 @@ export function InvitationFlow({
               size="lg"
               onClick={() => void submit()}
               disabled={submitting || uploadBusy}
-              className="micro-label h-12 rounded-none px-7"
+              className="micro-label h-11 min-w-40 rounded-none px-7"
             >
               {submitting ? (
                 <Loader2 className="size-4 animate-spin" />
@@ -518,14 +518,14 @@ function PhoneStep({
 }) {
   return (
     <div>
-      <span className="flex size-10 items-center justify-center rounded-full bg-secondary">
+      <span className="flex size-10 items-center justify-center border border-ledger bg-manila text-ledger">
         <Phone className="size-4" />
       </span>
-      <p className="micro-label mt-6 text-muted-foreground">First things first</p>
+      <p className="micro-label mt-6 text-graphite">First things first</p>
       <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.03em]">
         Let’s find you.
       </h2>
-      <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
+      <p className="mt-4 max-w-md text-sm leading-6 text-graphite">
         Enter the phone number connected to your profile. If you’ve worked with
         us before, we’ll pull up your details. If not, we’ll ask a few questions.
       </p>
@@ -540,7 +540,7 @@ function PhoneStep({
           inputMode="tel"
           autoComplete="tel"
           placeholder="20 12 34 56"
-          className="h-11 rounded-none bg-background"
+          className="h-11 rounded-none bg-paper"
           defaultValue={initialPhone}
           {...register("phone")}
           onKeyDown={(event) => {
@@ -550,14 +550,14 @@ function PhoneStep({
             }
           }}
         />
-        <p className="mt-2 text-[11px] leading-4 text-muted-foreground">
+        <p className="mt-2 text-[11px] leading-4 text-graphite">
           Danish numbers can be entered without +45. International numbers
           should include their country code.
         </p>
-        {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
+        {error && <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>}
       </div>
       {lookupLoading && (
-        <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+        <p className="mt-4 flex items-center gap-2 text-xs text-graphite">
           <Loader2 className="size-3.5 animate-spin" />
           Checking our archive…
         </p>
@@ -587,14 +587,14 @@ function ExistingStep({
 }) {
   return (
     <div>
-      <span className="flex size-10 items-center justify-center rounded-full border border-[#c5d2bd] bg-[#e5ecdf] text-[#40553a]">
+      <span className="flex size-10 items-center justify-center border border-ledger bg-manila text-ledger">
         <Check className="size-4" />
       </span>
-      <p className="micro-label mt-6 text-muted-foreground">Profile found</p>
+      <p className="micro-label mt-6 text-graphite">Profile found</p>
       <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.03em]">
         Welcome back, {name.split(" ")[0]}.
       </h2>
-      <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
+      <p className="mt-4 max-w-md text-sm leading-6 text-graphite">
         {alreadyOnCast
           ? "You’re already part of this cast. You can send fresh casting media below if the team has asked for it."
           : "We’ll attach your existing profile to this cast. There’s no need to re-enter your details."}
@@ -603,14 +603,14 @@ function ExistingStep({
       <button
         type="button"
         onClick={onChangeNumber}
-        className="micro-label mt-5 inline-flex items-center gap-1.5 text-muted-foreground underline underline-offset-4 hover:text-foreground"
+        className="micro-label mt-5 inline-flex items-center gap-1.5 text-graphite underline underline-offset-4 hover:text-ink"
       >
         <ArrowLeft className="size-3" />
         Use a different number
       </button>
 
       {requireMedia ? (
-        <div className="mt-8 border-t border-border pt-7">
+        <div className="mt-8 border-t border-ledger pt-7">
           <MediaUploader
             token={token}
             media={media}
@@ -619,7 +619,7 @@ function ExistingStep({
           />
         </div>
       ) : (
-        <div className="mt-8 border border-border bg-background/60 px-5 py-4 text-sm leading-6 text-muted-foreground">
+        <div className="mt-8 border border-ledger bg-manila/55 px-5 py-4 text-sm leading-6 text-graphite">
           No uploads required. Just confirm and we’ll let the casting team know
           you’re available.
         </div>
@@ -657,27 +657,27 @@ function RegisterStep({
 }) {
   return (
     <div>
-      <span className="flex size-10 items-center justify-center rounded-full bg-secondary">
+      <span className="flex size-10 items-center justify-center border border-ledger bg-manila text-ledger">
         <CircleUserRound className="size-4" />
       </span>
-      <p className="micro-label mt-6 text-muted-foreground">New to the agency</p>
+      <p className="micro-label mt-6 text-graphite">New to the agency</p>
       <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.03em]">
         Tell us about you.
       </h2>
-      <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
+      <p className="mt-4 max-w-md text-sm leading-6 text-graphite">
         We couldn’t find a profile with that number. Fill in your details below
         and the team will review your application alongside this cast.
       </p>
       <button
         type="button"
         onClick={onChangeNumber}
-        className="micro-label mt-5 inline-flex items-center gap-1.5 text-muted-foreground underline underline-offset-4 hover:text-foreground"
+        className="micro-label mt-5 inline-flex items-center gap-1.5 text-graphite underline underline-offset-4 hover:text-ink"
       >
         <ArrowLeft className="size-3" />
         Use a different number
       </button>
 
-      <div className="mt-8 border-t border-border pt-7">
+      <div className="mt-8 border-t border-ledger pt-7">
         <HeadshotUploader
           value={headshot}
           onChange={setHeadshot}
@@ -690,11 +690,11 @@ function RegisterStep({
       <ModelFormFields
         register={register}
         errors={errors}
-        className="mt-8 border-t border-border pt-7"
+        className="mt-8 border-t border-ledger pt-7"
       />
 
       {requireMedia && (
-        <div className="mt-8 border-t border-border pt-7">
+        <div className="mt-8 border-t border-ledger pt-7">
           <MediaUploader
             token={token}
             media={media}
@@ -704,7 +704,7 @@ function RegisterStep({
         </div>
       )}
 
-      <div className="mt-8 flex items-start gap-3 border-t border-border pt-7">
+      <div className="mt-8 flex items-start gap-3 border border-ledger bg-manila px-4 py-4">
         <Checkbox
           id="invite-hidden"
           checked={isHidden}
@@ -713,10 +713,10 @@ function RegisterStep({
         />
         <Label
           htmlFor="invite-hidden"
-          className="flex-col items-start gap-0 text-sm leading-5 font-normal text-foreground"
+          className="flex-col items-start gap-0 text-sm leading-5 font-normal text-ink"
         >
           Keep my profile hidden from the public archive
-          <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+          <span className="mt-1 block text-xs leading-5 text-graphite">
             The agency can still consider you for this cast. Your profile will
             not be publicly listed.
           </span>
@@ -741,16 +741,16 @@ function MediaRequestStep({
 }) {
   return (
     <div>
-      <span className="flex size-10 items-center justify-center rounded-full bg-secondary">
+      <span className="flex size-10 items-center justify-center border border-ledger bg-manila text-ledger">
         <CircleUserRound className="size-4" />
       </span>
-      <p className="micro-label mt-6 text-muted-foreground">
+      <p className="micro-label mt-6 text-graphite">
         {targetName ? `For ${targetName}` : "Casting media"}
       </p>
       <h2 className="mt-3 font-display text-4xl leading-tight tracking-[-0.03em]">
         Show us where you are now.
       </h2>
-      <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
+      <p className="mt-4 max-w-md text-sm leading-6 text-graphite">
         The team has asked for a short, current casting clip or a few recent
         photos. Natural light and no heavy retouching, please.
       </p>
@@ -764,7 +764,7 @@ function MediaRequestStep({
         />
       </div>
 
-      <div className="mt-6 border border-border bg-background/60 px-5 py-4 text-xs leading-5 text-muted-foreground">
+      <div className="mt-6 border border-ledger bg-paper/60 px-5 py-4 text-xs leading-5 text-graphite">
         Your uploads are saved automatically. You can close this page and come
         back before the link expires.
       </div>

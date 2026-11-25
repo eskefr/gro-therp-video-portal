@@ -15,16 +15,16 @@ export function Brand({
     <Link
       href={href}
       className={cn(
-        "group inline-flex shrink-0 items-baseline gap-2 whitespace-nowrap text-foreground",
+        "group inline-flex shrink-0 items-baseline gap-2 whitespace-nowrap text-ink",
         className,
       )}
       aria-label={`${BRAND.fullName} home`}
     >
-      <span className="font-display text-[1.15rem] font-medium tracking-[-0.03em] uppercase sm:text-[1.35rem]">
+      <span className="font-display text-[1.15rem] font-medium tracking-[-0.025em] uppercase sm:text-[1.35rem]">
         {BRAND.name}
       </span>
       {!compact && (
-        <span className="micro-label hidden text-muted-foreground sm:inline">
+        <span className="micro-label hidden text-graphite sm:inline">
           Casting
         </span>
       )}

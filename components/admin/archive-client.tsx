@@ -41,15 +41,15 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
 
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full max-w-sm">
-          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-graphite" />
           <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search archive"
-            className="h-10 rounded-none bg-card pl-9"
+            className="h-10 rounded-none bg-paper pl-9"
           />
         </div>
-        <div className="flex border border-border bg-card p-1">
+        <div className="flex border border-ledger bg-card p-1">
           {(
             [
               ["all", "All"],
@@ -63,8 +63,8 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
               onClick={() => setVisibility(value)}
               className={`micro-label px-3 py-1.5 transition ${
                 visibility === value
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-ledger text-paper"
+                  : "text-graphite hover:text-ink"
               }`}
             >
               {label}
@@ -76,7 +76,7 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
       {filtered.length ? (
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
           {filtered.map((model) => (
-            <article key={model.id} className="group border border-border bg-card">
+            <article key={model.id} className="group border border-ledger bg-card">
               <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                 <img
                   src={model.headshot_url}
@@ -86,7 +86,7 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
                 {model.is_hidden && (
                   <MicroBadge
                     tone="hidden"
-                    className="absolute top-2 left-2 bg-[#f1e7d3]/95 backdrop-blur"
+                    className="absolute top-2 left-2 bg-manila/95 backdrop-blur"
                   >
                     Hidden
                   </MicroBadge>
@@ -98,18 +98,18 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
                     <h2 className="truncate font-display text-xl leading-tight">
                       {model.name}
                     </h2>
-                    <p className="mt-1 text-[11px] text-muted-foreground">
+                    <p className="mt-1 text-[11px] text-graphite">
                       {model.city || "City TBC"}
                       {model.height_cm ? ` · ${model.height_cm} cm` : ""}
                     </p>
                   </div>
                   <MicroBadge tone="approved">Live</MicroBadge>
                 </div>
-                <div className="mt-3 flex items-center justify-between border-t border-border pt-2.5">
-                  <span className="text-[11px] text-muted-foreground">
+                <div className="mt-3 flex items-center justify-between border-t border-ledger pt-2.5">
+                  <span className="font-mono text-[10px] text-graphite">
                     {formatPhone(model.phone)}
                   </span>
-                  <span className="text-[11px] text-muted-foreground">
+                  <span className="font-mono text-[10px] text-graphite">
                     {model.hair_color || "—"}
                   </span>
                 </div>

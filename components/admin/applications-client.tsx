@@ -95,29 +95,29 @@ export function ApplicationsClient({
 
       <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full max-w-sm">
-          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-graphite" />
           <Input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search applications"
-            className="h-10 rounded-none bg-card pl-9"
+            className="h-10 rounded-none bg-paper pl-9"
           />
         </div>
-        <p className="micro-label text-muted-foreground">
+        <p className="micro-label text-graphite">
           {filtered.length} pending
         </p>
       </div>
 
       {filtered.length ? (
-        <div className="overflow-x-auto border border-border bg-card">
+        <div className="double-rule overflow-x-auto border border-ledger bg-card">
           <table className="w-full min-w-[720px] text-left text-sm">
             <thead>
-              <tr className="border-b border-border">
+              <tr className="border-b border-ledger">
                 {["Applicant", "Contact", "Stats", "Source", "Received", ""].map(
                   (label) => (
                     <th
                       key={label}
-                      className="micro-label px-4 py-3 text-muted-foreground"
+                      className="micro-label px-4 py-3 text-graphite"
                     >
                       {label}
                     </th>
@@ -129,7 +129,7 @@ export function ApplicationsClient({
               {filtered.map((application) => (
                 <tr
                   key={application.id}
-                  className="group cursor-pointer transition hover:bg-background/70"
+                  className="group cursor-pointer transition hover:bg-manila/30"
                   onClick={() => setSelected(application)}
                 >
                   <td className="px-4 py-3">
@@ -146,19 +146,19 @@ export function ApplicationsClient({
                             <MicroBadge tone="hidden">Hidden</MicroBadge>
                           )}
                         </div>
-                        <p className="mt-0.5 text-xs text-muted-foreground">
+                        <p className="mt-0.5 text-xs text-graphite">
                           {application.city || "City not provided"}
                         </p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-xs">
+                  <td className="px-4 py-3 font-mono text-[10px]">
                     <p>{formatPhone(application.phone)}</p>
-                    <p className="mt-0.5 text-muted-foreground">
+                    <p className="mt-0.5 font-mono text-[10px] text-graphite">
                       {application.email || "No email"}
                     </p>
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">
+                  <td className="px-4 py-3 text-xs text-graphite">
                     {application.height_cm ? `${application.height_cm} cm` : "—"}
                     <br />
                     {application.hair_color || "—"} / {application.eye_color || "—"}
@@ -167,21 +167,21 @@ export function ApplicationsClient({
                     {application.source ? (
                       <span className="text-xs">
                         Via cast invite
-                        <span className="mt-0.5 block text-muted-foreground">
+                        <span className="mt-0.5 block text-graphite">
                           {application.source.castTitle}
                         </span>
                       </span>
                     ) : (
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-xs text-graphite">
                         Direct application
                       </span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-xs text-muted-foreground">
+                  <td className="px-4 py-3 font-mono text-[10px] text-graphite">
                     {formatDate(application.created_at)}
                   </td>
                   <td className="px-4 py-3 text-right">
-                    <ArrowUpRight className="ml-auto size-4 text-muted-foreground opacity-0 transition group-hover:opacity-100" />
+                    <ArrowUpRight className="ml-auto size-4 text-graphite opacity-0 transition group-hover:opacity-100" />
                   </td>
                 </tr>
               ))}
@@ -200,18 +200,18 @@ export function ApplicationsClient({
       )}
 
       <Sheet open={Boolean(selected)} onOpenChange={(open) => !open && setSelected(null)}>
-        <SheetContent className="w-full overflow-y-auto border-border bg-popover p-0 sm:max-w-xl">
+        <SheetContent className="w-full overflow-y-auto border-ledger bg-popover p-0 sm:max-w-xl">
           {selected && (
             <>
-              <div className="border-b border-border px-6 py-5">
+              <div className="border-b border-ledger bg-manila px-6 py-5">
                 <SheetHeader>
-                  <p className="micro-label text-muted-foreground">
+                  <p className="micro-label text-graphite">
                     Pending application
                   </p>
                   <SheetTitle className="font-display text-3xl font-normal tracking-[-0.03em]">
                     {selected.name}
                   </SheetTitle>
-                  <SheetDescription className="text-xs text-muted-foreground">
+                  <SheetDescription className="text-xs text-graphite">
                     Received {formatDate(selected.created_at)}
                     {selected.source ? ` · via ${selected.source.castTitle}` : " · direct"}
                   </SheetDescription>
@@ -225,7 +225,7 @@ export function ApplicationsClient({
                   className="aspect-[4/5] w-full max-w-sm object-cover"
                 />
 
-                <div className="grid grid-cols-2 gap-px border border-border bg-border text-sm">
+                <div className="grid grid-cols-2 gap-px border border-ledger bg-border text-sm">
                   {[
                     ["Phone", formatPhone(selected.phone)],
                     ["Email", selected.email || "—"],
@@ -238,16 +238,16 @@ export function ApplicationsClient({
                     ["Hair", selected.hair_color || "—"],
                     ["Eyes", selected.eye_color || "—"],
                   ].map(([label, value]) => (
-                    <div key={label} className="bg-card px-3 py-2.5">
-                      <p className="micro-label text-muted-foreground">{label}</p>
+                    <div key={label} className="bg-paper px-3 py-2.5">
+                      <p className="micro-label text-graphite">{label}</p>
                       <p className="mt-1 break-words text-xs">{value}</p>
                     </div>
                   ))}
                 </div>
 
                 <div>
-                  <p className="micro-label text-muted-foreground">About</p>
-                  <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  <p className="micro-label text-graphite">About</p>
+                  <p className="mt-2 text-sm leading-6 text-graphite">
                     {selected.bio || "No bio provided."}
                   </p>
                 </div>
@@ -259,7 +259,7 @@ export function ApplicationsClient({
                   )}
                 </div>
 
-                <div className="flex flex-col gap-2 border-t border-border pt-5 sm:flex-row">
+                <div className="flex flex-col gap-2 border-t border-ledger pt-5 sm:flex-row">
                   <Button
                     className="micro-label h-10 flex-1 gap-2 rounded-none"
                     onClick={() => void approve(selected)}
@@ -289,12 +289,12 @@ export function ApplicationsClient({
       </Sheet>
 
       <AlertDialog open={rejectOpen} onOpenChange={setRejectOpen}>
-        <AlertDialogContent className="border-border bg-popover">
+        <AlertDialogContent className="border-ledger bg-popover">
           <AlertDialogHeader>
             <AlertDialogTitle className="font-display text-2xl font-normal">
               Reject this application?
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-sm leading-6 text-muted-foreground">
+            <AlertDialogDescription className="text-sm leading-6 text-graphite">
               {selected?.name} will be permanently removed, along with any cast
               attachments. This cannot be undone.
             </AlertDialogDescription>

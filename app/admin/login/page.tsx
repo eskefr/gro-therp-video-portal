@@ -16,21 +16,21 @@ export default async function AdminLoginPage({
 
   return (
     <div className="grid min-h-screen lg:grid-cols-[1.15fr_0.85fr]">
-      <div className="paper-texture relative hidden flex-col justify-between border-r border-border p-10 lg:flex xl:p-14">
+      <div className="paper-texture relative hidden flex-col justify-between border-r border-ledger p-10 lg:flex xl:p-14">
         <Brand />
         <div className="max-w-xl">
-          <p className="micro-label text-muted-foreground">Demo environment</p>
+          <p className="micro-label text-graphite">Demo environment</p>
           <p className="mt-6 font-display text-6xl leading-[0.92] tracking-[-0.055em] xl:text-7xl">
             Casting, without
             <br />
             the paperwork.
           </p>
-          <p className="mt-7 max-w-sm text-sm leading-7 text-muted-foreground">
+          <p className="mt-7 max-w-sm text-sm leading-7 text-graphite">
             Review applications, build casts, request media, and track every
             invitation from one quiet workspace.
           </p>
         </div>
-        <p className="micro-label text-muted-foreground">
+        <p className="micro-label text-graphite">
           Copenhagen · Internal preview
         </p>
       </div>

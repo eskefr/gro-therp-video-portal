@@ -8,8 +8,14 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-typewriter);
   --font-heading: var(--font-display);
+  --color-paper: var(--paper);
+  --color-manila: var(--manila);
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-ledger: var(--ledger);
+  --color-ledger-soft: var(--ledger-soft);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -39,51 +45,64 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 }
 
 :root {
-  --background: #f3efe6;
-  --foreground: #1a1712;
-  --card: #faf7f0;
-  --card-foreground: #1a1712;
-  --popover: #fbf8f2;
-  --popover-foreground: #1a1712;
-  --primary: #1a1712;
-  --primary-foreground: #f9f6ef;
-  --secondary: #e9e2d5;
-  --secondary-foreground: #26221b;
-  --muted: #ebe5da;
-  --muted-foreground: #746c5f;
-  --accent: #e2d7c5;
-  --accent-foreground: #201c16;
-  --destructive: #9f3528;
-  --border: #d6cdbd;
-  --input: #cec4b2;
-  --ring: #93846e;
-  --chart-1: #b49a76;
-  --chart-2: #7c6d58;
-  --chart-3: #4f4a3e;
-  --chart-4: #a6a28f;
-  --chart-5: #d0c3ac;
-  --radius: 0.2rem;
-  --sidebar: #eee8dc;
-  --sidebar-foreground: #1a1712;
-  --sidebar-primary: #1a1712;
-  --sidebar-primary-foreground: #f9f6ef;
-  --sidebar-accent: #e3dacb;
-  --sidebar-accent-foreground: #1a1712;
-  --sidebar-border: #d6cdbd;
-  --sidebar-ring: #93846e;
+  --paper: #f6f4ef;
+  --manila: #efe2c4;
+  --ink: #2c2b29;
+  --graphite: #6e6b64;
+  --ledger: #3b6e9c;
+  --ledger-soft: #d8e2eb;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #fbf9f4;
+  --card-foreground: var(--ink);
+  --popover: #fbf9f4;
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--manila);
+  --secondary-foreground: var(--ink);
+  --muted: #ece8de;
+  --muted-foreground: var(--graphite);
+  --accent: var(--manila);
+  --accent-foreground: var(--ink);
+  --destructive: #9a3b2e;
+  --border: var(--ledger);
+  --input: var(--ledger);
+  --ring: var(--ledger);
+  --chart-1: var(--ledger);
+  --chart-2: #6e91b0;
+  --chart-3: var(--manila);
+  --chart-4: var(--graphite);
+  --chart-5: var(--ink);
+  --radius: 0px;
+  --sidebar: var(--manila);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--paper);
+  --sidebar-accent: var(--paper);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--ledger);
+  --sidebar-ring: var(--ledger);
 }
 
 @layer base {
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -101,16 +120,33 @@
 
   h1,
   h2,
-  h3,
-  h4 {
+  h3 {
     font-family: var(--font-display), Georgia, serif;
     font-weight: 400;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.03em;
+  }
+
+  input,
+  select,
+  textarea {
+    font-family: var(--font-sans), sans-serif;
+  }
+
+  input[type="date"],
+  input[type="datetime-local"],
+  input[type="time"] {
+    font-family: var(--font-typewriter), "Courier New", monospace;
+    font-size: 0.8rem;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--graphite);
   }
 
   ::selection {
-    background: #cdbb9f;
-    color: #171410;
+    background: var(--ledger);
+    color: var(--paper);
   }
 }
 
@@ -119,22 +155,83 @@
     font-family: var(--font-display), Georgia, serif;
   }
 
+  .font-typewriter {
+    font-family: var(--font-typewriter), "Courier New", monospace;
+  }
+
   .micro-label {
+    font-family: var(--font-sans), sans-serif;
     font-size: 0.64rem;
     font-weight: 600;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.12em;
     line-height: 1.2;
     text-transform: uppercase;
   }
 
+  .stamp {
+    font-family: var(--font-typewriter), "Courier New", monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.045em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: var(--ledger);
+  }
+
+  .double-rule {
+    border-top: 3px double var(--ledger) !important;
+  }
+
   .editorial-rule {
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--ledger);
   }
 
   .paper-texture {
+    background-color: var(--paper);
     background-image:
-      radial-gradient(at 4% 2%, rgba(149, 128, 98, 0.1) 0, transparent 35%),
-      radial-gradient(at 98% 0%, rgba(130, 112, 88, 0.07) 0, transparent 30%);
+      radial-gradient(at 4% 2%, rgba(239, 226, 196, 0.55) 0, transparent 34%),
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 31px,
+        rgba(59, 110, 156, 0.055) 31px,
+        rgba(59, 110, 156, 0.055) 32px
+      );
+  }
+
+  .ledger-grid {
+    display: grid;
+    gap: 1px;
+    border: 1px solid var(--ledger);
+    background: var(--ledger);
+  }
+
+  .ledger-grid > * {
+    background: var(--paper);
+  }
+
+  .ledger-section {
+    background: var(--manila) !important;
+    color: var(--ink);
+  }
+
+  .ledger-cell {
+    padding: 0.8rem 1rem;
+    background: var(--paper);
+  }
+
+  .ledger-cell input,
+  .ledger-cell select,
+  .ledger-cell textarea {
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .ledger-cell input:focus-visible,
+  .ledger-cell select:focus-visible,
+  .ledger-cell textarea:focus-visible {
+    outline: 2px solid var(--ledger);
+    outline-offset: 3px;
   }
 
   .no-scrollbar {

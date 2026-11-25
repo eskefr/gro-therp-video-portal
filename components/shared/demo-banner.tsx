@@ -27,11 +27,11 @@ export function DemoBanner() {
   ];
 
   return (
-    <div className="demo-banner relative z-[60] flex min-h-9 items-center justify-center bg-[#171410] px-4 py-2 text-[#f4efe5]">
+    <div className="demo-banner relative z-[60] flex min-h-9 items-center justify-center border-b border-ledger bg-ink px-4 py-2 text-paper">
       <div className="flex w-full max-w-[1500px] flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:justify-between">
         <div className="flex items-center gap-2">
-          <LockKeyhole className="size-3 text-[#b9a88d]" />
-          <span className="micro-label text-[#b9a88d]">Demo mode</span>
+          <LockKeyhole className="size-3 text-manila" />
+          <span className="micro-label text-manila">Demo mode</span>
         </div>
         <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5">
           {links.map((link) => {
@@ -44,14 +44,14 @@ export function DemoBanner() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "micro-label inline-flex items-center gap-1 text-[#efe8dc]",
-                  active && "text-white",
+                  "micro-label inline-flex items-center gap-1 text-paper/75",
+                  active && "text-paper",
                 )}
               >
                 <span
                   className={cn(
-                    "inline-block size-1 rounded-full bg-[#9c8b70]",
-                    active && "bg-[#e6b98f]",
+                    "inline-block size-1 border border-paper/30 bg-transparent",
+                    active && "border-manila bg-manila",
                   )}
                 />
                 {link.label}
@@ -60,13 +60,13 @@ export function DemoBanner() {
           })}
           <Link
             href={`/invite/${DEMO_MEDIA_REQUEST_TOKEN}`}
-            className="micro-label hidden items-center gap-1 text-[#a99a83] transition hover:text-white lg:inline-flex"
+            className="micro-label hidden items-center gap-1 text-paper/50 transition hover:text-paper lg:inline-flex"
           >
             Media request
             <ArrowUpRight className="size-3" />
           </Link>
         </nav>
-        <span className="micro-label hidden text-[#7f7464] sm:block">
+        <span className="micro-label hidden text-graphite sm:block">
           Not a live environment
         </span>
       </div>

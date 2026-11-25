@@ -42,7 +42,7 @@ export default async function AdminOverviewPage() {
         action={
           <Link
             href="/admin/jobs"
-            className="micro-label inline-flex h-10 items-center gap-2 border border-foreground bg-foreground px-4 text-background transition hover:bg-foreground/85"
+            className="micro-label inline-flex h-10 items-center gap-2 border border-ledger bg-manila px-4 text-ink transition hover:bg-[#e7d7b4]"
           >
             Manage casts
             <ArrowRight className="size-3.5" />
@@ -50,38 +50,38 @@ export default async function AdminOverviewPage() {
         }
       />
 
-      <div className="grid gap-px border border-border bg-border sm:grid-cols-2 xl:grid-cols-5">
+      <div className="ledger-grid sm:grid-cols-2 xl:grid-cols-5">
         {statCards.map((card) => {
           const Icon = card.icon;
           return (
             <Link
               key={card.label}
               href={card.href}
-              className="group bg-card px-5 py-6 transition hover:bg-[#f6f1e7]"
+              className="group bg-paper px-5 py-6 transition hover:bg-manila/55"
             >
               <div className="flex items-start justify-between">
-                <Icon className="size-4 text-muted-foreground" />
-                <ArrowUpRight className="size-3.5 text-muted-foreground opacity-0 transition group-hover:opacity-100" />
+                <Icon className="size-4 text-ledger" />
+                <ArrowUpRight className="size-3.5 text-graphite opacity-0 transition group-hover:opacity-100" />
               </div>
               <p className="mt-7 font-display text-5xl tracking-[-0.05em]">
                 {String(card.value).padStart(2, "0")}
               </p>
-              <p className="micro-label mt-2 text-muted-foreground">{card.label}</p>
+              <p className="micro-label mt-2 text-graphite">{card.label}</p>
             </Link>
           );
         })}
       </div>
 
       <div className="mt-10 grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
-        <section className="border border-border bg-card">
-          <div className="flex items-center justify-between border-b border-border px-5 py-4">
+        <section className="double-rule border border-ledger bg-card">
+          <div className="flex items-center justify-between border-b border-ledger bg-manila/40 px-5 py-4">
             <div>
-              <p className="micro-label text-muted-foreground">Applications</p>
+              <p className="micro-label text-graphite">Applications</p>
               <h2 className="mt-1 font-display text-2xl">Waiting for review</h2>
             </div>
             <Link
               href="/admin/applications"
-              className="micro-label inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+              className="micro-label inline-flex items-center gap-1.5 text-graphite hover:text-ink"
             >
               View queue
               <ArrowUpRight className="size-3" />
@@ -93,7 +93,7 @@ export default async function AdminOverviewPage() {
                 <Link
                   key={application.id}
                   href="/admin/applications"
-                  className="flex items-center gap-4 px-5 py-3.5 transition hover:bg-background/60"
+                  className="flex items-center gap-4 px-5 py-3.5 transition hover:bg-manila/35"
                 >
                   <img
                     src={application.headshot_url}
@@ -102,7 +102,7 @@ export default async function AdminOverviewPage() {
                   />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium">{application.name}</p>
-                    <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                    <p className="mt-0.5 truncate text-xs text-graphite">
                       {application.city || "City not provided"}
                       {application.source
                         ? ` · via ${application.source.castTitle}`
@@ -114,21 +114,21 @@ export default async function AdminOverviewPage() {
               ))}
             </div>
           ) : (
-            <p className="px-5 py-10 text-sm text-muted-foreground">
+            <p className="px-5 py-10 text-sm text-graphite">
               The queue is clear. Every application has been reviewed.
             </p>
           )}
         </section>
 
-        <section className="border border-border bg-card">
-          <div className="flex items-center justify-between border-b border-border px-5 py-4">
+        <section className="double-rule border border-ledger bg-card">
+          <div className="flex items-center justify-between border-b border-ledger bg-manila/40 px-5 py-4">
             <div>
-              <p className="micro-label text-muted-foreground">Magic links</p>
+              <p className="micro-label text-graphite">Magic links</p>
               <h2 className="mt-1 font-display text-2xl">Recent invitations</h2>
             </div>
             <Link
               href="/admin/invitations"
-              className="micro-label inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+              className="micro-label inline-flex items-center gap-1.5 text-graphite hover:text-ink"
             >
               Track all
               <ArrowUpRight className="size-3" />
@@ -149,7 +149,7 @@ export default async function AdminOverviewPage() {
                           invitation.claimed_model?.name ||
                           "General cast invite"}
                       </p>
-                      <p className="mt-0.5 truncate text-xs text-muted-foreground">
+                      <p className="mt-0.5 truncate text-xs text-graphite">
                         {invitation.cast.title}
                       </p>
                     </div>
@@ -157,7 +157,7 @@ export default async function AdminOverviewPage() {
                       <InvitationStatusBadge status={status} compact />
                       <Countdown
                         expiresAt={invitation.expires_at}
-                        className="text-[10px] text-muted-foreground"
+                        className="text-[10px] text-graphite"
                       />
                     </div>
                   </div>
@@ -165,7 +165,7 @@ export default async function AdminOverviewPage() {
               })}
             </div>
           ) : (
-            <p className="px-5 py-10 text-sm text-muted-foreground">
+            <p className="px-5 py-10 text-sm text-graphite">
               No invitations generated yet.
             </p>
           )}
@@ -175,12 +175,12 @@ export default async function AdminOverviewPage() {
       <section className="mt-10">
         <div className="mb-4 flex items-end justify-between">
           <div>
-            <p className="micro-label text-muted-foreground">Production board</p>
+            <p className="micro-label text-graphite">Production board</p>
             <h2 className="mt-1 font-display text-2xl">Current casts</h2>
           </div>
           <Link
             href="/admin/jobs"
-            className="micro-label inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+            className="micro-label inline-flex items-center gap-1.5 text-graphite hover:text-ink"
           >
             All casts
             <ArrowUpRight className="size-3" />
@@ -191,22 +191,22 @@ export default async function AdminOverviewPage() {
             <Link
               key={cast.id}
               href={`/admin/jobs/${cast.id}`}
-              className="group flex min-h-44 flex-col justify-between border border-border bg-card p-5 transition hover:border-foreground/30"
+              className="group flex min-h-44 flex-col justify-between border border-ledger bg-card p-5 transition hover:bg-manila/25"
             >
               <div className="flex items-start justify-between gap-4">
-                <span className="font-display text-2xl text-muted-foreground/40">
+                <span className="font-mono text-sm text-graphite/60">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <MicroBadge tone={cast.status}>{cast.status}</MicroBadge>
               </div>
               <div>
-                <p className="micro-label text-muted-foreground">
+                <p className="micro-label text-graphite">
                   {cast.client_name || "Independent"}
                 </p>
                 <h3 className="mt-2 font-display text-2xl leading-tight tracking-[-0.02em]">
                   {cast.title}
                 </h3>
-                <p className="mt-2 text-xs text-muted-foreground">
+                <p className="mt-2 font-mono text-[10px] text-graphite">
                   {formatShootDates(cast.shoot_start, cast.shoot_end)}
                 </p>
               </div>

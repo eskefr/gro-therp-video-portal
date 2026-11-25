@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Courier_Prime, Inter, Newsreader } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DemoBanner } from "@/components/shared/demo-banner";
@@ -12,8 +12,15 @@ const inter = Inter({
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const newsreader = Newsreader({
   variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const courier = Courier_Prime({
+  variable: "--font-typewriter",
+  weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -32,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${inter.variable} ${newsreader.variable} ${courier.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <TooltipProvider>

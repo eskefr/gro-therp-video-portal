@@ -14,13 +14,13 @@ export function EmptyState({
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center border border-dashed border-border px-6 py-16 text-center",
+        "flex flex-col items-center justify-center border border-dashed border-ledger px-6 py-16 text-center",
         className,
       )}
     >
       <p className="font-display text-2xl tracking-[-0.02em]">{title}</p>
       {description && (
-        <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
+        <p className="mt-2 max-w-md text-sm leading-6 text-graphite">
           {description}
         </p>
       )}

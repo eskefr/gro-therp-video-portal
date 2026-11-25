@@ -26,7 +26,7 @@ export function ExpirationPicker({
 
   return (
     <div>
-      <div className="grid grid-cols-4 border border-border bg-background p-1">
+      <div className="grid grid-cols-4 border border-ledger bg-paper p-1">
         {(
           [
             ["24h", "24 hours"],
@@ -40,8 +40,8 @@ export function ExpirationPicker({
             type="button"
             onClick={() => choose(key)}
             className={cn(
-              "micro-label px-2 py-2 text-muted-foreground transition",
-              preset === key && "bg-foreground text-background",
+              "micro-label px-2 py-2 text-graphite transition",
+              preset === key && "bg-ledger text-paper",
             )}
           >
             {label}
@@ -60,12 +60,12 @@ export function ExpirationPicker({
                 onChange(next.toISOString());
               }
             }}
-            className="h-10 rounded-none bg-background"
+            className="h-10 rounded-none bg-paper"
           />
         </div>
       )}
 
-      <p className="mt-2 text-[11px] text-muted-foreground">
+      <p className="mt-2 font-mono text-[10px] text-graphite">
         Closes {formatDateTime(value)} · local time
       </p>
     </div>

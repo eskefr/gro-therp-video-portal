@@ -25,30 +25,30 @@ export function JobsClient({ casts }: { casts: CastWithCount[] }) {
             <Link
               key={cast.id}
               href={`/admin/jobs/${cast.id}`}
-              className="group flex flex-col justify-between border border-border bg-card p-5 transition hover:border-foreground/30"
+              className="double-rule group flex flex-col justify-between border border-ledger bg-card p-5 transition hover:bg-manila/25"
             >
               <div className="flex items-start justify-between gap-3">
                 <MicroBadge tone={cast.status}>{cast.status}</MicroBadge>
-                <ArrowUpRight className="size-4 text-muted-foreground opacity-0 transition group-hover:opacity-100" />
+                <ArrowUpRight className="size-4 text-graphite opacity-0 transition group-hover:opacity-100" />
               </div>
               <div className="mt-8">
-                <p className="micro-label text-muted-foreground">
+                <p className="micro-label text-graphite">
                   {cast.client_name || "Independent"}
                 </p>
                 <h2 className="mt-2 font-display text-3xl leading-[1.02] tracking-[-0.03em]">
                   {cast.title}
                 </h2>
-                <p className="mt-3 text-xs text-muted-foreground">
+                <p className="mt-3 font-mono text-[10px] text-graphite">
                   {formatShootDates(cast.shoot_start, cast.shoot_end)}
                   {cast.location ? ` · ${cast.location}` : ""}
                 </p>
               </div>
-              <div className="mt-7 flex items-center gap-5 border-t border-border pt-4">
-                <span className="micro-label inline-flex items-center gap-1.5 text-muted-foreground">
+              <div className="mt-7 flex items-center gap-5 border-t border-ledger pt-4">
+                <span className="micro-label inline-flex items-center gap-1.5 text-graphite">
                   <Users className="size-3" />
                   {cast.memberCount} models
                 </span>
-                <span className="micro-label inline-flex items-center gap-1.5 text-muted-foreground">
+                <span className="micro-label inline-flex items-center gap-1.5 text-graphite">
                   <Film className="size-3" />
                   {cast.mediaCount} media
                 </span>

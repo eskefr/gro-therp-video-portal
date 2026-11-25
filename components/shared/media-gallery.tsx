@@ -30,7 +30,7 @@ export function MediaGallery({
 
   if (!media.length) {
     return (
-      <p className="text-xs leading-5 text-muted-foreground">
+      <p className="text-xs leading-5 text-graphite">
         No casting media submitted yet.
       </p>
     );
@@ -46,7 +46,7 @@ export function MediaGallery({
             <button
               type="button"
               onClick={() => setActiveIndex(index)}
-              className="group relative aspect-square overflow-hidden border border-border bg-muted text-left"
+              className="group relative aspect-square overflow-hidden border border-ledger bg-muted text-left"
               aria-label={`Open ${item.name}`}
             >
               {item.kind === "video" ? (
@@ -76,7 +76,7 @@ export function MediaGallery({
           </DialogTrigger>
         ))}
       </div>
-      <DialogContent className="max-w-[calc(100%-2rem)] gap-0 overflow-hidden border-border bg-[#12100d] p-0 text-white sm:max-w-4xl">
+      <DialogContent className="max-w-[calc(100%-2rem)] gap-0 overflow-hidden border-ledger bg-ink p-0 text-white sm:max-w-4xl">
         <DialogHeader className="flex flex-row items-center justify-between gap-4 border-b border-white/10 px-5 py-3">
           <DialogTitle className="font-display text-lg font-normal text-white">
             {title}

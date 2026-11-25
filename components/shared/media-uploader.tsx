@@ -123,11 +123,11 @@ export function MediaUploader({
   return (
     <div>
       <div className="mb-2 flex items-baseline justify-between gap-3">
-        <span className="text-sm font-medium">
+        <span className="micro-label text-ink">
           Casting photos & video
           <span className="ml-1 text-destructive">*</span>
         </span>
-        <span className="text-[11px] text-muted-foreground">
+        <span className="stamp text-[10px] text-graphite">
           {media.length} / {MAX_CASTING_MEDIA_FILES} · Max{" "}
           {formatBytes(MAX_CASTING_MEDIA_BYTES)} each
         </span>
@@ -152,7 +152,7 @@ export function MediaUploader({
             return (
               <div
                 key={item.id}
-                className="group relative aspect-[3/4] overflow-hidden border border-border bg-muted"
+                className="group relative aspect-[3/4] overflow-hidden border border-ledger bg-manila/40"
               >
                 {item.kind === "video" ? (
                   <>
@@ -218,27 +218,27 @@ export function MediaUploader({
             if (!disabled) void handleFiles(event.dataTransfer.files);
           }}
           className={cn(
-            "flex w-full flex-col items-center justify-center gap-2 border border-dashed border-border bg-card/40 px-5 py-7 text-center transition hover:border-foreground/40 hover:bg-card disabled:opacity-60",
-            dragging && "border-foreground/60 bg-card",
+            "flex w-full flex-col items-center justify-center gap-2 border border-dashed border-ledger bg-manila/25 px-5 py-7 text-center transition hover:bg-manila/60 disabled:opacity-60",
+            dragging && "bg-manila",
           )}
         >
           {busy ? (
-            <Loader2 className="size-5 animate-spin text-muted-foreground" />
+            <Loader2 className="size-5 animate-spin text-ledger" />
           ) : (
-            <Upload className="size-5 text-muted-foreground" />
+            <Upload className="size-5 text-ledger" />
           )}
-          <span className="text-sm font-medium">
+          <span className="micro-label text-ink">
             {busy
               ? `Uploading ${uploading} file${uploading === 1 ? "" : "s"}…`
               : "Drop files or choose from your device"}
           </span>
-          <span className="text-xs text-muted-foreground">
+          <span className="font-mono text-[10px] leading-5 text-graphite">
             Photos and short casting clips. Keep it natural and current.
           </span>
         </button>
       )}
 
-      {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
+      {error && <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>}
     </div>
   );
 }

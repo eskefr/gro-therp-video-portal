@@ -91,18 +91,18 @@ export function ApplyForm() {
 
   if (submitted) {
     return (
-      <div className="border border-border bg-card px-7 py-14 text-center sm:px-12">
-        <span className="mx-auto flex size-12 items-center justify-center rounded-full border border-[#bfd0bf] bg-[#e5ecdf] text-[#40553a]">
+      <div className="double-rule border border-ledger bg-card px-7 py-14 text-center sm:px-12">
+        <span className="mx-auto flex size-12 items-center justify-center border border-ledger bg-manila text-ledger">
           <Check className="size-5" />
         </span>
         <h2 className="mt-7 font-display text-4xl tracking-[-0.03em]">
           Application received.
         </h2>
-        <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-sm text-sm leading-6 text-graphite">
           Thank you for introducing yourself. The agency reviews new
           applications every week and will be in touch if there’s a fit.
         </p>
-        <p className="micro-label mt-8 text-muted-foreground">
+        <p className="micro-label mt-8 text-graphite">
           {isHidden
             ? "Your profile will stay private while under review."
             : "Your profile will appear publicly once approved."}
@@ -114,18 +114,18 @@ export function ApplyForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="border border-border bg-card/70 p-5 sm:p-8 lg:p-10"
+      className="double-rule border border-ledger bg-card p-5 sm:p-8 lg:p-10"
     >
-      <div className="mb-9 flex items-start justify-between gap-6 border-b border-border pb-6">
+      <div className="mb-9 flex items-start justify-between gap-6 border border-ledger bg-manila px-4 py-4">
         <div>
-          <p className="micro-label text-muted-foreground">Application</p>
+          <p className="micro-label text-graphite">Application</p>
           <h2 className="mt-2 font-display text-3xl tracking-[-0.03em]">
             Introduce yourself
           </h2>
         </div>
-        <span className="micro-label hidden items-center gap-1.5 text-muted-foreground sm:inline-flex">
+        <span className="micro-label hidden items-center gap-1.5 text-graphite sm:inline-flex">
           <ShieldCheck className="size-3.5" />
-          Private by default
+          For agency review
         </span>
       </div>
 
@@ -139,10 +139,10 @@ export function ApplyForm() {
       <ModelFormFields
         register={register}
         errors={errors}
-        className="mt-9 border-t border-border pt-8"
+        className="mt-8 border-t border-ledger pt-7"
       />
 
-      <div className="mt-8 flex items-start gap-3 border-t border-border pt-7">
+      <div className="mt-8 flex items-start gap-3 border border-ledger bg-manila px-4 py-4">
         <Checkbox
           id="hidden"
           checked={isHidden}
@@ -151,10 +151,10 @@ export function ApplyForm() {
         />
         <Label
           htmlFor="hidden"
-          className="flex-col items-start gap-0 text-sm leading-5 font-normal text-foreground"
+          className="flex-col items-start gap-0 text-sm leading-5 font-normal text-ink"
         >
           Keep my profile hidden from the public archive
-          <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+          <span className="mt-1 block text-xs leading-5 text-graphite">
             The agency can still view and cast you. You can change this later.
           </span>
         </Label>
@@ -163,14 +163,14 @@ export function ApplyForm() {
       {serverError && (
         <p
           role="alert"
-          className="mt-6 border border-destructive/30 bg-destructive/5 px-4 py-3 text-sm text-destructive"
+          className="mt-6 border border-destructive/50 bg-destructive/5 px-4 py-3 text-sm text-destructive"
         >
           {serverError}
         </p>
       )}
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-xs text-[11px] leading-5 text-muted-foreground">
+        <p className="max-w-xs font-mono text-[10px] leading-5 text-graphite">
           By applying you agree to the agency storing your details for casting
           consideration.
         </p>

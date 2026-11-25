@@ -67,11 +67,11 @@ export function HeadshotUploader({
   return (
     <div>
       <div className="mb-2 flex items-baseline justify-between gap-3">
-        <label className="text-sm font-medium">
+        <label className="micro-label text-graphite">
           {label}
           {required && <span className="ml-1 text-destructive">*</span>}
         </label>
-        <span className="text-[11px] text-muted-foreground">
+        <span className="stamp text-[10px] text-graphite">
           Max {formatBytes(MAX_HEADSHOT_BYTES)}
         </span>
       </div>
@@ -88,23 +88,23 @@ export function HeadshotUploader({
       />
 
       {value ? (
-        <div className="relative flex items-center gap-4 border border-border bg-card p-3">
+        <div className="relative flex items-center gap-4 border border-ledger bg-manila/45 p-3">
           <img
             src={value.url}
             alt="Headshot preview"
             className="size-24 shrink-0 object-cover"
           />
           <div className="min-w-0 flex-1">
-            <p className="truncate text-sm font-medium">
+            <p className="truncate font-mono text-[11px]">
               {value.name || "Headshot uploaded"}
             </p>
-            <p className="mt-1 text-xs text-muted-foreground">
+            <p className="mt-1 font-mono text-[10px] text-graphite">
               Uploaded and ready for review.
             </p>
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
-              className="micro-label mt-3 border-b border-foreground pb-0.5"
+              className="micro-label mt-3 border-b border-ledger pb-0.5"
             >
               Replace image
             </button>
@@ -112,7 +112,7 @@ export function HeadshotUploader({
           <button
             type="button"
             onClick={() => onChange(null)}
-            className="absolute top-2 right-2 flex size-7 items-center justify-center rounded-full bg-background/90 text-muted-foreground hover:text-foreground"
+            className="absolute top-2 right-2 flex size-7 items-center justify-center border border-ledger bg-paper text-graphite hover:bg-manila hover:text-ink"
             aria-label="Remove headshot"
           >
             <X className="size-3.5" />
@@ -134,25 +134,25 @@ export function HeadshotUploader({
             void handleFile(event.dataTransfer.files?.[0]);
           }}
           className={cn(
-            "flex min-h-32 w-full flex-col items-center justify-center gap-3 border border-dashed border-border bg-card/50 px-5 py-7 text-center transition hover:border-foreground/40 hover:bg-card",
-            dragging && "border-foreground/60 bg-card",
+            "flex min-h-32 w-full flex-col items-center justify-center gap-3 border border-dashed border-ledger bg-manila/25 px-5 py-7 text-center transition hover:bg-manila/60",
+            dragging && "bg-manila",
           )}
         >
           {uploading ? (
-            <Loader2 className="size-5 animate-spin text-muted-foreground" />
+            <Loader2 className="size-5 animate-spin text-ledger" />
           ) : (
-            <ImagePlus className="size-5 text-muted-foreground" />
+            <ImagePlus className="size-5 text-ledger" />
           )}
-          <span className="text-sm font-medium">
+          <span className="micro-label text-ink">
             {uploading ? "Uploading headshot…" : "Choose a headshot"}
           </span>
-          <span className="max-w-xs text-xs leading-5 text-muted-foreground">
+          <span className="max-w-xs font-mono text-[10px] leading-5 text-graphite">
             {hint}
           </span>
         </button>
       )}
 
-      {error && <p className="mt-2 text-xs text-destructive">{error}</p>}
+      {error && <p className="mt-2 font-mono text-[10px] text-destructive">{error}</p>}
     </div>
   );
 }

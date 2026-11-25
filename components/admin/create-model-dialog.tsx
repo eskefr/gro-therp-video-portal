@@ -112,14 +112,14 @@ export function CreateModelDialog() {
           Create model
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[92vh] w-full overflow-y-auto border-border bg-popover p-0 sm:max-w-3xl">
-        <div className="border-b border-border px-6 py-5">
+      <DialogContent className="max-h-[92vh] w-full overflow-y-auto border-ledger bg-popover p-0 sm:max-w-3xl">
+        <div className="border-b border-ledger bg-manila px-6 py-5">
           <DialogHeader>
-            <p className="micro-label text-muted-foreground">Direct entry</p>
+            <p className="micro-label text-graphite">Direct entry</p>
             <DialogTitle className="font-display text-3xl font-normal tracking-[-0.03em]">
               Create a model
             </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
+            <DialogDescription className="text-sm text-graphite">
               New profiles created here go straight into the approved archive.
             </DialogDescription>
           </DialogHeader>
@@ -133,11 +133,11 @@ export function CreateModelDialog() {
             required
           />
 
-          <div className="border-t border-border pt-7">
+          <div className="border-t border-ledger pt-7">
             <ModelFormFields register={register} errors={errors} />
           </div>
 
-          <div className="flex items-start gap-3 border-t border-border pt-6">
+          <div className="flex items-start gap-3 border-t border-ledger pt-6">
             <Checkbox
               id="admin-hidden"
               checked={isHidden}
@@ -149,7 +149,7 @@ export function CreateModelDialog() {
               className="flex-col items-start gap-0 text-sm leading-5 font-normal"
             >
               Hide from the public archive
-              <span className="mt-1 block text-xs text-muted-foreground">
+              <span className="mt-1 block text-xs text-graphite">
                 The model remains approved and castable, but won’t be listed
                 publicly.
               </span>
@@ -162,7 +162,7 @@ export function CreateModelDialog() {
             </p>
           )}
 
-          <div className="flex flex-col-reverse gap-3 border-t border-border pt-5 sm:flex-row sm:justify-end">
+          <div className="flex flex-col-reverse gap-3 border-t border-ledger pt-5 sm:flex-row sm:justify-end">
             <Button
               type="button"
               variant="outline"

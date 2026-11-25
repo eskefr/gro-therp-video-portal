@@ -15,11 +15,11 @@ export function AdminPageHeader({
   backHref?: { href: string; label: string };
 }) {
   return (
-    <div className="mb-8 border-b border-border pb-7">
+    <div className="double-rule mb-10 border-b border-ledger pt-6 pb-8">
       {backHref && (
         <Link
           href={backHref.href}
-          className="micro-label mb-5 inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground"
+          className="micro-label mb-5 inline-flex items-center gap-1.5 text-graphite hover:text-ink"
         >
           <ArrowLeft className="size-3" />
           {backHref.label}
@@ -27,12 +27,12 @@ export function AdminPageHeader({
       )}
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
         <div>
-          <p className="micro-label text-muted-foreground">{eyebrow}</p>
+          <p className="micro-label text-graphite">{eyebrow}</p>
           <h1 className="mt-3 font-display text-4xl leading-none tracking-[-0.04em] sm:text-5xl">
             {title}
           </h1>
           {description && (
-            <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">
+            <p className="mt-3 max-w-xl text-sm leading-6 text-graphite">
               {description}
             </p>
           )}

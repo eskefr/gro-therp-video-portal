@@ -21,11 +21,11 @@ export function ArchivePagination({
   };
 
   return (
-    <div className="mt-12 flex items-center justify-between border-t border-border pt-6">
+    <div className="mt-12 flex items-center justify-between border-t border-ledger pt-6">
       {page > 1 ? (
         <Link
           href={hrefFor(page - 1)}
-          className="micro-label inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"
+          className="micro-label inline-flex items-center gap-2 text-graphite hover:text-ink"
         >
           <ArrowLeft className="size-3.5" />
           Previous
@@ -33,13 +33,13 @@ export function ArchivePagination({
       ) : (
         <span />
       )}
-      <span className="micro-label text-muted-foreground">
+      <span className="stamp text-graphite">
         {String(page).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}
       </span>
       {page < totalPages ? (
         <Link
           href={hrefFor(page + 1)}
-          className="micro-label inline-flex items-center gap-2 text-muted-foreground hover:text-foreground"
+          className="micro-label inline-flex items-center gap-2 text-graphite hover:text-ink"
         >
           Next
           <ArrowRight className="size-3.5" />

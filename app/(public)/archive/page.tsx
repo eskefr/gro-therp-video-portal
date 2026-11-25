@@ -73,11 +73,11 @@ export default async function ArchivePage({
 
   return (
     <div>
-      <section className="paper-texture border-b border-border">
+      <section className="paper-texture double-rule border-b border-ledger">
         <div className="mx-auto w-full max-w-[1500px] px-5 py-14 md:px-10 md:py-20">
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
-              <p className="micro-label text-muted-foreground">
+              <p className="micro-label text-graphite">
                 Represented talent · {result.total}{" "}
                 {result.total === 1 ? "face" : "faces"}
               </p>
@@ -86,11 +86,11 @@ export default async function ArchivePage({
               </h1>
             </div>
             <div className="max-w-xs lg:pb-3">
-              <p className="text-sm leading-6 text-muted-foreground">
+              <p className="text-sm leading-6 text-graphite">
                 Faces we believe in. A living roster of models and talent for
                 editorial, campaign, runway, and moving image.
               </p>
-              <p className="micro-label mt-5 text-muted-foreground">
+              <p className="stamp mt-5">
                 Copenhagen · Representing worldwide
               </p>
             </div>
@@ -103,12 +103,13 @@ export default async function ArchivePage({
 
         {result.models.length ? (
           <>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-10 py-10 md:grid-cols-3 md:gap-x-6 lg:grid-cols-4 lg:gap-x-6 xl:gap-x-7">
+            <div className="grid grid-cols-2 gap-4 py-10 md:grid-cols-3 md:gap-5 lg:grid-cols-4">
               {result.models.map((model, index) => (
                 <ModelCard
                   key={model.id}
                   model={model}
                   priority={index < 4}
+                  catalogNumber={`GT / ${String((result.page - 1) * result.pageSize + index + 1).padStart(3, "0")}`}
                 />
               ))}
             </div>
@@ -131,7 +132,7 @@ export default async function ArchivePage({
               hasFilters ? (
                 <a
                   href="/archive"
-                  className="micro-label border-b border-foreground pb-1"
+                  className="micro-label border-b border-ledger pb-1"
                 >
                   Clear filters
                 </a>

@@ -28,7 +28,7 @@ export function DraftIndicator({
   return (
     <div
       className={cn(
-        "flex items-center gap-1.5 text-[11px] text-muted-foreground",
+        "flex items-center gap-1.5 font-mono text-[10px] leading-4 tracking-[0.02em] text-graphite uppercase",
         status === "error" && "text-destructive",
         className,
       )}
@@ -36,20 +36,20 @@ export function DraftIndicator({
     >
       {status === "pending" && (
         <>
-          <span className="size-1.5 rounded-full bg-muted-foreground/60" />
+          <span className="size-1.5 border border-ledger bg-manila" />
           Autosave on
         </>
       )}
       {status === "saving" && (
         <>
-          <Loader2 className="size-3 animate-spin" />
+          <Loader2 className="size-3 animate-spin text-ledger" />
           Saving draft…
         </>
       )}
       {status === "saved" && (
         <>
-          <Check className="size-3" />
-          Draft saved{time ? ` at ${time}` : ""}
+          <Check className="size-3 text-ledger" />
+          Draft saved{time ? ` · ${time}` : ""}
         </>
       )}
       {status === "error" && (

@@ -22,6 +22,9 @@ export interface ModelFormValues {
   isHidden: boolean;
 }
 
+const cellInput =
+  "h-8 w-full border-0 bg-transparent px-0 py-1 text-[15px] shadow-none outline-none placeholder:text-graphite focus-visible:ring-0";
+
 export function ModelFormFields({
   register,
   errors,
@@ -33,78 +36,78 @@ export function ModelFormFields({
 }) {
   const error = (field: keyof ModelFormValues) =>
     errors[field]?.message ? (
-      <p className="mt-1 text-[11px] text-destructive">
+      <p className="mt-1 font-mono text-[10px] text-destructive">
         {String(errors[field]?.message)}
       </p>
     ) : null;
 
   return (
-    <div className={cn("space-y-7", className)}>
-      <div className="space-y-4">
-        <p className="micro-label text-muted-foreground">The basics</p>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Full name" htmlFor="name" required error={error("name")}>
-            <Input
-              id="name"
-              autoComplete="name"
-              placeholder="First and last name"
-              className="h-10 rounded-none bg-card"
-              {...register("name")}
-            />
-          </Field>
-          <Field label="Email" htmlFor="email" error={error("email")}>
-            <Input
-              id="email"
-              type="email"
-              autoComplete="email"
-              placeholder="you@example.com"
-              className="h-10 rounded-none bg-card"
-              {...register("email")}
-            />
-          </Field>
-          <Field label="City" htmlFor="city" error={error("city")}>
-            <Input
-              id="city"
-              autoComplete="address-level2"
-              placeholder="Copenhagen"
-              className="h-10 rounded-none bg-card"
-              {...register("city")}
-            />
-          </Field>
-          <Field
-            label="Phone number"
-            htmlFor="phone"
-            required
-            error={error("phone")}
-            hint="Danish numbers can be entered as 20 12 34 56."
-          >
-            <Input
-              id="phone"
-              type="tel"
-              autoComplete="tel"
-              inputMode="tel"
-              placeholder="20 12 34 56"
-              className="h-10 rounded-none bg-card"
-              {...register("phone")}
-            />
-          </Field>
+    <div className={cn("space-y-6", className)}>
+      <div className="ledger-grid sm:grid-cols-2">
+        <div className="ledger-section col-span-full flex items-center justify-between px-4 py-2.5">
+          <span className="micro-label">The basics</span>
+          <span className="stamp text-[10px]">Form 01 / Talent</span>
         </div>
+
+        <Field label="Full name" htmlFor="name" required error={error("name")}>
+          <Input
+            id="name"
+            autoComplete="name"
+            placeholder="First and last name"
+            className={cellInput}
+            {...register("name")}
+          />
+        </Field>
+        <Field label="Email" htmlFor="email" error={error("email")}>
+          <Input
+            id="email"
+            type="email"
+            autoComplete="email"
+            placeholder="you@example.com"
+            className={cellInput}
+            {...register("email")}
+          />
+        </Field>
+        <Field label="City" htmlFor="city" error={error("city")}>
+          <Input
+            id="city"
+            autoComplete="address-level2"
+            placeholder="Copenhagen"
+            className={cellInput}
+            {...register("city")}
+          />
+        </Field>
+        <Field
+          label="Phone number"
+          htmlFor="phone"
+          required
+          error={error("phone")}
+          hint="Danish numbers can be entered as 20 12 34 56."
+        >
+          <Input
+            id="phone"
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
+            placeholder="20 12 34 56"
+            className={cellInput}
+            {...register("phone")}
+          />
+        </Field>
       </div>
 
-      <div className="space-y-4">
-        <div>
-          <p className="micro-label text-muted-foreground">Measurements</p>
-          <p className="mt-1 text-xs text-muted-foreground">
-            All measurements in centimetres.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div>
+        <div className="ledger-grid grid-cols-2 sm:grid-cols-4">
+          <div className="ledger-section col-span-full flex items-center justify-between px-4 py-2.5">
+            <span className="micro-label">Measurements</span>
+            <span className="stamp text-[10px]">Centimetres</span>
+          </div>
           <Field label="Height" htmlFor="height_cm">
             <Input
               id="height_cm"
               inputMode="numeric"
               placeholder="175"
-              className="h-10 rounded-none bg-card"
+              className={cellInput}
               {...register("height_cm")}
             />
           </Field>
@@ -113,7 +116,7 @@ export function ModelFormFields({
               id="bust_cm"
               inputMode="numeric"
               placeholder="82"
-              className="h-10 rounded-none bg-card"
+              className={cellInput}
               {...register("bust_cm")}
             />
           </Field>
@@ -122,7 +125,7 @@ export function ModelFormFields({
               id="waist_cm"
               inputMode="numeric"
               placeholder="61"
-              className="h-10 rounded-none bg-card"
+              className={cellInput}
               {...register("waist_cm")}
             />
           </Field>
@@ -131,41 +134,52 @@ export function ModelFormFields({
               id="hips_cm"
               inputMode="numeric"
               placeholder="89"
-              className="h-10 rounded-none bg-card"
+              className={cellInput}
               {...register("hips_cm")}
             />
           </Field>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <Field label="Shoe size" htmlFor="shoe_size">
-            <Input
-              id="shoe_size"
-              inputMode="decimal"
-              placeholder="39.5"
-              className="h-10 rounded-none bg-card"
-              {...register("shoe_size")}
-            />
-          </Field>
-          <Field label="Hair" htmlFor="hair_color">
-            <Input
-              id="hair_color"
-              placeholder="Brown"
-              className="h-10 rounded-none bg-card"
-              {...register("hair_color")}
-            />
-          </Field>
-          <Field label="Eyes" htmlFor="eye_color">
-            <Input
-              id="eye_color"
-              placeholder="Green"
-              className="h-10 rounded-none bg-card"
-              {...register("eye_color")}
-            />
-          </Field>
-        </div>
+        <p className="mt-1.5 font-mono text-[10px] leading-4 text-graphite">
+          All measurements in centimetres. Leave blank if unsure.
+        </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="ledger-grid grid-cols-3">
+        <div className="ledger-section col-span-full px-4 py-2.5">
+          <span className="micro-label">Colouring & sizing</span>
+        </div>
+        <Field label="Shoe size" htmlFor="shoe_size">
+          <Input
+            id="shoe_size"
+            inputMode="decimal"
+            placeholder="39.5"
+            className={cellInput}
+            {...register("shoe_size")}
+          />
+        </Field>
+        <Field label="Hair" htmlFor="hair_color">
+          <Input
+            id="hair_color"
+            placeholder="Brown"
+            className={cellInput}
+            {...register("hair_color")}
+          />
+        </Field>
+        <Field label="Eyes" htmlFor="eye_color">
+          <Input
+            id="eye_color"
+            placeholder="Green"
+            className={cellInput}
+            {...register("eye_color")}
+          />
+        </Field>
+      </div>
+
+      <div className="ledger-grid">
+        <div className="ledger-section flex items-center justify-between px-4 py-2.5">
+          <span className="micro-label">Personal note</span>
+          <span className="stamp text-[10px]">Optional</span>
+        </div>
         <Field
           label="A little about you"
           htmlFor="bio"
@@ -176,7 +190,7 @@ export function ModelFormFields({
             id="bio"
             rows={4}
             placeholder="A short introduction…"
-            className="resize-none rounded-none bg-card"
+            className="min-h-20 resize-none border-0 bg-transparent px-0 py-1 text-[15px] shadow-none focus-visible:ring-0"
             {...register("bio")}
           />
         </Field>
@@ -201,14 +215,17 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <Label htmlFor={htmlFor} className="mb-2 text-xs font-medium">
+    <div className="ledger-cell">
+      <Label
+        htmlFor={htmlFor}
+        className="micro-label mb-1.5 flex items-center gap-1 text-graphite"
+      >
         {label}
-        {required && <span className="ml-1 text-destructive">*</span>}
+        {required && <span className="text-destructive">*</span>}
       </Label>
       {children}
       {hint && !error && (
-        <p className="mt-1.5 text-[11px] leading-4 text-muted-foreground">{hint}</p>
+        <p className="mt-1 font-mono text-[10px] leading-4 text-graphite">{hint}</p>
       )}
       {error}
     </div>
