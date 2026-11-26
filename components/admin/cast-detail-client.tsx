@@ -54,6 +54,7 @@ import {
   updateCastStatusAction,
   updateRoleNotesAction,
 } from "@/lib/actions/casts";
+import { modelProfilePath } from "@/lib/admin-links";
 import { formatDateTime, formatShootDates } from "@/lib/dates";
 import { getEffectiveInvitationStatus } from "@/lib/invitations/status";
 import type {
@@ -180,11 +181,19 @@ export function CastDetailClient({
           {members.map((member) => (
             <article key={member.id} className="border border-ledger bg-card">
               <div className="flex gap-4 p-4">
-                <img
-                  src={member.model.headshot_url}
-                  alt={member.model.name}
-                  className="h-32 w-24 shrink-0 object-cover"
-                />
+                <Link
+                  href={modelProfilePath(member.model.phone, {
+                    from: "cast",
+                    castId: cast.id,
+                  })}
+                  className="shrink-0"
+                >
+                  <img
+                    src={member.model.headshot_url}
+                    alt={member.model.name}
+                    className="h-32 w-24 object-cover"
+                  />
+                </Link>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-1.5">
                     {member.model.status === "pending" && (
@@ -195,7 +204,15 @@ export function CastDetailClient({
                     )}
                   </div>
                   <h3 className="mt-2 font-display text-2xl leading-tight">
-                    {member.model.name}
+                    <Link
+                      href={modelProfilePath(member.model.phone, {
+                        from: "cast",
+                        castId: cast.id,
+                      })}
+                      className="hover:underline"
+                    >
+                      {member.model.name}
+                    </Link>
                   </h3>
                   <p className="mt-1 font-mono text-[12px] text-graphite">
                     {member.model.city || "City TBC"}
@@ -297,21 +314,33 @@ export function CastDetailClient({
               <tbody className="divide-y divide-border">
                 {invitations.map((invitation) => {
                   const status = getEffectiveInvitationStatus(invitation);
-                  const target = invitation.target_model_id
-                    ? members.find(
-                        (member) => member.model_id === invitation.target_model_id,
-                      )?.model.name
-                    : null;
+                  const linkedMember = members.find(
+                    (member) =>
+                      member.model_id ===
+                      (invitation.target_model_id ??
+                        invitation.claimed_model_id),
+                  );
+                  const recipient = linkedMember
+                    ? linkedMember.model.name
+                    : invitation.claimed_model_id
+                      ? "Submitted applicant"
+                      : "Any talent";
+                  const inspectHref = linkedMember
+                    ? modelProfilePath(linkedMember.model.phone, {
+                        from: "cast",
+                        castId: cast.id,
+                        invitationId: invitation.id,
+                      })
+                    : `/admin/invitations/${invitation.id}?from=cast&cast=${cast.id}`;
                   return (
                     <tr key={invitation.id}>
                       <td className="px-4 py-3 text-xs">
-                        {target ||
-                          (invitation.claimed_model_id
-                            ? members.find(
-                                (member) =>
-                                  member.model_id === invitation.claimed_model_id,
-                              )?.model.name || "Submitted applicant"
-                            : "Any talent")}
+                        <Link
+                          href={inspectHref}
+                          className="hover:underline"
+                        >
+                          {recipient}
+                        </Link>
                       </td>
                       <td className="px-4 py-3 text-xs text-graphite">
                         {invitation.target_model_id ? "Media request" : "Cast invite"}
@@ -338,7 +367,7 @@ export function CastDetailClient({
                             variant="ghost"
                           />
                           <Link
-                            href={`/admin/invitations/${invitation.id}`}
+                            href={inspectHref}
                             className="micro-label inline-flex items-center gap-1 px-2 py-1.5 text-graphite hover:text-ink"
                           >
                             <Eye className="size-3" />
@@ -508,14 +537,30 @@ function AddModelsDialog({
             <div className="divide-y divide-border border-y border-ledger">
               {filtered.map((model) => (
                 <div key={model.id} className="flex items-center gap-3 py-2.5">
-                  <img
-                    src={model.headshot_url}
-                    alt={model.name}
-                    className="size-11 shrink-0 object-cover"
-                  />
+                  <Link
+                    href={modelProfilePath(model.phone, { from: "archive" })}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="shrink-0"
+                  >
+                    <img
+                      src={model.headshot_url}
+                      alt={model.name}
+                      className="size-11 object-cover"
+                    />
+                  </Link>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <p className="truncate text-sm font-medium">{model.name}</p>
+                      <Link
+                        href={modelProfilePath(model.phone, {
+                          from: "archive",
+                        })}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="truncate text-sm font-medium hover:underline"
+                      >
+                        {model.name}
+                      </Link>
                       {model.is_hidden && <MicroBadge tone="hidden">Hidden</MicroBadge>}
                     </div>
                     <p className="text-[12px] text-graphite">

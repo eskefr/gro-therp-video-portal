@@ -187,12 +187,11 @@ export async function getInvitationInspection(
   const status = getEffectiveInvitationStatus(invitation);
   const isSubmitted = status === "submitted" || status === "completed";
   const draftMedia = draft.media ?? [];
-  const media =
-    isSubmitted && memberMedia.length
+  const media = isSubmitted
+    ? memberMedia.length
       ? memberMedia
-      : draftMedia.length
-        ? draftMedia
-        : memberMedia;
+      : draftMedia
+    : draftMedia;
   const mediaSource: InvitationInspection["mediaSource"] = media.length
     ? isSubmitted
       ? "submitted"
@@ -219,6 +218,8 @@ export async function getInvitationInspection(
     expiresAt: invitation.expires_at,
     submittedAt: invitation.submitted_at,
     draftSavedAt: draft.savedAt ?? draft.clientUpdatedAt ?? null,
+    modelId: model?.id ?? null,
+    modelPhone: model?.phone ?? null,
     modelStatus: model?.status ?? null,
     profile: {
       name: model?.name ?? draftProfile.name ?? null,

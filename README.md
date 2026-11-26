@@ -18,7 +18,8 @@ Peoples Archive is the casting practice of Gro Therp Casting in Copenhagen. The 
 - **Admin workspace**:
   - compact overview statistics and review queues
   - approved archive with hidden-profile badges
-  - pending application review with approve/reject
+  - phone-addressed model profiles with application, cast, media, and invitation history
+  - pending application review with approve/reject on the model profile
   - cast management, role notes, and media previews
   - invite generation with 24h / 3d / 7d / custom expiry
   - invitation tracker with live status, countdowns, and submission inspection
@@ -206,6 +207,7 @@ proxy.ts                Admin route guard
 - Videos are capped at 50 MB per file. This is intentionally conservative for local and starter Supabase plans.
 - The seed uses bundled portrait assets in `public/seed` for speed and offline reliability. Demo portraits were sourced from [grotherpcasting.dk](https://grotherpcasting.dk) and share a muted color grade. Real application and admin uploads use Supabase Storage.
 - The public archive exposes only initials, age, and the portrait; full names and profile data stay behind the admin boundary.
+- Admin model profiles are addressed by normalized phone digits (`/admin/models/4520120001`); UUIDs remain the internal database keys.
 
 ## Useful commands
 

@@ -1,12 +1,14 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Search } from "lucide-react";
 import { CreateModelDialog } from "@/components/admin/create-model-dialog";
 import { AdminPageHeader } from "@/components/admin/page-header";
 import { EmptyState } from "@/components/shared/empty-state";
 import { MicroBadge } from "@/components/shared/status-badge";
 import { Input } from "@/components/ui/input";
+import { modelProfilePath } from "@/lib/admin-links";
 import type { Model } from "@/types/app";
 import { formatPhone } from "@/lib/phone";
 
@@ -73,7 +75,11 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
       {filtered.length ? (
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
           {filtered.map((model) => (
-            <article key={model.id} className="group border border-ledger bg-card">
+            <Link
+              key={model.id}
+              href={modelProfilePath(model.phone, { from: "archive" })}
+              className="group border border-ledger bg-card transition hover:bg-manila/20"
+            >
               <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                 <img
                   src={model.headshot_url}
@@ -112,7 +118,7 @@ export function AdminArchiveClient({ models }: { models: Model[] }) {
                   </span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       ) : (

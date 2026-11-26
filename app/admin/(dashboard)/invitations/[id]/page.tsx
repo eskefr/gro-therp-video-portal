@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ArrowUpRight, Film } from "lucide-react";
 import { AdminPageHeader } from "@/components/admin/page-header";
 import { MediaGallery } from "@/components/shared/media-gallery";
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { formatDateTime } from "@/lib/dates";
 import { formatPhone } from "@/lib/phone";
 import { getInvitationInspection } from "@/lib/queries/invitations";
+import { modelProfilePath } from "@/lib/admin-links";
 
 export const dynamic = "force-dynamic";
 
@@ -22,12 +23,25 @@ export const metadata: Metadata = {
 
 export default async function InvitationInspectionPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ from?: string; cast?: string }>;
 }) {
-  const { id } = await params;
+  const [{ id }, query] = await Promise.all([params, searchParams]);
   const inspection = await getInvitationInspection(id);
   if (!inspection) notFound();
+
+  if (inspection.modelPhone) {
+    const fromCast = query.from === "cast" && query.cast;
+    redirect(
+      modelProfilePath(inspection.modelPhone, {
+        from: fromCast ? "cast" : "invitations",
+        castId: fromCast ? query.cast : undefined,
+        invitationId: inspection.id,
+      }),
+    );
+  }
 
   const { profile } = inspection;
   const fields = [
@@ -54,7 +68,11 @@ export default async function InvitationInspectionPage({
   return (
     <div>
       <AdminPageHeader
-        backHref={{ href: "/admin/invitations", label: "Invitations" }}
+        backHref={
+          query.from === "cast" && query.cast
+            ? { href: `/admin/jobs/${query.cast}`, label: "Cast" }
+            : { href: "/admin/invitations", label: "Invitations" }
+        }
         eyebrow={inspection.castTitle}
         title={inspection.recipientName || "General cast invite"}
         action={
@@ -119,22 +137,10 @@ export default async function InvitationInspectionPage({
                   className="aspect-[4/5] w-full object-cover"
                 />
               )}
-              <div className="mt-3 flex flex-wrap gap-2">
-                {profile.isHidden && (
+              {profile.isHidden && (
+                <div className="mt-3">
                   <MicroBadge tone="hidden">Private profile requested</MicroBadge>
-                )}
-                {inspection.modelStatus === "pending" && (
-                  <MicroBadge tone="pending">Awaiting approval</MicroBadge>
-                )}
-              </div>
-              {inspection.modelStatus === "pending" && (
-                <Link
-                  href="/admin/applications"
-                  className="micro-label mt-4 inline-flex items-center gap-1.5 text-graphite underline underline-offset-4 hover:text-ink"
-                >
-                  Review application
-                  <ArrowUpRight className="size-3" />
-                </Link>
+                </div>
               )}
             </div>
           )}

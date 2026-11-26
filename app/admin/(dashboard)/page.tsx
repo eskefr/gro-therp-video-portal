@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { InvitationStatusBadge, MicroBadge } from "@/components/shared/status-badge";
 import { Countdown } from "@/components/shared/countdown";
+import { modelProfilePath } from "@/lib/admin-links";
 import { getAdminStats } from "@/lib/queries/models";
 import { getDashboardData } from "@/lib/queries/dashboard";
 import { getEffectiveInvitationStatus } from "@/lib/invitations/status";
@@ -71,7 +72,9 @@ export default async function AdminOverviewPage() {
               {dashboard.recentApplications.map((application) => (
                 <Link
                   key={application.id}
-                  href="/admin/applications"
+                  href={modelProfilePath(application.phone, {
+                    from: "applications",
+                  })}
                   className="flex items-center gap-3 px-4 py-3 transition hover:bg-manila/35"
                 >
                   <img
@@ -116,6 +119,14 @@ export default async function AdminOverviewPage() {
             <div className="divide-y divide-border">
               {dashboard.recentInvitations.map((invitation) => {
                 const status = getEffectiveInvitationStatus(invitation);
+                const linkedModel =
+                  invitation.claimed_model ?? invitation.target_model;
+                const href = linkedModel
+                  ? modelProfilePath(linkedModel.phone, {
+                      from: "invitations",
+                      invitationId: invitation.id,
+                    })
+                  : `/admin/invitations/${invitation.id}`;
                 return (
                   <div
                     key={invitation.id}
@@ -123,9 +134,9 @@ export default async function AdminOverviewPage() {
                   >
                     <div className="min-w-0">
                       <p className="truncate text-sm font-medium">
-                        {invitation.target_model?.name ||
-                          invitation.claimed_model?.name ||
-                          "General cast invite"}
+                        <Link href={href} className="hover:underline">
+                          {linkedModel?.name || "General cast invite"}
+                        </Link>
                       </p>
                       <p className="mt-0.5 truncate text-xs text-graphite">
                         {invitation.cast.title}

@@ -188,11 +188,49 @@ export interface InvitationInspection {
   expiresAt: string;
   submittedAt: string | null;
   draftSavedAt: string | null;
+  modelId: string | null;
+  modelPhone: string | null;
   modelStatus: ModelStatus | null;
   profile: InvitationInspectionProfile;
   headshotUrl: string | null;
   media: SignedMedia[];
   mediaSource: "submitted" | "draft" | null;
+}
+
+export interface ModelCastHistoryEntry {
+  memberId: string;
+  cast: Cast;
+  roleNotes: string | null;
+  media: SignedMedia[];
+  addedAt: string;
+}
+
+export interface ModelInvitationHistoryEntry {
+  id: string;
+  token: string;
+  type: "cast" | "media";
+  status: EffectiveInvitationStatus;
+  castId: string;
+  castTitle: string;
+  clientName: string | null;
+  requireMediaUpload: boolean;
+  expiresAt: string;
+  submittedAt: string | null;
+  createdAt: string;
+  draftSavedAt: string | null;
+  media: SignedMedia[];
+  mediaSource: "submitted" | "draft" | null;
+}
+
+export interface ModelProfile {
+  model: Model;
+  casts: ModelCastHistoryEntry[];
+  invitations: ModelInvitationHistoryEntry[];
+  applicationSource: {
+    castTitle: string;
+    invitationId: string;
+    token: string;
+  } | null;
 }
 
 export interface AdminStats {

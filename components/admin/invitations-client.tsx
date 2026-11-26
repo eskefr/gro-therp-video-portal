@@ -4,9 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
-  ArrowUpRight,
   Check,
-  Eye,
   Film,
   Image as ImageIcon,
   Loader2,
@@ -20,6 +18,7 @@ import { Countdown } from "@/components/shared/countdown";
 import { InvitationStatusBadge } from "@/components/shared/status-badge";
 import { Button } from "@/components/ui/button";
 import { markInvitationCompletedAction } from "@/lib/actions/casts";
+import { modelProfilePath } from "@/lib/admin-links";
 import { formatDateTime } from "@/lib/dates";
 import { getEffectiveInvitationStatus } from "@/lib/invitations/status";
 import type {
@@ -153,27 +152,40 @@ export function InvitationsClient({
             </thead>
             <tbody className="divide-y divide-border">
               {filtered.map(({ invitation, status }) => {
+                const linkedModel =
+                  invitation.claimed_model ?? invitation.target_model;
                 const recipient =
-                  invitation.target_model?.name ||
-                  invitation.claimed_model?.name ||
+                  linkedModel?.name ||
                   "Any talent";
                 const isMediaRequest = Boolean(invitation.target_model_id);
+                const href = linkedModel
+                  ? modelProfilePath(linkedModel.phone, {
+                      from: "invitations",
+                      invitationId: invitation.id,
+                    })
+                  : `/admin/invitations/${invitation.id}`;
                 return (
-                  <tr key={invitation.id} className="align-middle">
+                  <tr
+                    key={invitation.id}
+                    onClick={() => router.push(href)}
+                    className="cursor-pointer align-middle transition hover:bg-manila/25"
+                  >
                     <td className="px-4 py-4">
-                      <Link
-                        href={`/admin/jobs/${invitation.cast_id}`}
-                        className="group inline-flex items-center gap-1 text-sm font-medium hover:underline"
-                      >
+                      <p className="text-sm font-medium">
                         {invitation.cast.title}
-                        <ArrowUpRight className="size-3 opacity-0 transition group-hover:opacity-100" />
-                      </Link>
+                      </p>
                       <p className="mt-0.5 text-[12px] text-graphite">
                         {invitation.cast.client_name || "Independent"}
                       </p>
                     </td>
                     <td className="px-4 py-4 text-xs">
-                      <p>{recipient}</p>
+                      <Link
+                        href={href}
+                        onClick={(event) => event.stopPropagation()}
+                        className="hover:underline"
+                      >
+                        {recipient}
+                      </Link>
                       <p className="mt-0.5 text-graphite">
                         {isMediaRequest ? "Targeted" : "Open invite"}
                       </p>
@@ -209,7 +221,10 @@ export function InvitationsClient({
                         hasTarget={isMediaRequest}
                       />
                     </td>
-                    <td className="px-4 py-4">
+                    <td
+                      className="px-4 py-4"
+                      onClick={(event) => event.stopPropagation()}
+                    >
                       <div className="flex items-center gap-1.5">
                         <CopyButton
                           value={`/invite/${invitation.token}`}
@@ -217,13 +232,6 @@ export function InvitationsClient({
                           variant="ghost"
                           className="h-8 px-2"
                         />
-                        <Link
-                          href={`/admin/invitations/${invitation.id}`}
-                          className="micro-label inline-flex h-8 items-center gap-1 px-2 text-graphite hover:text-ink"
-                        >
-                          <Eye className="size-3" />
-                          Inspect
-                        </Link>
                         {status === "submitted" && (
                           <button
                             type="button"
