@@ -23,6 +23,7 @@ Peoples Archive is the public-facing casting archive of Gro Therp Casting. The c
 
 ## Architecture
 
+- `UX.md` is the product/UX source of truth for the final Django rebuild. Read it before changing UI. Any page, flow, copy, status, validation, or admin behavior change must update `UX.md`, its Last updated date, and its changelog.
 - Next.js 16 App Router, React Server Components by default. Keep `'use client'` limited to filters, forms, uploaders, dialogs, and countdowns.
 - DB-backed pages are deliberately `force-dynamic`; Cache Components is disabled. Do not turn it on without restructuring data fetches.
 - Next 16 conventions apply: `params`/`searchParams` are Promises, and auth routing lives in `proxy.ts`, not `middleware.ts`.

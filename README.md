@@ -4,6 +4,8 @@ A fast, editorial casting-platform prototype built with Next.js App Router, Supa
 
 Peoples Archive is the casting practice of Gro Therp Casting in Copenhagen. The interface follows an archival editorial / vintage library-card direction: warm paper and manila surfaces, ledger-blue rules, Newsreader display type, Inter labels, and Courier Prime for dates and metadata.
 
+The complete product and UX specification for the final Django implementation lives in [UX.md](./UX.md). Keep it updated whenever a page, flow, validation rule, status, or piece of interface copy changes.
+
 ## What’s included
 
 - **Public archive** with initials and age filters and an initials/age-only public projection.
@@ -173,6 +175,7 @@ No seed or migration step runs automatically on deploy. Run them manually agains
 ## Project map
 
 ```text
+UX.md                   Full UX specification for the Django rebuild
 app/
   (public)/archive      Public roster and filters
   (public)/apply        Application form
