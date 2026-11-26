@@ -60,7 +60,7 @@ export default async function ArchivePage({
     <div className="min-h-screen bg-white text-neutral-950">
       <div className="mx-auto w-full max-w-[1600px] px-5 py-8 md:px-8 md:py-10 lg:px-10">
         <div className="grid gap-10 lg:grid-cols-[180px_1fr] lg:gap-12 xl:grid-cols-[220px_1fr]">
-          <aside className="lg:sticky lg:top-8 lg:flex lg:h-[calc(100vh-4rem)] lg:flex-col lg:self-start">
+          <aside className="lg:sticky lg:top-8 lg:flex lg:h-[calc(100vh-6rem)] lg:flex-col lg:self-start">
             <Link
               href="/archive"
               className="w-fit text-[15px] font-semibold tracking-[-0.01em] text-neutral-950"
