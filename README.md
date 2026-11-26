@@ -177,7 +177,7 @@ No seed or migration step runs automatically on deploy. Run them manually agains
 ```text
 UX.md                   Full UX specification for the Django rebuild
 app/
-  (public)/archive      Public roster and filters
+  (gallery)/archive     Public roster and filters (minimal gallery shell)
   (public)/apply        Application form
   invite/[token]        Magic-link flow
   admin/                Passcode-gated workspace

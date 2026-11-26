@@ -62,6 +62,7 @@ An archival editorial / vintage casting-book aesthetic:
 - Serif display type for names and headings; sans-serif for UI labels; monospace/typewriter for dates, codes, metadata.
 - Restrained motion: hover color shifts, subtle image scale, no decorative animation.
 - No gradients except the subtle paper texture. No drop shadows except the existing offset shadow treatment used by some dialogs.
+- **Archive exception:** `/archive` intentionally uses a separate white, gallery-minimal shell inspired by a sparse photography index. See 5.3.
 
 ### 3.2 Core tokens
 
@@ -149,6 +150,8 @@ Backend endpoints behind these screens (not user-facing routes):
 
 ### 5.1 Public header
 
+This header applies to public pages except `/archive`, which has its own minimal shell.
+
 Sticky header with a bottom ledger-blue rule:
 
 - Left: Peoples Archive wordmark, links home to `/archive`.
@@ -159,6 +162,8 @@ Sticky header with a bottom ledger-blue rule:
 - Header background is paper with slight translucency and blur.
 
 ### 5.2 Public footer
+
+This footer applies to public pages except `/archive`, which ends with a single copyright line in its left rail.
 
 Three-column layout on desktop, stacked on mobile:
 
@@ -181,64 +186,88 @@ Three-column layout on desktop, stacked on mobile:
 
 #### Purpose
 
-A public, privacy-first contact sheet of approved models. It intentionally exposes only initials, age, and a portrait.
+A public, privacy-first gallery of approved models. It intentionally exposes only initials, age, and a portrait.
 
-#### Header
+#### Shell
 
-A slim paper-textured band with a double rule and bottom ledger-blue border:
+The archive uses a dedicated gallery-minimal shell, separate from the paper/ledger public layout:
 
-- Only the display heading **“The Archive”**.
-- No marketing paragraph, location line, or count in the header. The count appears in the filter bar.
+- White page background.
+- No public site header or footer.
+- The global demo banner remains while demo mode is enabled.
+- Desktop: narrow left rail plus a wide image field.
+- Left rail is sticky on desktop and spans the available viewport height; copyright sits at the bottom.
+- Mobile: wordmark and links at the top, filters below, then the image field.
+- All archive chrome is 14–15px minimum. Do not use tiny micro-labels on this page.
 
-#### Filters
+#### Left rail
 
-A single filter region above the grid:
+- Wordmark: plain black sans-serif `Peoples Archive`, approximately 15px semibold.
+- Navigation, 14px:
+  - `Archive` — active, underlined.
+  - `Apply`.
+  - `Contact` — mailto link.
+- Filters:
+  - `Index` label, 14px medium.
+  - Minimal underlined search input, placeholder `initials`.
+  - `Age` label, 14px medium.
+  - Age links: `All`, `18–25`, `26–35`, `36–45`, `46–55`, `56–70`.
+  - On desktop the age links stack vertically; on mobile they wrap inline.
+  - Active age range is black and underlined.
+  - `Reset` appears when any filter is active.
+- Copyright at the bottom of the rail: `© current year Peoples Archive`.
 
-- `INDEX` label + search input placeholder **“Search initials”**.
-- Initials search is debounced by roughly 450ms.
-- Clear-search icon when text is present.
-- `Reset index` appears when any filter is active.
-- Entry count on the right: `18 entries`, `01 entry`, etc.
-- `AGE` label + text-link ranges separated by slashes:
-  - `All`
-  - `18–25`
-  - `26–35`
-  - `36–45`
-  - `46–55`
-  - `56–70`
-- Active range is underlined.
-- Filters update the URL query and reset pagination to page 1.
+#### Main field
+
+A single 14px metadata line above the grid:
+
+- Left: `Casting archive`.
+- Right: `18 entries` / `1 entry`.
+
+No large “The Archive” heading is shown visually; the page still has an accessible screen-reader heading.
 
 #### Grid
 
-- Zero-gap contact sheet.
-- 1 column on small screens, 2 at `sm`, 4 at `lg`.
-- Wrapper owns top/left hairlines; each cell owns right/bottom hairlines.
-- No gaps, shadows, or doubled internal borders.
-- Portrait area is 4:5, with a small paper inset frame.
-- Portrait treatment: muted color, slightly reduced saturation and contrast; never black-and-white.
-- Cards are not clickable publicly. There is no public model detail page.
+- Loose image grid with generous white space.
+- 1 column on small screens, 2 at `sm`, 3 at `lg`, 4 at `xl`.
+- Gaps: approximately 24px between columns and 36px between rows.
+- No card borders, frames, shadows, background panels, or index numbers.
+- Portrait ratio remains **4:5**. Do not vary or crop away from the portrait ratio.
+- Portrait treatment remains muted color, never black-and-white.
+- Images are not clickable publicly. There is no public model detail page.
 
-#### Card caption
+#### Caption
 
-Example: `01. AL — 55`
+Example: `AL, 55`
 
-- Catalog index is presentational and continues across pages.
-- Initials are generated from the first letters of the first two name words.
-- Age is shown after an em dash; missing age shows `—`.
-- No full name, city, phone, email, measurements, hair, eyes, bio, or status.
+- 14px.
+- Initials in black medium weight.
+- Age in grey after a comma.
+- Missing age shows initials only.
+- No catalog index, city, measurements, hair, eyes, bio, or status.
 
 #### Pagination
 
 - 24 models per page.
-- Previous / `01 / 02` / Next.
+- Small 14px text row: `Previous`, `01 / 03`, `Next`.
+- No border or box.
 - Hidden if only one page.
-- Preserves active filters.
+- Preserves active filters and resets to page 1 when filters change.
 
 #### Empty states
 
 - With filters: **“No faces match that search.”** / “Try a different age range, search by initials, or clear the filters.” + `Clear filters`.
 - No filters: **“The archive is being refreshed.”** / “New faces are added regularly. Please check back soon.”
+- No bordered empty-state card; plain centered text within the image field.
+
+#### Interaction and accessibility
+
+- Initials search remains debounced by roughly 450ms.
+- Age links update the URL and expose pressed state.
+- Search has a visible label and accessible name.
+- Active filters remain distinguishable by more than color alone.
+- Focus states use a visible black underline/outline.
+- Pagination links use readable 14px text.
 
 #### Current limitation to resolve in final build
 
@@ -1183,3 +1212,4 @@ Repo-level rule: `AGENTS.md` points future agents to this file, and `README.md` 
 | Date | Area | Change |
 |---|---|---|
 | 2026-11-26 | All | Initial exhaustive UX specification covering public archive, application flow, invitation flows, admin workspace, model profiles, applications, casts, invitation inspection, media, data model, demo-only behavior, and Django parity checklist. |
+| 2026-11-26 | Archive | Replaced the archive contact-sheet shell with a white gallery-minimal left-rail layout. Removed the public header/footer, paper/ledger chrome, card frames, borders, and catalog index numbers. Kept 4:5 portraits, readable 14–15px type, initials/age, filters, pagination, and privacy rules. |

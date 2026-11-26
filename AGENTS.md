@@ -27,7 +27,7 @@ Peoples Archive is the public-facing casting archive of Gro Therp Casting. The c
 - Next.js 16 App Router, React Server Components by default. Keep `'use client'` limited to filters, forms, uploaders, dialogs, and countdowns.
 - DB-backed pages are deliberately `force-dynamic`; Cache Components is disabled. Do not turn it on without restructuring data fetches.
 - Next 16 conventions apply: `params`/`searchParams` are Promises, and auth routing lives in `proxy.ts`, not `middleware.ts`.
-- `app/(public)` is the public site; `app/invite/[token]` is standalone; `app/admin/(dashboard)` is the guarded workspace. Admin login sits outside the guarded group.
+- `app/(public)` is the public site; `app/(gallery)/archive` is the public archive with its own white gallery shell and deliberately bypasses the public header/footer; `app/invite/[token]` is standalone; `app/admin/(dashboard)` is the guarded workspace. Admin login sits outside the guarded group.
 - Admin auth is a demo passcode cookie in `lib/auth`; `proxy.ts` is only an optimistic gate. Layouts and every Server Action call `requireAdmin`/`getAdminSession` themselves.
 - Admin model profiles live at `/admin/models/<phone digits>`; the normalized phone is the admin-facing identifier while UUIDs remain the internal database keys. Every model surface links there.
 - Applications are reviewed on the model profile, not in a side sheet. Invitation inspection redirects to the model profile when a model is attached, preserving invitation context via `?invitation=`.

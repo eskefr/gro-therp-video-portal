@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export function ArchivePagination({
   page,
@@ -21,28 +20,21 @@ export function ArchivePagination({
   };
 
   return (
-    <div className="mt-12 flex items-center justify-between border-t border-ledger pt-6">
+    <div className="mt-14 flex items-center justify-between text-sm text-neutral-500">
       {page > 1 ? (
-        <Link
-          href={hrefFor(page - 1)}
-          className="micro-label inline-flex items-center gap-2 text-graphite hover:text-ink"
-        >
-          <ArrowLeft className="size-3.5" />
+        <Link href={hrefFor(page - 1)} className="hover:text-neutral-950">
           Previous
         </Link>
       ) : (
         <span />
       )}
-      <span className="stamp text-graphite">
-        {String(page).padStart(2, "0")} / {String(totalPages).padStart(2, "0")}
+      <span>
+        {String(page).padStart(2, "0")} /{" "}
+        {String(totalPages).padStart(2, "0")}
       </span>
       {page < totalPages ? (
-        <Link
-          href={hrefFor(page + 1)}
-          className="micro-label inline-flex items-center gap-2 text-graphite hover:text-ink"
-        >
+        <Link href={hrefFor(page + 1)} className="hover:text-neutral-950">
           Next
-          <ArrowRight className="size-3.5" />
         </Link>
       ) : (
         <span />
