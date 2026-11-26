@@ -26,6 +26,7 @@ export interface Model {
   age: number | null;
   initials: string;
   headshot_url: string;
+  media_history: SubmissionMedia[];
   is_hidden: boolean;
   status: ModelStatus;
   created_at: string;

@@ -19,7 +19,8 @@ Peoples Archive is the casting practice of Gro Therp Casting in Copenhagen. The 
   - compact overview statistics and review queues
   - approved archive with hidden-profile badges
   - phone-addressed model profiles with application, cast, media, and invitation history
-  - pending application review with approve/reject on the model profile
+  - profile editing for information, visibility, and photos with media history
+  - pending application review with approve/reject and an optional standard archive placeholder
   - cast management, role notes, and media previews
   - invite generation with 24h / 3d / 7d / custom expiry
   - invitation tracker with live status, countdowns, and submission inspection

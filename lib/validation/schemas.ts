@@ -74,6 +74,10 @@ export const adminModelSchema = applicationSchema.extend({
   isHidden: z.boolean().default(false),
 });
 
+export const updateModelSchema = adminModelSchema.extend({
+  modelId: z.string().uuid(),
+});
+
 export const castSchema = z.object({
   title: z.string().trim().min(2, "Give this cast a title.").max(140),
   client_name: z.preprocess(emptyToNull, z.string().max(120).nullable()).optional(),

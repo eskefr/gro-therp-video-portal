@@ -16,6 +16,7 @@ export function HeadshotUploader({
   label = "Headshot",
   hint = "A clean portrait, natural light. JPEG, PNG, or WebP.",
   required,
+  showRemove = true,
 }: {
   value: DraftHeadshot | null;
   onChange: (value: DraftHeadshot | null) => void;
@@ -24,6 +25,7 @@ export function HeadshotUploader({
   label?: string;
   hint?: string;
   required?: boolean;
+  showRemove?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -109,14 +111,16 @@ export function HeadshotUploader({
               Replace image
             </button>
           </div>
-          <button
-            type="button"
-            onClick={() => onChange(null)}
-            className="absolute top-2 right-2 flex size-7 items-center justify-center border border-ledger bg-paper text-graphite hover:bg-manila hover:text-ink"
-            aria-label="Remove headshot"
-          >
-            <X className="size-3.5" />
-          </button>
+          {showRemove && (
+            <button
+              type="button"
+              onClick={() => onChange(null)}
+              className="absolute top-2 right-2 flex size-7 items-center justify-center border border-ledger bg-paper text-graphite hover:bg-manila hover:text-ink"
+              aria-label="Remove headshot"
+            >
+              <X className="size-3.5" />
+            </button>
+          )}
         </div>
       ) : (
         <button

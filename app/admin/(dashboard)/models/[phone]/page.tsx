@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight, Film } from "lucide-react";
 import { AdminPageHeader } from "@/components/admin/page-header";
+import { EditModelDialog } from "@/components/admin/edit-model-dialog";
 import { ModelApprovalActions } from "@/components/admin/model-approval-actions";
 import { MediaGallery } from "@/components/shared/media-gallery";
 import {
@@ -36,14 +37,22 @@ export default async function ModelProfilePage({
   if (!profile) notFound();
 
   const { model } = profile;
+  const from =
+    query.from === "archive" ||
+    query.from === "applications" ||
+    query.from === "cast" ||
+    query.from === "invitations"
+      ? query.from
+      : undefined;
   const backHref =
-    query.from === "applications"
+    from === "applications"
       ? { href: "/admin/applications", label: "Applications" }
-      : query.from === "invitations"
+      : from === "invitations"
         ? { href: "/admin/invitations", label: "Invitations" }
-        : query.from === "cast" && query.cast
+        : from === "cast" && query.cast
           ? { href: `/admin/jobs/${query.cast}`, label: "Cast" }
           : { href: "/admin/archive", label: "Archive" };
+  const mediaHistory = model.media_history ?? [];
 
   const details = [
     ["Phone", formatPhone(model.phone)],
@@ -65,6 +74,14 @@ export default async function ModelProfilePage({
         backHref={backHref}
         eyebrow={`${model.initials}${model.age ? ` · ${model.age}` : ""}`}
         title={model.name}
+        action={
+          <EditModelDialog
+            model={model}
+            from={from}
+            castId={query.cast}
+            invitationId={query.invitation}
+          />
+        }
       />
 
       <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
@@ -136,6 +153,26 @@ export default async function ModelProfilePage({
                 <ModelApprovalActions
                   modelId={model.id}
                   modelName={model.name}
+                />
+              </div>
+            </section>
+          )}
+
+          {mediaHistory.length > 0 && (
+            <section className="mt-8">
+              <div className="flex items-baseline justify-between gap-3 border-b border-ledger pb-2">
+                <h2 className="font-display text-2xl tracking-[-0.02em]">
+                  Media history
+                </h2>
+                <span className="micro-label text-graphite">
+                  {mediaHistory.length}{" "}
+                  {mediaHistory.length === 1 ? "file" : "files"}
+                </span>
+              </div>
+              <div className="mt-4 max-w-xl">
+                <MediaGallery
+                  media={mediaHistory}
+                  title={`${model.name} — media history`}
                 />
               </div>
             </section>

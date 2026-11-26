@@ -17,6 +17,7 @@ export const BRAND = {
 export const MAX_HEADSHOT_BYTES = 8 * 1024 * 1024;
 export const MAX_CASTING_MEDIA_BYTES = 50 * 1024 * 1024;
 export const MAX_CASTING_MEDIA_FILES = 6;
+export const MODEL_PLACEHOLDER_HEADSHOT = "/brand/photo-coming-soon.jpg";
 
 export const PUBLIC_SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";

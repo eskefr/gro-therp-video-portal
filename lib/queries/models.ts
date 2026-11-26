@@ -16,7 +16,7 @@ const PUBLIC_MODEL_COLUMNS =
   "id,initials,age,headshot_url,created_at";
 
 const ADMIN_MODEL_COLUMNS =
-  "id,name,phone,email,city,height_cm,bust_cm,waist_cm,hips_cm,shoe_size,hair_color,eye_color,bio,age,initials,headshot_url,is_hidden,status,created_at,updated_at";
+  "id,name,phone,email,city,height_cm,bust_cm,waist_cm,hips_cm,shoe_size,hair_color,eye_color,bio,age,initials,headshot_url,media_history,is_hidden,status,created_at,updated_at";
 
 export async function getPublicModels(filters: PublicModelFilters) {
   const supabase = createPublicClient();
